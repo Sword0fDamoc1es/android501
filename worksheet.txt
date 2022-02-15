@@ -1,0 +1,29 @@
+assignment3
+
+Part 2.
+4a. 
+onCreate() - onStart() - onResume()
+4b.
+click home button:
+onPause() - onstop()
+"restart" the app:
+onRestart() - onStart() - onResume()
+4c.
+click back button:
+onPause() - onStop()
+"restart" the app:
+onRestart() - onStart() - onResume()
+4d.
+onPause() - onStop() - onDestroy() - onCreate() - onStart() - onResume()
+4e.
+switch to another:
+onPause() - onStop()
+switch back:
+onRestart() - onStart() - onResume()
+
+
+4g.
+if press home button and then come back: no changes.
+if rotate: textview change back to "textview"
+if switch to another app: no changes
+if click back then come back: no changes
