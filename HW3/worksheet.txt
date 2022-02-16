@@ -1,4 +1,4 @@
-assignment3
+Assignment 3
 
 Workersheet :
 Part 2.
@@ -27,9 +27,6 @@ if rotate: textview change back to "textview"
 if switch to another app: no changes
 if click back then come back: no changes
 
-Part 3.
-
-Part 4.
 
 Chapter 3:
     3.1) Importing the View class is sufficient
