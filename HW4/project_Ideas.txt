@@ -1,6 +1,6 @@
 (Top 3 so far)
 Food Recommendation App (With what you have in the fridge) - Pinterest API
-    Refrigator Items Freshness App - Grocery Store Website Scraping
+    - Refrigator Items Freshness App - Grocery Store Website Scraping
 Ubereats with Home Chefs - Mapquest/Google Maps API
 Roadtrip Planner - Mapquest/Google Maps API
 
