@@ -1,10 +1,10 @@
-4.1)
-4.2)
-4.3)
-4.4)
-4.5)
-4.6)
-4.7)
-4.8)
-4.9)
-4.10)
+4.1) As a table of rows and columns
+4.2) ViewGroup
+4.3) LinearLayout
+4.4) So that we position components relative to other components
+4.5) android.content
+4.6) startActivity
+4.7) onRestart
+4.8) onCreate, onStart, and onResume (in that order)
+4.9) onStop
+4.10) Yes, but it is only possible by writing to and reading from a SQLite database
