@@ -1,10 +1,14 @@
 (Top 3 so far)
-Food Recommendation App (With what you have in the fridge) - Pinterest API
+*Food Recommendation App (With what you have in the fridge) - Pinterest API
     - Refrigator Items Freshness App - Grocery Store Website Scraping
-Ubereats with Home Chefs - Mapquest/Google Maps API
-Roadtrip Planner - Mapquest/Google Maps API
+Ubereats with Home Chefs - Google Maps API
+*Roadtrip Planner - Google Maps API
 
 (Extra Ideas)
 Resource Sharing App (Recommend articles, videos, etc. about a requested topic)
-Movie Night Meetup - Fandango & Letterboxd API's
+*Movie Night Meetup
 ASMR Requesting App - 
+Airbnb for Home Gyms
+Restaurant Week Gadget (Inspection, rotate restarants every few weeks to check for sanitariness)
+Rating door knob handles (Rating App using imaging)
+Text Messaging Bombing (Spam messages to someone)
