@@ -1,0 +1,7 @@
+Movie Night Meetup - Fandango & Letterboxd API's
+Roadtrip Planner - Mapquest/Google Maps API
+ASMR Requesting App - 
+Refrigator Items Freshness App -  Grocery Store Website Scraping
+Food Recommendation App (With what you have in the fridge) - Pinterest API
+Ubereats with Home Chefs - Mapquest/Google Maps API
+Resource Sharing App (Recommend articles, videos, etc. about a requested topic)
