@@ -1,8 +1,10 @@
 package com.example.hangman;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,6 +42,40 @@ public class GameActivity extends AppCompatActivity {
         // # 3. errorCount.
         // # 4. ImageView path. what image we're using.
     }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        errorCount =  savedInstanceState.getInt("err");
+        // # important!
+        // do changeImage immediately after we get the errorCount.
+        changeImage();
+        answer = savedInstanceState.getString("ans");
+        wordtextView.setText(savedInstanceState.getString("wordtext"));
+        gameState = savedInstanceState.getBoolean("state");
+
+        gameResult.setVisibility(savedInstanceState.getInt("resultInt"));
+        gameResult.setText(savedInstanceState.getString("resultText"));
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        outState.putInt("err",errorCount);
+        outState.putString("ans",answer);
+        outState.putString("wordtext",wordtextView.getText().toString());
+        outState.putBoolean("state",gameState);
+
+        outState.putInt("resultInt",gameResult.getVisibility());
+        outState.putString("resultText",gameResult.getText().toString());
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     private void changeImage(){
         switch (errorCount){
             case 1:
