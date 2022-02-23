@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">hangman</string>
-    <string name="game_name">HangMan!</string>
+    <string name="game_name">Hangman!</string>
     <string name="btn_name">start!</string>
+    <string name="game_result_win">Win!</string>
+    <string name="game_result_loose">Loose!</string>
 </resources>
