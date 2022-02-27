@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView textView;
     public EditText shift;
     public Button btn1;
-    public String regex = "\\d";
+    public String regex = "\\d+";
     public static final String PREFS_NAME = "myPrefsFile";
     private String sharedstring;
     @Override
@@ -35,13 +35,16 @@ public class MainActivity extends AppCompatActivity {
 //            return;
 //        }
         if(str.matches(regex)){
-            Intent nextpage = new Intent(getApplicationContext(), MainActivity2.class);
-            nextpage.putExtra("shift",str);
-            SharedPreferences setting = getSharedPreferences(PREFS_NAME,0);
-            SharedPreferences.Editor editor = setting.edit();
-            editor.putString("shift",str);
-            editor.commit();
-            startActivity(nextpage);
+            int i = Integer.valueOf(str);
+            if(1<=i && i<=25){
+                Intent nextpage = new Intent(getApplicationContext(), MainActivity2.class);
+                nextpage.putExtra("shift", str);
+                SharedPreferences setting = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = setting.edit();
+                editor.putString("shift", str);
+                editor.commit();
+                startActivity(nextpage);
+            }
         }
     }
 }
