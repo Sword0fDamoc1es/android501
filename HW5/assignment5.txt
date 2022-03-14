@@ -1,0 +1,16 @@
+Chapter 7:
+    7.1) setOnTouchListener
+    7.2) getAction
+    7.3) bringToFront
+    7.4) GestureDetector
+    7.5) Public static inner interfaces of GestureDetector
+    7.6) Private methods 
+    7.7) onTouchEvent
+    
+    7.18) 
+    setContentView(R.layout.activity_main);
+    GestureDetector gestureDetector = new GestureDetector(this, new GestureListener());
+
+    7.19)
+    this.gestureDetector.onTouchEvent(event);
+    return super.onTouchEvent(event);
