@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">fragmentPractice</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mainButton1">to frag1</string>
+    <string name="mainButton2">to frag2</string>
+    <string name="mainButton3">to frag3</string>
+    <string name="mainButton4">to activity2</string>
+</resources>
