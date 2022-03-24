@@ -1,1 +1,16 @@
+Chapter 9:
+    9.1) 11
+    9.2) Object
+    9.3) 0 or more
+    9.4) onRestart
+    9.5) getActivity
+    9.6) FragmentManager 
+    9.7) add
+    9.8) tag or id
+    9.9) an interface
+    9.10) FragmentManager manager = getFragmentManager();
+    
+    9.14) View v = inflater.inflate(R.layout.my_fragment.xml, container, false);
+          return v;
 
+    9.15) MyActivity act = (MyActivity) getActivity();
