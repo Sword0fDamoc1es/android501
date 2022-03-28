@@ -1,11 +1,14 @@
 package com.example.fandango0;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.example.fandango0.model.APIresponse;
 
 import java.util.List;
 
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -23,9 +26,37 @@ public class ResponseManager {
         this.context = context;
     }
 
+    public void getReplyByZip(onFetchListener listener, String word){
+        AMC_locationSuggestion_zip alz = retrofit.create(AMC_locationSuggestion_zip.class);
+        Call<List<APIresponse>> call = alz.repos(word);
+
+        try{
+            call.enqueue(new Callback<List<APIresponse>>() {
+                @Override
+                public void onResponse(Call<List<APIresponse>> call, Response<List<APIresponse>> response) {
+                    if(!response.isSuccessful()){
+                        Toast.makeText(context,"Error no response!",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    listener.onFetchData(response.body().get(0),response.message());
+
+                }
+
+                @Override
+                public void onFailure(Call<List<APIresponse>> call, Throwable throwable) {
+                    listener.onError("Request failed!");
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(context,"ERROR!",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     public interface AMC_locationSuggestion_zip{
         @GET("location-suggestions/?query={77429}")
-        Call<List<String>> repos(
+        Call<List<APIresponse>> repos(
                @Path("77429") String word
         );
 
