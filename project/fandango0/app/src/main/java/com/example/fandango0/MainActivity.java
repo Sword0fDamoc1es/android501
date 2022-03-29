@@ -13,7 +13,9 @@ import com.example.fandango0.model.APIresponse;
 public class MainActivity extends AppCompatActivity {
     public Button button;
     public TextView textView;
-    public String zip = "66062";
+//    public String zip = "?query=town center";
+//    public String zip = "66062"
+    public String zip = "town center";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

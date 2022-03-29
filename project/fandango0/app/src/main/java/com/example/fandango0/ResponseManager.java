@@ -56,9 +56,11 @@ public class ResponseManager {
     }
 
     public interface AMC_locationSuggestion_zip{
-        @GET("location-suggestions/?query={word}")
+//        @Query("location-suggestions/?query={word}")
+//        @GET("location-suggestions/?query={word}")
+        @GET("location-suggestions/{word}")
         Call<List<APIresponse>> repos(
-               @Path("word") String word
+               @Query("word") String word
         );
 
 
