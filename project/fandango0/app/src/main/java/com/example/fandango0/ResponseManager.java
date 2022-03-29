@@ -15,10 +15,11 @@ import retrofit2.http.GET;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class ResponseManager {
     Context context;
-    Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.amctheatres.com/v2/theatres/42")
+    Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.amctheatres.com/v2/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -55,9 +56,9 @@ public class ResponseManager {
     }
 
     public interface AMC_locationSuggestion_zip{
-        @GET("location-suggestions/?query={77429}")
+        @GET("location-suggestions/?query={word}")
         Call<List<APIresponse>> repos(
-               @Path("77429") String word
+               @Path("word") String word
         );
 
 
