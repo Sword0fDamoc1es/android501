@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView textView;
 //    public String zip = "?query=town center";
 //    public String zip = "66062"
-    public String zip = "town center";
+    public String country_abbrev = "US";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ResponseManager mg = new ResponseManager(MainActivity.this);
-                mg.getReplyByZip(listener,zip);
+                mg.getReplyByZip(listener,country_abbrev);
             }
         });
     }

@@ -19,7 +19,7 @@ import retrofit2.http.Query;
 
 public class ResponseManager {
     Context context;
-    Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.amctheatres.com/v2/")
+    Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
@@ -58,9 +58,9 @@ public class ResponseManager {
     public interface AMC_locationSuggestion_zip{
 //        @Query("location-suggestions/?query={word}")
 //        @GET("location-suggestions/?query={word}")
-        @GET("location-suggestions/{word}")
+        @GET("movie/now_playing?api_key=06394bbe96d1ac41eded2b7f5aad470a&language=en-US&page=1&region={country_abbreviation}")
         Call<List<APIresponse>> repos(
-               @Query("word") String word
+               @Query("country_abbreviation") String country_abbrev
         );
 
 
