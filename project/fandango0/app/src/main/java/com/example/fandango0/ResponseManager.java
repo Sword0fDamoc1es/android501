@@ -58,6 +58,7 @@ public class ResponseManager {
     public interface AMC_locationSuggestion_zip{
 //        @Query("location-suggestions/?query={word}")
 //        @GET("location-suggestions/?query={word}")
+        // marve's api-endpoint: 550?api_key=c5a45837e9632229e51e8455548838d7
         @GET("movie/now_playing?api_key=06394bbe96d1ac41eded2b7f5aad470a&language=en-US&page=1&region={country_abbreviation}")
         Call<List<APIresponse>> repos(
                @Query("country_abbreviation") String country_abbrev
