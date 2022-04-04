@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         textView =(TextView) findViewById(R.id.textView);
 
+    }
+    public void onClick(View view){
         new TMDBService().execute();
     }
     private class TMDBService extends AsyncTask<String, String, String>{
