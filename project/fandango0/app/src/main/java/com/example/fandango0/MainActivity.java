@@ -69,7 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=%s","popular",API_KEY);
+
+            // curl "https://api-gate2.movieglu.com/filmsComingSoon/?n=1" -H "api-version: [VERSION]" -H "Authorization: [BASIC AUTHENTICATION]" -H "x-api-key: [API-KEY]" -H "device-datetime: [DATE-TIME]" -H "territory: [TERRITORY]" -H "client: [USERNAME]"
+//            String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=%s","popular",API_KEY);
+            String url_formatted = String.format("https://api-gate2.movieglu.com/filmLiveSearch/?n=2&query=Doctor+Strange+in+the+Multiverse+of+Madness");
             URL url = null;
             HttpURLConnection urlConnection = null;
             String responseString = null;
@@ -78,7 +81,12 @@ public class MainActivity extends AppCompatActivity {
                 urlConnection = (HttpURLConnection) url.openConnection();
                 // the word : popular is the search keyword.
                 // change it using other keyword for other functions.
-                urlConnection.setRequestProperty("Authorization", "Bearer " + API_KEY);
+                urlConnection.setRequestProperty("api-version", "v200");
+                urlConnection.setRequestProperty("territory", "US");
+                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
+                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
+                urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
+                urlConnection.setRequestProperty("client", "BOST_1");
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 responseString = IOUtil.toString(in);
             } catch (IOException e) {
@@ -95,31 +103,45 @@ public class MainActivity extends AppCompatActivity {
             //tvSearchResult.setText(result);
             Log.i("API RESPONSE:", result);
             JSONObject jsonObj = null;
+            String ttt = "";
             try {
                 jsonObj = new JSONObject(result);
                 if (jsonObj != null) {
-                    JSONArray jsonArray_results = jsonObj.getJSONArray("results");
+                    System.out.println("here1");
+//                    JSONArray jsonArray_results = jsonObj.getJSONArray("results");
+                    JSONArray jsonArray_results = jsonObj.getJSONArray("films");
                     for (int i=0; i < jsonArray_results.length(); i++) {
-                        ids.add(jsonArray_results.getJSONObject(i).getString("id"));
+//                        if(i == 0){
+//                            ttt = jsonArray_results.getJSONObject(i).getString("film_id");
+//                        }
+                        ids.add(jsonArray_results.getJSONObject(i).getString("film_id"));
                     }
 //                    tvSearchResult.setText(ids);
                 }
-                new TMDBResultsDetailAPI().execute();
+//                textView.setText(ttt);
+                 new TMDBResultsDetailAPI().execute();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         private class TMDBResultsDetailAPI extends AsyncTask<String, String, String> {
+            // filmDetails/?film_id=12345
             @Override
             protected String doInBackground(String... strings) {
-                String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=c5a45837e9632229e51e8455548838d7",ids.get(0));
+//                String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=c5a45837e9632229e51e8455548838d7",ids.get(0));
+                String url_formatted = String.format("https://api-gate2.movieglu.com/filmDetails/?film_id=%s",ids.get(0));
                 URL url = null;
                 HttpURLConnection urlConnection = null;
                 String responseString = null;
                 try {
                     url = new URL(url_formatted);
                     urlConnection = (HttpURLConnection) url.openConnection();
-                    urlConnection.setRequestProperty("Authorization", "Bearer " + API_KEY);
+                    urlConnection.setRequestProperty("api-version", "v200");
+                    urlConnection.setRequestProperty("territory", "US");
+                    urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
+                    urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
+                    urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
+                    urlConnection.setRequestProperty("client", "BOST_1");
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     responseString = IOUtil.toString(in);
                 } catch (IOException e) {
@@ -137,11 +159,11 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     jsonObj = new JSONObject(s);
                     if (jsonObj != null) {
-                        String id = jsonObj.getString("id");
-                        String original_title = jsonObj.getString("original_title");
-                        String popularity = jsonObj.getString("popularity");
-                        String release_date = jsonObj.getString("release_date");
-                        String tvDisplay = String.format("id:%s\noriginal_title:%s\npopularity:%s\nrelease_date:%s", id,original_title,popularity,release_date);
+                        String id = jsonObj.getString("film_id");
+                        String original_title = jsonObj.getString("film_name");
+//                        String popularity = jsonObj.getString("duration");
+                        String release_date = jsonObj.getString("duration_mins");
+                        String tvDisplay = String.format("id:%s\noriginal_title:%s\nrelease_date:%s", id,original_title,release_date);
                         textView.setText(tvDisplay);
                     }
                 } catch (JSONException e) {
