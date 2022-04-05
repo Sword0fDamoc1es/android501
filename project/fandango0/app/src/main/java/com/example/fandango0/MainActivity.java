@@ -59,7 +59,12 @@ public class MainActivity extends AppCompatActivity {
 //    }
     private TextView tvSearchResult;
     // marve's key
-    private String API_KEY = "c5a45837e9632229e51e8455548838d7";
+//    private String API_KEY = "c5a45837e9632229e51e8455548838d7";
+//    private String API_KEY = "WVRe7pzw0M7QAiC0PpNVG9jCHWHb2Mp11Z2mjBVd";
+    private String API_KEY = "aapzWjp1te1BP56dD0SYg4UmUAZJ004z1OpRPryC";
+//    private String Autherization = "Basic Qk9TVF8xX1hYOlhkQXBSWE5ZZTJUOA==";
+    private String Autherization = "Basic Qk9TVF8wOlhlc2xyRUF4T1RNaQ==";
+    private String client = "BOST_0";
     private List<String> ids = new ArrayList<>();
 
     @Override
@@ -96,10 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 // change it using other keyword for other functions.
                 urlConnection.setRequestProperty("api-version", "v200");
                 urlConnection.setRequestProperty("territory", "US");
-                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
-                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
-                urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
-                urlConnection.setRequestProperty("client", "BOST_1");
+                urlConnection.setRequestProperty("authorization", Autherization);
+                urlConnection.setRequestProperty("x-api-key", API_KEY);
+                urlConnection.setRequestProperty("device-datetime", "2022-04-05T21:23:51.027Z");
+                urlConnection.setRequestProperty("client", client);
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 responseString = IOUtil.toString(in);
             } catch (IOException e) {
@@ -155,10 +160,10 @@ public class MainActivity extends AppCompatActivity {
                     urlConnection = (HttpURLConnection) url.openConnection();
                     urlConnection.setRequestProperty("api-version", "v200");
                     urlConnection.setRequestProperty("territory", "US");
-                    urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
-                    urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
-                    urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
-                    urlConnection.setRequestProperty("client", "BOST_1");
+                    urlConnection.setRequestProperty("authorization", Autherization);
+                    urlConnection.setRequestProperty("x-api-key", API_KEY);
+                    urlConnection.setRequestProperty("device-datetime", "2022-04-05T21:23:51.027Z");
+                    urlConnection.setRequestProperty("client", client);
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     responseString = IOUtil.toString(in);
                 } catch (IOException e) {
@@ -205,13 +210,13 @@ public class MainActivity extends AppCompatActivity {
                 // the word : popular is the search keyword.
                 // change it using other keyword for other functions.
                 urlConnection.setRequestProperty("api-version", "v200");
-                urlConnection.setRequestProperty("territory", "US");
-                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
-                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
-                urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
+                urlConnection.setRequestProperty("territory", "XX");
+                urlConnection.setRequestProperty("authorization", Autherization);
+                urlConnection.setRequestProperty("x-api-key", API_KEY);
+                urlConnection.setRequestProperty("device-datetime", "2022-04-05T21:23:51.027Z");
+                urlConnection.setRequestProperty("client", client);
                 // important:
                 urlConnection.setRequestProperty("geolocation", "42.3611;-71.0570");
-                urlConnection.setRequestProperty("client", "BOST_1");
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 responseString = IOUtil.toString(in);
             } catch (IOException e) {
@@ -271,12 +276,12 @@ public class MainActivity extends AppCompatActivity {
                 // change it using other keyword for other functions.
                 urlConnection.setRequestProperty("api-version", "v200");
                 urlConnection.setRequestProperty("territory", "US");
-                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
-                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
-                urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
+                urlConnection.setRequestProperty("authorization", Autherization);
+                urlConnection.setRequestProperty("x-api-key", API_KEY);
+                urlConnection.setRequestProperty("device-datetime", "2022-04-05T21:23:51.027Z");
+                urlConnection.setRequestProperty("client", client);
                 // important:
                 urlConnection.setRequestProperty("geolocation", "42.3611;-71.0570");
-                urlConnection.setRequestProperty("client", "BOST_1");
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 responseString = IOUtil.toString(in);
             } catch (IOException e) {
@@ -336,12 +341,12 @@ public class MainActivity extends AppCompatActivity {
                 // change it using other keyword for other functions.
                 urlConnection.setRequestProperty("api-version", "v200");
                 urlConnection.setRequestProperty("territory", "US");
-                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
-                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
+                urlConnection.setRequestProperty("authorization", Autherization);
+                urlConnection.setRequestProperty("x-api-key", API_KEY);
                 urlConnection.setRequestProperty("device-datetime", "2022-04-05T21:23:51.027Z");
+                urlConnection.setRequestProperty("client", client);
                 // important:
                 urlConnection.setRequestProperty("geolocation", "42.3611;-71.0570");
-                urlConnection.setRequestProperty("client", "BOST_1");
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 responseString = IOUtil.toString(in);
             } catch (IOException e) {
