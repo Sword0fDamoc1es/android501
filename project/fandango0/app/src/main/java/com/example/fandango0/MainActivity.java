@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                 // the word : popular is the search keyword.
                 // change it using other keyword for other functions.
                 urlConnection.setRequestProperty("api-version", "v200");
-                urlConnection.setRequestProperty("territory", "XX");
+                urlConnection.setRequestProperty("territory", "US");
                 urlConnection.setRequestProperty("authorization", Autherization);
                 urlConnection.setRequestProperty("x-api-key", API_KEY);
                 urlConnection.setRequestProperty("device-datetime", "2022-04-05T21:23:51.027Z");
