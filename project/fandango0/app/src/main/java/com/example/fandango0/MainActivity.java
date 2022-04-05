@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.AsyncTask;
@@ -33,7 +34,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public Button button;
+    public Button button2;
+    public Button button3;
     public TextView textView;
+    public TextView textView2;
+    public TextView textView3;
+    public EditText edittext;
 ////    public String zip = "?query=town center";
 ////    public String zip = "66062"
 //    public String country_abbrev = "US";
@@ -62,16 +68,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView =(TextView) findViewById(R.id.textView);
+        textView2 =(TextView) findViewById(R.id.textView2);
+        textView3 =(TextView) findViewById(R.id.textView3);
+        edittext = (EditText) findViewById(R.id.edittext);
 
     }
-    public void onClick(View view){
+    public void onClick1(View view){
         new TMDBService().execute();
     }
+    public void onClick2(View view) { new MovieGluTheatureSearch().execute(); }
+    public void onClick3(View view) { new MovieGluTheatureSearchID().execute(); }
+    public void onClick4(View view) { new MovieGluCinemaID2Film().execute(); }
     private class TMDBService extends AsyncTask<String, String, String>{
 
         @Override
         protected String doInBackground(String... params) {
-
             // curl "https://api-gate2.movieglu.com/filmsComingSoon/?n=1" -H "api-version: [VERSION]" -H "Authorization: [BASIC AUTHENTICATION]" -H "x-api-key: [API-KEY]" -H "device-datetime: [DATE-TIME]" -H "territory: [TERRITORY]" -H "client: [USERNAME]"
 //            String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=%s","popular",API_KEY);
             String url_formatted = String.format("https://api-gate2.movieglu.com/filmLiveSearch/?n=2&query=Doctor+Strange+in+the+Multiverse+of+Madness");
@@ -105,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             //tvSearchResult.setText(result);
             Log.i("API RESPONSE:", result);
             JSONObject jsonObj = null;
+            ids.clear();
             String ttt = "";
             try {
                 jsonObj = new JSONObject(result);
@@ -126,6 +138,9 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+
+
         private class TMDBResultsDetailAPI extends AsyncTask<String, String, String> {
             // filmDetails/?film_id=12345
             @Override
@@ -174,7 +189,210 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-//    private final onFetchListener listener = new onFetchListener() {
+    private class MovieGluTheatureSearch extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            // curl "https://api-gate2.movieglu.com/filmsComingSoon/?n=1" -H "api-version: [VERSION]" -H "Authorization: [BASIC AUTHENTICATION]" -H "x-api-key: [API-KEY]" -H "device-datetime: [DATE-TIME]" -H "territory: [TERRITORY]" -H "client: [USERNAME]"
+//            String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=%s","popular",API_KEY);
+            String url_formatted = String.format("https://api-gate2.movieglu.com/cinemasNearby/?n=5");
+            URL url = null;
+            HttpURLConnection urlConnection = null;
+            String responseString = null;
+            try {
+                url = new URL(url_formatted);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                // the word : popular is the search keyword.
+                // change it using other keyword for other functions.
+                urlConnection.setRequestProperty("api-version", "v200");
+                urlConnection.setRequestProperty("territory", "US");
+                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
+                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
+                urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
+                // important:
+                urlConnection.setRequestProperty("geolocation", "42.3611;-71.0570");
+                urlConnection.setRequestProperty("client", "BOST_1");
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                responseString = IOUtil.toString(in);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return responseString;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            //tvSearchResult.setText(result);
+            Log.i("API RESPONSE:", result);
+            JSONObject jsonObj = null;
+            String ttt = "";
+            ArrayList<String> cname = new ArrayList<String>();
+            ids.clear();
+            try {
+                jsonObj = new JSONObject(result);
+                if (jsonObj != null) {
+                    System.out.println("here1");
+//                    JSONArray jsonArray_results = jsonObj.getJSONArray("results");
+                    JSONArray jsonArray_results = jsonObj.getJSONArray("cinemas");
+                    for (int i = 0; i < jsonArray_results.length(); i++) {
+//                        if(i == 0){
+//                            ttt = jsonArray_results.getJSONObject(i).getString("film_id");
+//                        }
+                        cname.add(jsonArray_results.getJSONObject(i).getString("cinema_name"));
+                        ids.add(jsonArray_results.getJSONObject(i).getString("cinema_id"));
+                    }
+//                    tvSearchResult.setText(ids);
+                }
+                textView2.setText(cname.toString());
+//                    new TMDBResultsDetailAPI().execute();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class MovieGluTheatureSearchID extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            // curl "https://api-gate2.movieglu.com/filmsComingSoon/?n=1" -H "api-version: [VERSION]" -H "Authorization: [BASIC AUTHENTICATION]" -H "x-api-key: [API-KEY]" -H "device-datetime: [DATE-TIME]" -H "territory: [TERRITORY]" -H "client: [USERNAME]"
+//            String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=%s","popular",API_KEY);
+            String url_formatted = String.format("https://api-gate2.movieglu.com/cinemasNearby/?n=5");
+            URL url = null;
+            HttpURLConnection urlConnection = null;
+            String responseString = null;
+            try {
+                url = new URL(url_formatted);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                // the word : popular is the search keyword.
+                // change it using other keyword for other functions.
+                urlConnection.setRequestProperty("api-version", "v200");
+                urlConnection.setRequestProperty("territory", "US");
+                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
+                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
+                urlConnection.setRequestProperty("device-datetime", "2022-04-04T21:23:51.027Z");
+                // important:
+                urlConnection.setRequestProperty("geolocation", "42.3611;-71.0570");
+                urlConnection.setRequestProperty("client", "BOST_1");
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                responseString = IOUtil.toString(in);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return responseString;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            //tvSearchResult.setText(result);
+            Log.i("API RESPONSE:", result);
+            JSONObject jsonObj = null;
+            String ttt = "";
+            ArrayList<String> cname = new ArrayList<String>();
+            try {
+                jsonObj = new JSONObject(result);
+                if (jsonObj != null) {
+                    System.out.println("here1");
+//                    JSONArray jsonArray_results = jsonObj.getJSONArray("results");
+                    JSONArray jsonArray_results = jsonObj.getJSONArray("cinemas");
+                    for (int i = 0; i < jsonArray_results.length(); i++) {
+//                        if(i == 0){
+//                            ttt = jsonArray_results.getJSONObject(i).getString("film_id");
+//                        }
+                        cname.add(jsonArray_results.getJSONObject(i).getString("cinema_name"));
+                        ids.add(jsonArray_results.getJSONObject(i).getString("cinema_id"));
+                    }
+//                    tvSearchResult.setText(ids);
+                }
+                textView3.setText(ids.toString());
+//                    new TMDBResultsDetailAPI().execute();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private class MovieGluCinemaID2Film extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            // curl "https://api-gate2.movieglu.com/filmsComingSoon/?n=1" -H "api-version: [VERSION]" -H "Authorization: [BASIC AUTHENTICATION]" -H "x-api-key: [API-KEY]" -H "device-datetime: [DATE-TIME]" -H "territory: [TERRITORY]" -H "client: [USERNAME]"
+//            String url_formatted = String.format("https://api.themoviedb.org/3/movie/%s?api_key=%s","popular",API_KEY);
+//            String url_formatted = String.format("https://api-gate2.movieglu.com/cinemasNearby/?n=5");
+            String cid = edittext.getText().toString();
+            String url_formatted = String.format("https://api-gate2.movieglu.com/cinemaShowTimes/?cinema_id=%s&date=2022-04-05&sort=popularity",cid);
+            URL url = null;
+            HttpURLConnection urlConnection = null;
+            String responseString = null;
+            try {
+                url = new URL(url_formatted);
+                urlConnection = (HttpURLConnection) url.openConnection();
+                // the word : popular is the search keyword.
+                // change it using other keyword for other functions.
+                urlConnection.setRequestProperty("api-version", "v200");
+                urlConnection.setRequestProperty("territory", "US");
+                urlConnection.setRequestProperty("authorization", "Basic Qk9TVF8xOjhLQW1UaXVScEt0Qg==");
+                urlConnection.setRequestProperty("x-api-key", "usDFRasvcGtTk4dtZsrE9ayZwtwkG9cYV0mqD000");
+                urlConnection.setRequestProperty("device-datetime", "2022-04-05T21:23:51.027Z");
+                // important:
+                urlConnection.setRequestProperty("geolocation", "42.3611;-71.0570");
+                urlConnection.setRequestProperty("client", "BOST_1");
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                responseString = IOUtil.toString(in);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return responseString;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            //tvSearchResult.setText(result);
+            Log.i("API RESPONSE:", result);
+            JSONObject jsonObj = null;
+            String ttt = "";
+            ArrayList<String> cname = new ArrayList<String>();
+            try {
+                jsonObj = new JSONObject(result);
+                if (jsonObj != null) {
+                    System.out.println("here1");
+//                    JSONArray jsonArray_results = jsonObj.getJSONArray("results");
+                    JSONObject jsonArray_results_c = jsonObj.getJSONObject("cinema");
+                    String str1 = jsonArray_results_c.getString("cinema_id");
+                    String str2 = jsonArray_results_c.getString("cinema_name");
+                    textView2.setText(str1+" "+str2);
+                    JSONArray jsonArray_results = jsonObj.getJSONArray("films");
+                    for (int i = 0; i < jsonArray_results.length(); i++) {
+//                        if(i == 0){
+//                            ttt = jsonArray_results.getJSONObject(i).getString("film_id");
+//                        }
+                        cname.add(jsonArray_results.getJSONObject(i).getString("film_name"));
+//                        ids.add(jsonArray_results.getJSONObject(i).getString("cinema_id"));
+                    }
+                    textView.setText(cname.toString());
+//                    tvSearchResult.setText(ids);
+                }
+//                textView3.setText(ids.toString());
+//                    new TMDBResultsDetailAPI().execute();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    //    p
+//
+//
+//    rivate final onFetchListener listener = new onFetchListener() {
 //        @Override
 //        public void onFetchData(APIresponse apiresponse, String message) {
 //            if(apiresponse == null){
