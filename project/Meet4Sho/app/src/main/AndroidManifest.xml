@@ -29,6 +29,7 @@
         <activity android:name=".Yelp_MainActivity"></activity>
         <activity android:name=".Yelp_LocList"></activity>
         <activity android:name=".Yelp_LocInfo"></activity>
+        <activity android:name=".AppActivity"></activity>
     </application>
 
 </manifest>
