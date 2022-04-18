@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Meet4Sho">
         <activity
-            android:name=".MainActivity"
+            android:name=".loginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +30,7 @@
         <activity android:name=".Yelp_LocList"></activity>
         <activity android:name=".Yelp_LocInfo"></activity>
         <activity android:name=".AppActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

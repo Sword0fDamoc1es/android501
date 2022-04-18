@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/tbTopToolbar"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:background="?attr/colorPrimary"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.002" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/edtSearchBar"
         android:layout_width="184dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
@@ -31,28 +31,28 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/tbTopToolbar"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
+        app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnSearch"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/tbTopToolbar"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
+        app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.166" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/edtSearchCity"
         android:layout_width="184dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/white"
@@ -62,15 +62,15 @@
         android:text="Boston"
         android:textColor="#FFFFFF"
         android:textColorHint="#A1A1A1"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/tbTopToolbar"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
+        app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.893" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/edtSearchDate"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/white"
@@ -79,24 +79,24 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#A1A1A1"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/tbTopToolbar"
         app:layout_constraintHorizontal_bias="0.816"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
+        app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.893" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spnCategories"
         android:layout_width="111dp"
         android:layout_height="46dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/tbTopToolbar"
         app:layout_constraintHorizontal_bias="0.656"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
+        app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.216" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
