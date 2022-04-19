@@ -125,7 +125,6 @@ public class SearchFragment extends Fragment {
 //            imageURLs = extras.getStringArrayList("urls");
 //
 //        }
-
         ra = new TM_RecyclerAdapter(getActivity(), names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
         rvResults.setAdapter(ra);
         rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
