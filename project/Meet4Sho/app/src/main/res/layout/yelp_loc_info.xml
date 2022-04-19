@@ -12,19 +12,19 @@
         android:layout_height="200dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        tools:srcCompat="@tools:sample/avatars"/>
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/ivRestoImg"
-        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="30dp"
         android:background="@color/black"
-        android:textColor="@color/white"
         android:text="Resto Desc"
-        android:textSize="20sp"/>
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

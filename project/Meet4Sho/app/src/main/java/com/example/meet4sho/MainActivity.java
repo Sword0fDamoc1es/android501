@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         btnMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), Movie_MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), AppActivity.class);
                 startActivity(i);
             }
         });
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btnTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), TM_MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), AppActivity.class);
                 startActivity(i);
             }
         });
