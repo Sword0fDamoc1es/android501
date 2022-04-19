@@ -54,7 +54,7 @@ public class AppActivity extends AppCompatActivity {
 
         FragmentTransaction ft = fm.beginTransaction ();  //Create a reference to a fragment transaction.
         ft.add(R.id.displayedView, searchFrag, "searchFrag");  //now we have added our fragment to our Activity programmatically.  The other fragments exist, but have not been added yet.
-        ft.addToBackStack ("myFrag1");  //why do we do this?
+        ft.addToBackStack ("searchFrag");  //why do we do this?
         ft.commit ();
         bottomNavigationView.setOnItemSelectedListener(item ->  {
             switch(item.getItemId()) {
@@ -100,6 +100,9 @@ public class AppActivity extends AppCompatActivity {
     public void showProfile() {
         if (profileFrag == null)
             profileFrag = new ProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        profileFrag.setArguments(bundle);
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.displayedView, profileFrag);
         fragmentTransaction.addToBackStack("profileFrag");
