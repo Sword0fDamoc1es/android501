@@ -16,7 +16,7 @@
         app:layout_constraintVertical_bias="0.0"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:orientation="horizontal" />
+        android:orientation="vertical" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

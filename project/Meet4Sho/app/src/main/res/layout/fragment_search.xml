@@ -101,6 +101,7 @@
 
     <Spinner
         android:id="@+id/spnCategories"
+        android:entries="@array/search_options"
         android:layout_width="111dp"
         android:layout_height="46dp"
         android:background="@android:drawable/btn_dropdown"
@@ -111,5 +112,16 @@
         app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
         app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.216" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbTopToolbar"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
