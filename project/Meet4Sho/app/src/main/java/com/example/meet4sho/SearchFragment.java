@@ -83,19 +83,7 @@ public class SearchFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     // TODO
-                    EventInfoFragment eventInfoFrag = new EventInfoFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Name", movie.getKey());
-                    bundle.putString("Rating", temp.get(3));
-                    bundle.putString("Location", temp.get(1));
-                    bundle.putString("Release Date", temp.get(0));
                     mListener.messageFromParentFragment(movie);
-                    eventInfoFrag.setArguments(bundle);
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.csFullLayout, eventInfoFrag, "eventInfoFrag");
-                    transaction.addToBackStack ("searchFrag");  //why do we do this?
-                    transaction.commit ();
-
                 }
             });
         }
