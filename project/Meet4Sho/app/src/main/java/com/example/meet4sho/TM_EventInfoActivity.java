@@ -61,7 +61,7 @@ public class TM_EventInfoActivity extends AppCompatActivity {
                 descriptions = extras.getStringArrayList("descriptions");
                 imgURLS = extras.getStringArrayList("urls");
 
-                Intent i = new Intent(getApplicationContext(),TM_MainActivity.class);
+                Intent i = new Intent(getApplicationContext(),AppActivity.class);
                 i.putStringArrayListExtra("names",(ArrayList<String>) names);
                 i.putStringArrayListExtra("descriptions",(ArrayList<String>) descriptions);
                 i.putStringArrayListExtra("urls",(ArrayList<String>) imgURLS);

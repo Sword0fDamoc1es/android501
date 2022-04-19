@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Movie_MainActivity" />
-        <activity android:name=".TM_MainActivity" />
         <activity android:name=".TM_EventInfoActivity" />
         <activity android:name=".Yelp_MainActivity" />
         <activity android:name=".Yelp_LocList" />

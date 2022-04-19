@@ -1,12 +1,6 @@
 package com.example.meet4sho;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ActivityChooserView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -16,17 +10,15 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class AppActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener {
+
+    private int startingIndex = 0;
 
     private MessagesFragment messageFrag;
     private SearchFragment searchFrag;
@@ -78,8 +70,6 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
             }
             return true;
         });
-
-
     }
 
     public void showMessages() {
