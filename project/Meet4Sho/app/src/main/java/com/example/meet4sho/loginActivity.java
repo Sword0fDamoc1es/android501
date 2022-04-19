@@ -38,6 +38,7 @@ public class loginActivity extends AppCompatActivity {
                 if(userNames.containsKey(edtUsername.getText().toString())) {
                     if(userNames.get(edtUsername.getText().toString()).equals(edtPassword.getText().toString())){
                         Intent intent = new Intent(loginActivity.this, AppActivity.class);
+                        intent.putExtra("username",edtUsername.getText().toString());
                         startActivity(intent);
                     }
                 }

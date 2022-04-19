@@ -6,25 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".AppActivity">
 
-    <include
-        android:id="@+id/innerLayout"
-        layout="@layout/fragment_search"
+
+    <LinearLayout
+        android:id="@+id/displayedView"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fmSearchFragment"
-        layout="@layout/fragment_search"
-        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </androidx.fragment.app.FragmentContainerView>
+        android:layout_width="match_parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
