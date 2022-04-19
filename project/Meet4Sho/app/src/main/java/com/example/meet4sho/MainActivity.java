@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnMovie;
     private Button btnTicket;
     private Button btnYelp;
+    private Button button5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,15 @@ public class MainActivity extends AppCompatActivity {
         btnMovie = (Button) findViewById(R.id.btnMovie);
         btnTicket = (Button) findViewById(R.id.btnTicket);
         btnYelp = (Button) findViewById(R.id.btnYelp);
+        button5 = (Button) findViewById(R.id.button5);
+
+        button5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),Firebase_playground.class);
+                startActivity(i);
+            }
+        });
 
         btnMovie.setOnClickListener(new View.OnClickListener() {
             @Override

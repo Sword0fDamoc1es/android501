@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.meet4sho">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
 
     <application
         android:allowBackup="true"
@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Meet4Sho">
         <activity
+            android:name=".Firebase_playground"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -23,12 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Movie_MainActivity"></activity>
-        <activity android:name=".TM_MainActivity"></activity>
-        <activity android:name=".TM_EventInfoActivity"></activity>
-        <activity android:name=".Yelp_MainActivity"></activity>
-        <activity android:name=".Yelp_LocList"></activity>
-        <activity android:name=".Yelp_LocInfo"></activity>
+        <activity android:name=".Movie_MainActivity" />
+        <activity android:name=".TM_MainActivity" />
+        <activity android:name=".TM_EventInfoActivity" />
+        <activity android:name=".Yelp_MainActivity" />
+        <activity android:name=".Yelp_LocList" />
+        <activity android:name=".Yelp_LocInfo" />
     </application>
 
 </manifest>
