@@ -42,5 +42,4 @@
         <activity android:name=".AppActivity" />
         <activity android:name=".MainActivity" />
     </application>
-
 </manifest>

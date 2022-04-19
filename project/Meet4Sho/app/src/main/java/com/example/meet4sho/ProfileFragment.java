@@ -7,12 +7,10 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -33,6 +31,12 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.profile_page, container, false);
+        Bundle bundle = this.getArguments();
+        String username = bundle.getString("username");
+        View v = inflater.inflate(R.layout.profile_page, container, false);
+
+        TextView tvName = v.findViewById(R.id.tvName);
+        tvName.setText(username);
+        return v;
     }
 }

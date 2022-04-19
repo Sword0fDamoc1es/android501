@@ -1,27 +1,24 @@
 package com.example.meet4sho;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.ActivityChooserView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainerView;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 
-public class AppActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Map;
+
+public class AppActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener {
+
+    private int startingIndex = 0;
 
     private MessagesFragment messageFrag;
     private SearchFragment searchFrag;
@@ -50,11 +47,12 @@ public class AppActivity extends AppCompatActivity {
         fm = getFragmentManager ();
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.nav_search);
         View displayedView = (View) findViewById(R.id.displayedView);
 
         FragmentTransaction ft = fm.beginTransaction ();  //Create a reference to a fragment transaction.
         ft.add(R.id.displayedView, searchFrag, "searchFrag");  //now we have added our fragment to our Activity programmatically.  The other fragments exist, but have not been added yet.
-        ft.addToBackStack ("myFrag1");  //why do we do this?
+        ft.addToBackStack ("searchFrag");  //why do we do this?
         ft.commit ();
         bottomNavigationView.setOnItemSelectedListener(item ->  {
             switch(item.getItemId()) {
@@ -73,8 +71,6 @@ public class AppActivity extends AppCompatActivity {
             }
             return true;
         });
-
-
     }
 
     public void showMessages() {
@@ -100,6 +96,9 @@ public class AppActivity extends AppCompatActivity {
     public void showProfile() {
         if (profileFrag == null)
             profileFrag = new ProfileFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        profileFrag.setArguments(bundle);
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.displayedView, profileFrag);
         fragmentTransaction.addToBackStack("profileFrag");
@@ -116,5 +115,25 @@ public class AppActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+    @Override
+    public void messageFromParentFragment(Map.Entry<String, ArrayList<String>> temp) {
+        EventInfoFragment eventInfoFrag = new EventInfoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("Name", temp.getKey());
+        bundle.putString("Rating", temp.getValue().get(3));
+        bundle.putString("Location", temp.getValue().get(1));
+        bundle.putString("Release Date", temp.getValue().get(0));
+        eventInfoFrag.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.displayedView, eventInfoFrag);
+        fragmentTransaction.addToBackStack("eventInfoFrag");
+        fragmentTransaction.commit();
+    }
+
+//    @Override
+//    public void messageFromChildFragment(Uri uri) {
+//        Log.i("TAG", "received communication from child fragment");
+//    }
 
 }

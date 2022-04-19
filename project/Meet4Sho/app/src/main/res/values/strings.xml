@@ -2,6 +2,7 @@
     <string name="app_name">Meet4Sho</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="title_activity_signup">signupActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -11,4 +12,24 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- The options for the drop down list in fragment_search -->
+    <string-array name="search_options">
+        <item>All</item>
+        <item>Movies</item>
+        <item>Events</item>
+    </string-array>
+
+    <string-array name="restaurant_sort_options">
+        <item>Distance</item>
+        <item>Best Match</item>
+        <item>Rating</item>
+        <item>Review Count</item>
+    </string-array>
+
+
 </resources>
