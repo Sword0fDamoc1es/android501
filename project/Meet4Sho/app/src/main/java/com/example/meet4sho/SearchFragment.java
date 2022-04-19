@@ -27,7 +27,7 @@ public class SearchFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public Map<String, ArrayList<String>> movies = new HashMap<String, ArrayList<String>>();
-    //private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
 
     public SearchFragment() {
@@ -89,6 +89,7 @@ public class SearchFragment extends Fragment {
                     bundle.putString("Rating", temp.get(3));
                     bundle.putString("Location", temp.get(1));
                     bundle.putString("Release Date", temp.get(0));
+                    mListener.messageFromParentFragment(movie);
                     eventInfoFrag.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.replace(R.id.csFullLayout, eventInfoFrag, "eventInfoFrag");
@@ -101,27 +102,27 @@ public class SearchFragment extends Fragment {
         return v;
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void messageFromParentFragment(Uri uri);
-//    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void messageFromParentFragment(Map.Entry<String, ArrayList<String>> temp);
+    }
 
 }

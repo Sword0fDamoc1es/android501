@@ -10,7 +10,9 @@ import androidx.fragment.app.FragmentContainerView;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -21,7 +23,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class AppActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.Map;
+
+public class AppActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener {
 
     private MessagesFragment messageFrag;
     private SearchFragment searchFrag;
@@ -119,5 +124,25 @@ public class AppActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+    @Override
+    public void messageFromParentFragment(Map.Entry<String, ArrayList<String>> temp) {
+        EventInfoFragment eventInfoFrag = new EventInfoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("Name", temp.getKey());
+        bundle.putString("Rating", temp.getValue().get(3));
+        bundle.putString("Location", temp.getValue().get(1));
+        bundle.putString("Release Date", temp.getValue().get(0));
+        eventInfoFrag.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.displayedView, eventInfoFrag);
+        fragmentTransaction.addToBackStack("eventInfoFrag");
+        fragmentTransaction.commit();
+    }
+
+//    @Override
+//    public void messageFromChildFragment(Uri uri) {
+//        Log.i("TAG", "received communication from child fragment");
+//    }
 
 }
