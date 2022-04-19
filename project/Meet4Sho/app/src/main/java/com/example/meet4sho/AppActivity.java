@@ -47,6 +47,7 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         fm = getFragmentManager ();
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setSelectedItemId(R.id.nav_search);
         View displayedView = (View) findViewById(R.id.displayedView);
 
         FragmentTransaction ft = fm.beginTransaction ();  //Create a reference to a fragment transaction.

@@ -21,6 +21,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meet4sho.api.RequestListener;
+import com.example.meet4sho.api.SearchFilter;
+import com.example.meet4sho.api.TMEvent;
+import com.example.meet4sho.api.TMRequest;
 import com.example.meet4sho.model.API_Fetch;
 
 import java.io.Serializable;
@@ -134,13 +138,10 @@ public class SearchFragment extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                names.clear();
-                descriptions.clear();
-                imageURLs.clear();
-                pageNum = 1;
-                city = edtSearchCity.getText().toString();
-                keyword = edtSearchBar.getText().toString();
-                API_Fetch.Search(ra, names, descriptions, imageURLs, longitude, latitude, pageNum, city, keyword);
+                SearchFilter filter = new SearchFilter();
+                filter.add("city", edtSearchCity.getText().toString());
+                filter.add("keyword", edtSearchBar.getText().toString());
+                new TMRequest(new TMListener()).execute(filter);
             }
         });
 
@@ -148,7 +149,12 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 pageNum++;
-                API_Fetch.Search(ra, names, descriptions, imageURLs, longitude, latitude, pageNum, city, keyword);
+                SearchFilter filter = new SearchFilter();
+                filter.add("city", edtSearchCity.getText().toString());
+                filter.add("keyword", edtSearchBar.getText().toString());
+                filter.add("page", String.valueOf(pageNum));
+                new TMRequest(new TMListener()).execute(filter);
+                //API_Fetch.Search(ra, names, descriptions, imageURLs, longitude, latitude, pageNum, city, keyword);
             }
         });
 
@@ -176,6 +182,36 @@ public class SearchFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void messageFromParentFragment(Map.Entry<String, ArrayList<String>> temp);
+    }
+
+    private class TMListener implements RequestListener {
+        @Override
+        public void updateViews(List events) {
+            // reference: https://stackoverflow.com/questions/17176655/android-error-only-the-original-thread-that-created-a-view-hierarchy-can-touch
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    String output = "";
+                    names = new ArrayList<>();
+                    descriptions = new ArrayList<>();
+                    imageURLs = new ArrayList<>();
+                    longitude = new ArrayList<>();
+                    latitude = new ArrayList<>();
+                    for (int i = 0; i < events.size(); i++) {
+                        TMEvent event = (TMEvent) events.get(i);
+                        names.add(event.getName());
+                        descriptions.add(event.getDescription());
+                        imageURLs.add(event.getImages().get(0).getUrl());
+                        longitude.add(event.getVenue().getLongitude());
+                        latitude.add(event.getVenue().getLatitude());
+                        output += event.getName() + "\n";
+                    }
+                    ra = new TM_RecyclerAdapter(getActivity(), names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
+                    rvResults.setAdapter(ra);
+                    rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
+                }
+            });
+        }
     }
 
 }
