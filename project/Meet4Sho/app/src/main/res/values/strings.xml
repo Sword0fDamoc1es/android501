@@ -2,4 +2,13 @@
     <string name="app_name">Meet4Sho</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- The options for the drop down list in fragment_search -->
+    <string-array name="search_options">
+        <item>All</item>
+        <item>Movies</item>
+        <item>Events</item>
+    </string-array>
+
 </resources>

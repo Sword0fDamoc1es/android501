@@ -28,11 +28,12 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:ems="10"
+        android:hint="Name"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
         app:layout_constraintEnd_toEndOf="@+id/tbTopToolbar"
+        android:textColorHint="#A1A1A1"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
         app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
@@ -51,6 +52,19 @@
         app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.166" />
 
+    <Button
+        android:id="@+id/btnMore"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="More"
+        app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/edtSearchDate"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch"
+        app:layout_constraintVertical_bias="0.615" />
+
     <EditText
         android:id="@+id/edtSearchCity"
         android:layout_width="184dp"
@@ -59,7 +73,6 @@
         android:ems="10"
         android:hint="Location"
         android:inputType="textPersonName"
-        android:text="Boston"
         android:textColor="#FFFFFF"
         android:textColorHint="#A1A1A1"
         app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
@@ -81,7 +94,7 @@
         android:textColorHint="#A1A1A1"
         app:layout_constraintBottom_toBottomOf="@+id/tbTopToolbar"
         app:layout_constraintEnd_toEndOf="@+id/tbTopToolbar"
-        app:layout_constraintHorizontal_bias="0.816"
+        app:layout_constraintHorizontal_bias="0.685"
         app:layout_constraintStart_toStartOf="@+id/tbTopToolbar"
         app:layout_constraintTop_toTopOf="@+id/tbTopToolbar"
         app:layout_constraintVertical_bias="0.893" />
