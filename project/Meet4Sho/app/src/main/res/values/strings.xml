@@ -6,4 +6,19 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <!-- The options for the drop down list in fragment_search -->
+    <string-array name="search_options">
+        <item>All</item>
+        <item>Movies</item>
+        <item>Events</item>
+    </string-array>
+
+    <string-array name="restaurant_sort_options">
+        <item>Distance</item>
+        <item>Best Match</item>
+        <item>Rating</item>
+        <item>Review Count</item>
+    </string-array>
+
 </resources>

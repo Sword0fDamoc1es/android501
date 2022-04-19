@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AppActivity">
 
-
     <LinearLayout
         android:id="@+id/displayedView"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
@@ -16,7 +15,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        android:orientation="horizontal" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

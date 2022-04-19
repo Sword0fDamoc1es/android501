@@ -1,8 +1,12 @@
 package com.example.meet4sho;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +26,19 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
     List<String> names;
     List<String> descriptions;
     List<String> imageURLS;
+    List<String> longitude;
+    List<String> latitude;
     Context context;
+    FragmentManager fm;
 
-    public TM_RecyclerAdapter(Context ct, List<String> n,List<String> d,List<String> u){
+    public TM_RecyclerAdapter(Activity ct, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f){
         context = ct;
         names = n;
         descriptions = d;
         imageURLS = u;
+        longitude = lg;
+        latitude = lt;
+        fm = f;
 
     }
     @NonNull
@@ -44,6 +54,8 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         String title = names.get(position);
         String description = descriptions.get(position);
         String url = imageURLS.get(position);
+        String lg = longitude.get(position);
+        String lt = latitude.get(position);
         holder.tvTitle.setText(title);
         holder.tvDescription.setText(description);
         new TM_EventInfoActivity.DownloadImageTask(holder.ivPreview).execute(url);
@@ -51,15 +63,26 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, TM_EventInfoActivity.class);
-                i.putExtra("name", title);
-                i.putExtra("description", description);
-                i.putExtra("url", url);
-                i.putStringArrayListExtra("names", (ArrayList<String>) names);
-                i.putStringArrayListExtra("descriptions", (ArrayList<String>) descriptions);
-                i.putStringArrayListExtra("urls", (ArrayList<String>) imageURLS);
+                EventInfoFragment eiFrag = new EventInfoFragment();
+                Bundle bundle = new Bundle();
+//                Intent i = new Intent(context, TM_EventInfoActivity.class);
+                bundle.putString("name", title);
+                bundle.putString("description", description);
+                bundle.putString("url", url);
+                bundle.putString("lg", lg);
+                bundle.putString("lt", lt);
+                bundle.putStringArrayList("names", (ArrayList<String>) names);
+                bundle.putStringArrayList("descriptions", (ArrayList<String>) descriptions);
+                bundle.putStringArrayList("urls", (ArrayList<String>) imageURLS);
 
-                context.startActivity(i);
+                eiFrag.setArguments(bundle);
+
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.displayedView, eiFrag);
+                fragmentTransaction.addToBackStack("eiFrag");
+                fragmentTransaction.commit();
+
+//                context.startActivity(i);
             }
         });
 

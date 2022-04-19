@@ -28,6 +28,8 @@ import java.util.Map;
 
 public class AppActivity extends AppCompatActivity implements SearchFragment.OnFragmentInteractionListener {
 
+    private int startingIndex = 0;
+
     private MessagesFragment messageFrag;
     private SearchFragment searchFrag;
     private ProfileFragment profileFrag;
@@ -78,8 +80,6 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
             }
             return true;
         });
-
-
     }
 
     public void showMessages() {

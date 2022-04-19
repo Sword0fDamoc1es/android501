@@ -12,22 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 
-public class EventInfoFragment extends Fragment implements View.OnClickListener {
-
-    Bundle bundle;
+public class RestaurantInfoFragment extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     //private OnFragmentInteractionListener mListener;
 
 
-    public EventInfoFragment() {
+    public RestaurantInfoFragment() {
         // Required empty public constructor
     }
 
@@ -41,39 +40,28 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.tm_event_info, container, false);
-        bundle = this.getArguments();
-        String title = bundle.getString("name");
-        String description = bundle.getString("description");
-//        String location = bundle.getString("Location");
-//        String releaseDate = bundle.getString("Release Date");
+        View v = inflater.inflate(R.layout.yelp_loc_info, container, false);
 
-        TextView tvTitleEvent = v.findViewById(R.id.tvTitleEvent);
-        tvTitleEvent.setText(title);
+        ImageView ivRestoImg = (ImageView) v.findViewById(R.id.ivRestoImg);
+        TextView tvDescription = (TextView) v.findViewById(R.id.tvDescription);
 
-        TextView tvDescription = v.findViewById(R.id.tvDescriptionEvent);
+        Bundle bundle = this.getArguments();
+        Restaurant restaurant = (Restaurant) bundle.getSerializable("res");
+        String description = "Name: " + restaurant.name + "\n";
+        description += "Status: " + restaurant.isClosed + "\n";
+        description += "Rating: " + restaurant.rating + "\n";
+        description += "Review Count: " + restaurant.reviewCount + "\n";
+        description += "Price: " + restaurant.price + "\n";
+        description += "Distance: " + restaurant.distance + "\n";
+        description += "Address: " + restaurant.displayAddress + "\n";
+        description += "Phone: " + restaurant.displayPhone + "\n";
         tvDescription.setText(description);
 
-        Button btnGoToRes = v.findViewById(R.id.btnGoToRes);
-        btnGoToRes.setOnClickListener(this);
+        new TM_EventInfoActivity.DownloadImageTask(ivRestoImg).execute(restaurant.imgURL);
+
 
         return v;
     }
-
-    @Override
-    public void onClick(View v){
-        Bundle b = new Bundle();
-        b.putString("lg", bundle.getString("lg"));
-        b.putString("lt", bundle.getString("lt"));
-        RestaurantsFragment resFrag = new RestaurantsFragment();
-        resFrag.setArguments(b);
-        FragmentManager fm = getActivity().getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.displayedView, resFrag);
-        fragmentTransaction.addToBackStack("resFrag");
-        fragmentTransaction.commit();
-    }
-
 //    @Override
 //    public void onAttach(Context context) {
 //        super.onAttach(context);
