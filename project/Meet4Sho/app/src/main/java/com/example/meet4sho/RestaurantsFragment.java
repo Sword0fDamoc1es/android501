@@ -60,24 +60,16 @@ public class RestaurantsFragment extends Fragment {
         filter.add("longitude", bundle.getString("lg"));
         filter.add("latitude", bundle.getString("lt"));
         new YelpRequest(new YelpListener()).execute(filter);
-        System.out.println(restaurants);
-//        String title = bundle.getString("name");
-//        String description = bundle.getString("description");
-////        String location = bundle.getString("Location");
-////        String releaseDate = bundle.getString("Release Date");
-//
-//        TextView tvTitleEvent = v.findViewById(R.id.tvTitleEvent);
-//        tvTitleEvent.setText(title);
+
         edtResSearchBar = (EditText) v.findViewById(R.id.edtResSearchBar);
         btnResSearch = (Button) v.findViewById(R.id.btnResSearch);
         spnResSort = (Spinner) v.findViewById(R.id.spnResSort);
-//
+
         rvResResults = (RecyclerView) v.findViewById(R.id.rvResResults);
 
         ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());
         rvResResults.setAdapter(ra);
         rvResResults.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        API_Fetch.RestaurantSearch(ra, "", "", bundle.getString("lg"), bundle.getString("lt"));
 
         btnResSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,8 +94,6 @@ public class RestaurantsFragment extends Fragment {
         @Override
         public void updateViews(List providedRestaurants) {
             // reference: https://stackoverflow.com/questions/17176655/android-error-only-the-original-thread-that-created-a-view-hierarchy-can-touch
-            System.out.println("Listener");
-            System.out.println(providedRestaurants);
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -114,8 +104,6 @@ public class RestaurantsFragment extends Fragment {
                         restaurants.add(restaurant);
                         output += restaurant.getName() + "\n";
                     }
-
-                    //System.out.println(restaurants);
                     ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());
                     rvResResults.setAdapter(ra);
                     rvResResults.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -43,29 +43,11 @@ public class SearchFragment extends Fragment {
     private List<String> longitude = new ArrayList<>();
     private List<String> latitude = new ArrayList<>();
 
-    private String city;
-    private String keyword;
-
     private TM_RecyclerAdapter ra;
 
 
     public SearchFragment() {
         // Required empty public constructor
-        // Testing Code
-//        ArrayList<String> movieInfo = new ArrayList<String>();
-//        movieInfo.add("Out Now");
-//        movieInfo.add("Fenway");
-//        movieInfo.add("2:30PM");
-//        movieInfo.add("3/5");
-//        movies.put("Batman", movieInfo);
-//        movies.put("Robin", movieInfo);
-//        movies.put("Superman", movieInfo);
-//        movies.put("Wonder Woman", movieInfo);
-//        movies.put("The Flash", movieInfo);
-//        movies.put("Aquaman", movieInfo);
-//        movies.put("Cyborg", movieInfo);
-//        movies.put("Justice League", movieInfo);
-//        movies.put("Nightwing", movieInfo);
 
     }
 
@@ -80,45 +62,13 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_search, container, false);
-//        LinearLayout listEvents = v.findViewById(R.id.listEvents);
-//        int counter = 0;
-//        for (Map.Entry<String,ArrayList<String>> movie : movies.entrySet()) {
-//            TextView tvMovie = new TextView(getActivity());
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                    ViewGroup.LayoutParams.MATCH_PARENT,
-//                    ViewGroup.LayoutParams.WRAP_CONTENT
-//            );
-//            params.setMargins(50, 20, 50, 20);
-//            tvMovie.setLayoutParams(params);
-//            tvMovie.setId(counter);
-//            ArrayList<String> temp = movie.getValue();
-//            String description = String.format("Name: %s\nRating: %s\nLocation: %s\nRelease Date: %s\n", movie.getKey(),
-//                    temp.get(3), temp.get(1), temp.get(0));
-//            tvMovie.setText(description);
-//            tvMovie.setTextSize(16);
-//            listEvents.addView(tvMovie);
-//            counter++;
-//            tvMovie.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    // TODO
-//                    mListener.messageFromParentFragment(movie);
-//                }
-//            });
-//        }
+
         edtSearchBar = (EditText) v.findViewById(R.id.edtSearchBar);
         edtSearchCity = (EditText) v.findViewById(R.id.edtSearchCity);
         btnSearch = (Button) v.findViewById(R.id.btnSearch);
         btnMore = (Button) v.findViewById(R.id.btnMore);
         rvResults = (RecyclerView) v.findViewById(R.id.rvResults);
 
-//        if(getIntent().getExtras()!=null){
-//            extras = getIntent().getExtras();
-//            names = extras.getStringArrayList("names");
-//            descriptions = extras.getStringArrayList("descriptions");
-//            imageURLs = extras.getStringArrayList("urls");
-//
-//        }
         ra = new TM_RecyclerAdapter(getActivity(), names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
         rvResults.setAdapter(ra);
         rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -144,7 +94,6 @@ public class SearchFragment extends Fragment {
                 filter.add("keyword", edtSearchBar.getText().toString());
                 filter.add("page", String.valueOf(pageNum));
                 new TMRequest(new TMListener()).execute(filter);
-                //API_Fetch.Search(ra, names, descriptions, imageURLs, longitude, latitude, pageNum, city, keyword);
             }
         });
 
