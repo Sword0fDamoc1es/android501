@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.meet4sho.api.YelpRestaurant;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -46,18 +48,18 @@ public class RestaurantInfoFragment extends Fragment{
         TextView tvDescription = (TextView) v.findViewById(R.id.tvDescription);
 
         Bundle bundle = this.getArguments();
-        Restaurant restaurant = (Restaurant) bundle.getSerializable("res");
-        String description = "Name: " + restaurant.name + "\n";
-        description += "Status: " + restaurant.isClosed + "\n";
-        description += "Rating: " + restaurant.rating + "\n";
-        description += "Review Count: " + restaurant.reviewCount + "\n";
-        description += "Price: " + restaurant.price + "\n";
-        description += "Distance: " + restaurant.distance + "\n";
-        description += "Address: " + restaurant.displayAddress + "\n";
-        description += "Phone: " + restaurant.displayPhone + "\n";
+        YelpRestaurant restaurant = (YelpRestaurant) bundle.getSerializable("res");
+        String description = "Name: " + restaurant.getName() + "\n";
+        description += "Status: " + restaurant.getIs_closed() + "\n";
+        description += "Rating: " + restaurant.getRating() + "\n";
+        description += "Review Count: " + restaurant.getReview_count() + "\n";
+        description += "Price: " + restaurant.getPrice() + "\n";
+        description += "Distance: " + restaurant.getDistance() + "\n";
+        description += "Address: " + restaurant.getDisplay_address() + "\n";
+        description += "Phone: " + restaurant.getDisplay_phone() + "\n";
         tvDescription.setText(description);
 
-        new TM_EventInfoActivity.DownloadImageTask(ivRestoImg).execute(restaurant.imgURL);
+        new TM_EventInfoActivity.DownloadImageTask(ivRestoImg).execute(restaurant.getImage_url());
 
 
         return v;

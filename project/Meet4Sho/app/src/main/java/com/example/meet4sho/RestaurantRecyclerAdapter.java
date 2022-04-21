@@ -18,16 +18,18 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.meet4sho.api.YelpRestaurant;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRecyclerAdapter.MyViewHolder> {
 
-    List<Restaurant> restaurants;
+    List<YelpRestaurant> restaurants;
     Context context;
     FragmentManager fm;
 
-    public RestaurantRecyclerAdapter(Activity ct, List<Restaurant> r, android.app.FragmentManager f){
+    public RestaurantRecyclerAdapter(Activity ct, List<YelpRestaurant> r, android.app.FragmentManager f){
         context = ct;
         restaurants = r;
         fm = f;
@@ -43,13 +45,14 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Restaurant restaurant = restaurants.get(position);
-        holder.tvTitle.setText(restaurant.name);
-        holder.tvDescription.setText(restaurant.displayAddress);
-        holder.tvIsOpen.setText("Phone: " + restaurant.displayPhone);
-        holder.tvRating.setText("Rating: " + restaurant.rating);
-        holder.tvDistance.setText("Distance: " + restaurant.distance);
-        new TM_EventInfoActivity.DownloadImageTask(holder.ivPreview).execute(restaurant.imgURL);
+        YelpRestaurant restaurant = restaurants.get(position);
+        System.out.println(restaurant.getName());
+        holder.tvTitle.setText(restaurant.getName());
+        holder.tvDescription.setText(restaurant.getDisplay_address());
+        holder.tvIsOpen.setText("Phone: " + restaurant.getDisplay_phone());
+        holder.tvRating.setText("Rating: " + restaurant.getRating());
+        holder.tvDistance.setText("Distance: " + restaurant.getDistance());
+        new TM_EventInfoActivity.DownloadImageTask(holder.ivPreview).execute(restaurant.getImage_url());
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +77,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         return restaurants.size();
     }
 
-    public void notifyData(List<Restaurant> res) {
+    public void notifyData(List<YelpRestaurant> res) {
         Log.d("notifyData ", res.size() + "");
         this.restaurants = res;
         notifyDataSetChanged();

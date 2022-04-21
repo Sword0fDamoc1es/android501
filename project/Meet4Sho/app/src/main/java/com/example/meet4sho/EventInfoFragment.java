@@ -20,7 +20,9 @@ import java.util.Map;
 
 public class EventInfoFragment extends Fragment implements View.OnClickListener {
 
-    Bundle bundle;
+    private Bundle bundle;
+    private String lat;
+    private String lon;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,6 +47,9 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         bundle = this.getArguments();
         String title = bundle.getString("name");
         String description = bundle.getString("description");
+        lon = bundle.getString("lg");
+        lat = bundle.getString("lt");
+
 //        String location = bundle.getString("Location");
 //        String releaseDate = bundle.getString("Release Date");
 
@@ -53,6 +58,9 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
         TextView tvDescription = v.findViewById(R.id.tvDescriptionEvent);
         tvDescription.setText(description);
+
+        TextView tvLatLon = v.findViewById(R.id.tvLatLon);
+        tvLatLon.setText(lon+", "+lat);
 
         Button btnGoToRes = v.findViewById(R.id.btnGoToRes);
         btnGoToRes.setOnClickListener(this);
@@ -63,8 +71,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View v){
         Bundle b = new Bundle();
-        b.putString("lg", bundle.getString("lg"));
-        b.putString("lt", bundle.getString("lt"));
+        b.putString("lg", lon);
+        b.putString("lt", lat);
         RestaurantsFragment resFrag = new RestaurantsFragment();
         resFrag.setArguments(b);
         FragmentManager fm = getActivity().getFragmentManager();

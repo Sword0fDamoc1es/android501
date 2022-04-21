@@ -1,7 +1,5 @@
 package com.example.meet4sho;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -12,25 +10,30 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meet4sho.model.API_Fetch;
+import com.example.meet4sho.api.RequestListener;
+import com.example.meet4sho.api.SearchFilter;
+import com.example.meet4sho.api.YelpRequest;
+import com.example.meet4sho.api.YelpRestaurant;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 public class RestaurantsFragment extends Fragment {
 
-    private RecyclerView rvResResults;
+    public EditText edtResSearchBar;
+    public Button btnResSearch;
+    public Spinner spnResSort;
+    public RecyclerView rvResResults;
 
-    List<Restaurant> restaurants = new ArrayList<>();
+    public List<YelpRestaurant> restaurants = new ArrayList<>();
 
-    private RestaurantRecyclerAdapter ra;
+
+    public RestaurantRecyclerAdapter ra;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +56,11 @@ public class RestaurantsFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.restaurants_page, container, false);
         Bundle bundle = this.getArguments();
+        SearchFilter filter = new SearchFilter();
+        filter.add("longitude", bundle.getString("lg"));
+        filter.add("latitude", bundle.getString("lt"));
+        new YelpRequest(new YelpListener()).execute(filter);
+        System.out.println(restaurants);
 //        String title = bundle.getString("name");
 //        String description = bundle.getString("description");
 ////        String location = bundle.getString("Location");
@@ -60,28 +68,60 @@ public class RestaurantsFragment extends Fragment {
 //
 //        TextView tvTitleEvent = v.findViewById(R.id.tvTitleEvent);
 //        tvTitleEvent.setText(title);
-        EditText edtResSearchBar = (EditText) v.findViewById(R.id.edtResSearchBar);
-        Button btnResSearch = (Button) v.findViewById(R.id.btnResSearch);
-        Spinner spnResSort = (Spinner) v.findViewById(R.id.spnResSort);
+        edtResSearchBar = (EditText) v.findViewById(R.id.edtResSearchBar);
+        btnResSearch = (Button) v.findViewById(R.id.btnResSearch);
+        spnResSort = (Spinner) v.findViewById(R.id.spnResSort);
 //
-        RecyclerView rvResResults = v.findViewById(R.id.rvResResults);
+        rvResResults = (RecyclerView) v.findViewById(R.id.rvResResults);
 
         ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());
         rvResResults.setAdapter(ra);
         rvResResults.setLayoutManager(new LinearLayoutManager(getActivity()));
-        API_Fetch.RestaurantSearch(ra, "", "", bundle.getString("lg"), bundle.getString("lt"));
+//        API_Fetch.RestaurantSearch(ra, "", "", bundle.getString("lg"), bundle.getString("lt"));
 
         btnResSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                restaurants.clear();
-                String keyword = edtResSearchBar.getText().toString();
-                String sort = spnResSort.getSelectedItem().toString();
-                API_Fetch.RestaurantSearch(ra, keyword, sort, bundle.getString("lg"), bundle.getString("lt"));
+                //restaurants.clear();
+                filter.add("longitude", bundle.getString("lg"));
+                filter.add("latitude", bundle.getString("lt"));
+                if(!edtResSearchBar.getText().toString().equals(""))
+                    filter.add("keyword", edtResSearchBar.getText().toString());
+                filter.add("sort", spnResSort.getSelectedItem().toString());
+                new YelpRequest(new YelpListener()).execute(filter);
+                ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());
+                rvResResults.setAdapter(ra);
+                rvResResults.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
         });
 
         return v;
+    }
+
+    private class YelpListener implements RequestListener {
+        @Override
+        public void updateViews(List providedRestaurants) {
+            // reference: https://stackoverflow.com/questions/17176655/android-error-only-the-original-thread-that-created-a-view-hierarchy-can-touch
+            System.out.println("Listener");
+            System.out.println(providedRestaurants);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    String output = "";
+                    restaurants = new ArrayList<>();
+                    for (int i = 0; i < providedRestaurants.size(); i++) {
+                        YelpRestaurant restaurant = (YelpRestaurant) providedRestaurants.get(i);
+                        restaurants.add(restaurant);
+                        output += restaurant.getName() + "\n";
+                    }
+
+                    //System.out.println(restaurants);
+                    ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());
+                    rvResResults.setAdapter(ra);
+                    rvResResults.setLayoutManager(new LinearLayoutManager(getActivity()));
+                }
+            });
+        }
     }
 
 }

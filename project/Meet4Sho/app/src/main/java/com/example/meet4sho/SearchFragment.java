@@ -1,10 +1,6 @@
 package com.example.meet4sho;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
-import android.media.metrics.Event;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -14,10 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,10 +18,7 @@ import com.example.meet4sho.api.RequestListener;
 import com.example.meet4sho.api.SearchFilter;
 import com.example.meet4sho.api.TMEvent;
 import com.example.meet4sho.api.TMRequest;
-import com.example.meet4sho.model.API_Fetch;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
