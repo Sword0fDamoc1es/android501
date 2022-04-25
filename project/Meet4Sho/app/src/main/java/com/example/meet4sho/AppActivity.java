@@ -57,7 +57,7 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         seditr.putString(getString(R.string.preference_user_name), username);
         seditr.apply();
 
-        initCometChat();
+        //initCometChat();
 
         messageFrag = new MessagesListFragment();
         searchFrag = new SearchFragment();
@@ -167,18 +167,18 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         });
     }
 
-    private void initCometChat() {
-        CometChat.init(this, appID, appSettings, new CometChat.CallbackListener<String>() {
-            @Override
-            public void onSuccess(String s) {
-                Log.d("Comet Chat:", "Initialization Successful");
-            }
-            @Override
-            public void onError(CometChatException e) {
-                Log.d("Comet Chat:", "Initialization Failed");
-            }
-        });
-    }
+//    private void initCometChat() {
+//        CometChat.init(this, appID, appSettings, new CometChat.CallbackListener<String>() {
+//            @Override
+//            public void onSuccess(String s) {
+//                Log.d("Comet Chat:", "Initialization Successful");
+//            }
+//            @Override
+//            public void onError(CometChatException e) {
+//                Log.d("Comet Chat:", "Initialization Failed");
+//            }
+//        });
+//    }
 
 //    @Override
 //    public void messageFromChildFragment(Uri uri) {

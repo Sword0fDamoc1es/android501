@@ -10,16 +10,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.core.UsersRequest;
+import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.BaseMessage;
+import com.cometchat.pro.models.TextMessage;
+import com.cometchat.pro.models.User;
+import com.example.meet4sho.messages.MessageWrapper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class signupActivity extends AppCompatActivity {
+    //CometChat API Keys
+    public String appID = "2078762eaec81f6e"; // Replace with your App ID
+    public String region = "us"; // Replace with your App Region ("eu" or "us")
+    public String authKey = "b5a91f16fbe450cb26f7584db9f85d3bd75785ed"; //Replace with your Auth Key.
+    //
+
     public EditText signup_name;
     public EditText signup_pwd;
     public Button btnCreate;
@@ -63,6 +78,9 @@ public class signupActivity extends AppCompatActivity {
     }
     public void createAccount(){
         String uname = signup_name.getText().toString();
+
+        //CometChat Account Creation
+        CreateCometChatUser(uname);
 
         // get info
         String  upwd = signup_pwd.getText().toString();
@@ -123,5 +141,39 @@ public class signupActivity extends AppCompatActivity {
             createAccount();
         }
 
+    }
+
+    public void CreateCometChatUser(String name) {
+        List<String> userIDsInCometChat = new ArrayList<>();
+        UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().build();
+        usersRequest.fetchNext(new CometChat.CallbackListener<List<User>>() {
+            @Override
+            public void onSuccess(List <User> list) {
+                for(User user: list) {
+                    userIDsInCometChat.add(user.getUid());
+                }
+                Log.d("CometChat-Fetch UserIDs", "User list received: " + list.size());
+            }
+            @Override
+            public void onError(CometChatException e) {
+                Log.d("CometChat-Fetch UserIDs", "User list fetching failed with exception: " + e.getMessage());
+            }
+        });
+        if(!userIDsInCometChat.contains(name)) {
+            User user = new User();
+            user.setUid(name); // Replace with your uid for the user to be created.
+            user.setName(name);
+            CometChat.createUser(user, authKey, new CometChat.CallbackListener<User>() {
+                @Override
+                public void onSuccess(User user) {
+                    Log.d("CometChat_CreateUser", user.toString());
+                }
+
+                @Override
+                public void onError(CometChatException e) {
+                    Log.e("CometChat_CreateUser", e.getMessage());
+                }
+            });
+        }
     }
 }
