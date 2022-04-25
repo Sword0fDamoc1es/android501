@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Meet4Sho</string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="preference_file_name">com.example.meet4sho</string>
+    <string name="preference_user_name">userNameID</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="title_activity_signup">signupActivity</string>

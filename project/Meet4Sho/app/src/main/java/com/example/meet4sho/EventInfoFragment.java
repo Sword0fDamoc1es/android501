@@ -3,6 +3,7 @@ package com.example.meet4sho;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -56,9 +57,19 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         bundle = this.getArguments();
         // TODO get id
         id = bundle.getString("id");
-        Log.d("ID INFO: ",id);
+//        Log.d("ID INFO: ",id);
 
         // END TODO
+        // the following code get the user name from sharedPref
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.preference_file_name), Context.MODE_PRIVATE);
+        String getFromShared = sharedPref.getString(getString(R.string.preference_user_name), "nothing");
+        Log.d("user name : ", getFromShared);
+
+
+
+
+
         String title = bundle.getString("name");
         String description = bundle.getString("description");
         lon = bundle.getString("lg");

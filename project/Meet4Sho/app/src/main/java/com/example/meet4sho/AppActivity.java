@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +41,12 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         Bundle extras = getIntent().getExtras();
         username = extras.getString("username");
 
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                getString(R.string.preference_file_name), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor seditr = sharedPref.edit();
+        seditr.putString(getString(R.string.preference_user_name), username);
+        seditr.apply();
         messageFrag = new MessagesFragment();
         searchFrag = new SearchFragment();
         profileFrag = new ProfileFragment();
@@ -72,6 +80,7 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
             return true;
         });
     }
+
 
     public void showMessages() {
         if (messageFrag == null)
