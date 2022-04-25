@@ -78,7 +78,7 @@ public class RestaurantsFragment extends Fragment {
                 filter.add("longitude", bundle.getString("lg"));
                 filter.add("latitude", bundle.getString("lt"));
                 if(!edtResSearchBar.getText().toString().equals(""))
-                    filter.add("keyword", edtResSearchBar.getText().toString());
+                    filter.add("term", edtResSearchBar.getText().toString());
                 filter.add("sort", spnResSort.getSelectedItem().toString());
                 new YelpRequest(new YelpListener()).execute(filter);
                 ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());

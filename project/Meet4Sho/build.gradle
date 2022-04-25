@@ -18,6 +18,18 @@ plugins {
     id 'com.android.library' version '7.1.3' apply false
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://dl.cloudsmith.io/public/cometchat/cometchat-pro-android/maven/"
+        }
+        maven { url 'https://jitpack.io' }
+        jcenter()
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
