@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/app_main_page.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/conversation_layout.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/conversation_list_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_search.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/message_chat_page.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/messages_list_page.xml" value="0.22826086956521738" />
