@@ -11,14 +11,20 @@
       android:id="@+id/input"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      app:inputHint="Enter your message"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:inputHint="Enter your message"/>
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.921" />
 
   <com.stfalcon.chatkit.messages.MessagesList
       android:id="@+id/messagesList"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toTopOf="@id/input"/>
+      android:layout_height="570dp"
+      app:layout_constraintBottom_toTopOf="@id/input"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
