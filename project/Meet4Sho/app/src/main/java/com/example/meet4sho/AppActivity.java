@@ -56,7 +56,7 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         SharedPreferences.Editor seditr = sharedPref.edit();
         seditr.putString(getString(R.string.preference_user_name), username);
         seditr.apply();
-        messageFrag = new MessagesFragment();
+
         initCometChat();
 
         messageFrag = new MessagesListFragment();
