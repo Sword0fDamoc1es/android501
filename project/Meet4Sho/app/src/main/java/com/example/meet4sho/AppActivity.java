@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.cometchat.pro.core.AppSettings;
+import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
 
     private int startingIndex = 0;
 
-    private MessagesFragment messageFrag;
+    private MessagesListFragment messageFrag;
     private SearchFragment searchFrag;
     private ProfileFragment profileFrag;
     private SettingsFragment settingsFrag;
@@ -28,6 +30,12 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
     public View displayedView;
     public FragmentManager fm;
     public String username;
+
+    public String appID = "2078762eaec81f6e"; // Replace with your App ID
+    public String region = "us"; // Replace with your App Region ("eu" or "us")
+    public String authKey = "b5a91f16fbe450cb26f7584db9f85d3bd75785ed"; //Replace with your Auth Key.
+
+    AppSettings appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
 
     public EditText searchBar;
     public BottomNavigationView bottomNavigationView;
@@ -39,7 +47,9 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         Bundle extras = getIntent().getExtras();
         username = extras.getString("username");
 
-        messageFrag = new MessagesFragment();
+        initCometChat();
+
+        messageFrag = new MessagesListFragment();
         searchFrag = new SearchFragment();
         profileFrag = new ProfileFragment();
         settingsFrag = new SettingsFragment();
@@ -75,7 +85,8 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
 
     public void showMessages() {
         if (messageFrag == null)
-            messageFrag = new MessagesFragment();
+            messageFrag = new MessagesListFragment();
+        initMessagesList();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.displayedView, messageFrag);
         fragmentTransaction.addToBackStack("messageFrag");
@@ -129,6 +140,33 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         fragmentTransaction.replace(R.id.displayedView, eventInfoFrag);
         fragmentTransaction.addToBackStack("eventInfoFrag");
         fragmentTransaction.commit();
+    }
+
+    private void initMessagesList() {
+        CometChat.login(username, authKey, new CometChat.CallbackListener<User>() {
+            @Override
+            public void onSuccess(User user) {
+                Log.d("Comet Chat: ", "Login Successful");
+            }
+
+            @Override
+            public void onError(CometChatException e) {
+                Log.d("Comet Chat: ", "Login Failed");
+            }
+        });
+    }
+
+    private void initCometChat() {
+        CometChat.init(this, appID, appSettings, new CometChat.CallbackListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                Log.d("Comet Chat:", "Initialization Successful");
+            }
+            @Override
+            public void onError(CometChatException e) {
+                Log.d("Comet Chat:", "Initialization Failed");
+            }
+        });
     }
 
 //    @Override
