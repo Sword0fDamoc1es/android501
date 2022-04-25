@@ -28,8 +28,8 @@ public class SearchFragment extends Fragment {
     // 4/24 marv's comments:
     // the TODO is to add id.
     // the parts with <> is the on-going modification on latest-eventID branch.
-    // walk through: searchFragment -- <create ID array> -- <get info from TM-event> -- <then send info to TM_recycler>
-    //               TM-Recycler -- <create id array> -- <get id in CONSTRUCTOR> -- <add id to bundle in holders' onClick>
+    // walk through: searchFragment -- <create ID array> -- <get info from TM-event> -- <then send info to TM_recycler> -- <onCreate view has the recycle part to modify> √
+    //               TM-Recycler -- <create id array> -- <get id in CONSTRUCTOR> -- <add id to bundle in holders' onClick> √
     //               EventInfoFragment -- <create id string> -- <get id from bundle>
     // !!!! further goal: once the sign-up button is created in EventInfoFragment:
     // TODO: send id into bundle as a key for the sign-up in eventInfoFragment -> event sign-up page.
@@ -50,6 +50,8 @@ public class SearchFragment extends Fragment {
 
 
     // TODO: add private id ?
+    private List<String> ids = new ArrayList<>();
+    // END TODO.
 
     private List<String> names = new ArrayList<>();
     private List<String> descriptions = new ArrayList<>();
@@ -83,7 +85,10 @@ public class SearchFragment extends Fragment {
         btnMore = (Button) v.findViewById(R.id.btnMore);
         rvResults = (RecyclerView) v.findViewById(R.id.rvResults);
 
-        ra = new TM_RecyclerAdapter(getActivity(), names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
+        // TODO add ids to the parameter.
+        ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
+        // END TODO.
+
         rvResults.setAdapter(ra);
         rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -145,6 +150,11 @@ public class SearchFragment extends Fragment {
                 @Override
                 public void run() {
                     String output = "";
+
+                    // TODO ids:
+                    ids = new ArrayList<>();
+                    // END TODO.
+
                     names = new ArrayList<>();
                     descriptions = new ArrayList<>();
                     imageURLs = new ArrayList<>();
@@ -153,6 +163,8 @@ public class SearchFragment extends Fragment {
                     for (int i = 0; i < events.size(); i++) {
                         TMEvent event = (TMEvent) events.get(i);
                         // TODO add id here.
+                        ids.add(event.getId());
+                        // END TODO.
                         names.add(event.getName());
                         descriptions.add(event.getDescription());
                         imageURLs.add(event.getImages().get(0).getUrl());
@@ -160,7 +172,7 @@ public class SearchFragment extends Fragment {
                         latitude.add(event.getVenue().getLatitude());
                         output += event.getName() + "\n";
                     }
-                    ra = new TM_RecyclerAdapter(getActivity(), names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
+                    ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
                     rvResults.setAdapter(ra);
                     rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
                 }

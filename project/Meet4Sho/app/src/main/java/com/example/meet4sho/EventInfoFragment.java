@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,15 @@ import java.util.Map;
 
 public class EventInfoFragment extends Fragment implements View.OnClickListener {
 
+    // comments from Marv, 4/24
+    // TODO in this fragment, we need to create a sign-up button and send id as the key to it.
+    //
+
     private Bundle bundle;
     // TODO create id.
+    private String id;
+    // END TODO
+
     private String lat;
     private String lon;
 
@@ -47,6 +55,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         View v = inflater.inflate(R.layout.tm_event_info, container, false);
         bundle = this.getArguments();
         // TODO get id
+        id = bundle.getString("id");
+        Log.d("ID INFO: ",id);
+
+        // END TODO
         String title = bundle.getString("name");
         String description = bundle.getString("description");
         lon = bundle.getString("lg");

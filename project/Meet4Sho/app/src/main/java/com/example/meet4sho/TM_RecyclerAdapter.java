@@ -24,6 +24,8 @@ import java.util.List;
 public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.MyViewHolder> {
 
     // TODO: add id
+    List<String> ids;
+    // END TODO
     List<String> names;
     List<String> descriptions;
     List<String> imageURLS;
@@ -32,8 +34,12 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
     Context context;
     FragmentManager fm;
 
-    public TM_RecyclerAdapter(Activity ct, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f){
+    // TODO change the constructor, the first parameter will be ids array.
+
+    public TM_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f){
         // TODO: add id
+        ids = i;
+        // END TODO
         context = ct;
         names = n;
         descriptions = d;
@@ -43,6 +49,8 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         fm = f;
 
     }
+    // END TODO
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,6 +61,10 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        // TODO get id based on postion:
+        String id = ids.get(position);
+        // END TODO
+
         String title = names.get(position);
         String description = descriptions.get(position);
         String url = imageURLS.get(position);
@@ -69,6 +81,8 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
                 Bundle bundle = new Bundle();
 //                Intent i = new Intent(context, TM_EventInfoActivity.class);
                 // TODO: add id
+                bundle.putString("id",id);
+                // END TODO.
                 bundle.putString("name", title);
                 bundle.putString("description", description);
                 bundle.putString("url", url);
