@@ -21,6 +21,7 @@ import java.util.Map;
 public class EventInfoFragment extends Fragment implements View.OnClickListener {
 
     private Bundle bundle;
+    // TODO create id.
     private String lat;
     private String lon;
 
@@ -45,6 +46,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.tm_event_info, container, false);
         bundle = this.getArguments();
+        // TODO get id
         String title = bundle.getString("name");
         String description = bundle.getString("description");
         lon = bundle.getString("lg");

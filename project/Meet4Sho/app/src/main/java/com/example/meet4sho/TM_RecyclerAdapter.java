@@ -23,6 +23,7 @@ import java.util.List;
 
 public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.MyViewHolder> {
 
+    // TODO: add id
     List<String> names;
     List<String> descriptions;
     List<String> imageURLS;
@@ -32,6 +33,7 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
     FragmentManager fm;
 
     public TM_RecyclerAdapter(Activity ct, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f){
+        // TODO: add id
         context = ct;
         names = n;
         descriptions = d;
@@ -66,6 +68,7 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
                 EventInfoFragment eiFrag = new EventInfoFragment();
                 Bundle bundle = new Bundle();
 //                Intent i = new Intent(context, TM_EventInfoActivity.class);
+                // TODO: add id
                 bundle.putString("name", title);
                 bundle.putString("description", description);
                 bundle.putString("url", url);

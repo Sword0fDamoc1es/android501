@@ -44,8 +44,16 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/activity_signup2.xml" value="0.17119565217391305" />
         <entry key="app/src/main/res/layout/app_main_page.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/event_info.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/event_row.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/layout/login_page.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/messages_page.xml" value="0.1598731884057971" />
         <entry key="app/src/main/res/layout/movie_mainscreen.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/profile_page.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/restaurant_row.xml" value="0.1598731884057971" />
+        <entry key="app/src/main/res/layout/restaurants_page.xml" value="0.1322463768115942" />
         <entry key="app/src/main/res/layout/tm_event_info.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/tm_event_row.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/tm_mainscreen.xml" value="0.1956521739130435" />

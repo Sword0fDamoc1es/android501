@@ -25,6 +25,17 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchFragment extends Fragment {
+    // 4/24 marv's comments:
+    // the TODO is to add id.
+    // the parts with <> is the on-going modification on latest-eventID branch.
+    // walk through: searchFragment -- <create ID array> -- <get info from TM-event> -- <then send info to TM_recycler>
+    //               TM-Recycler -- <create id array> -- <get id in CONSTRUCTOR> -- <add id to bundle in holders' onClick>
+    //               EventInfoFragment -- <create id string> -- <get id from bundle>
+    // !!!! further goal: once the sign-up button is created in EventInfoFragment:
+    // TODO: send id into bundle as a key for the sign-up in eventInfoFragment -> event sign-up page.
+    // TODO: In event sign-up page: create a sign-up form and upload <eid> <uid>, <uid> is in a preference file.
+    // TODO: return chatroomID.
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +47,9 @@ public class SearchFragment extends Fragment {
     private RecyclerView rvResults;
 
     private int pageNum = 1;
+
+
+    // TODO: add private id ?
 
     private List<String> names = new ArrayList<>();
     private List<String> descriptions = new ArrayList<>();
@@ -138,6 +152,7 @@ public class SearchFragment extends Fragment {
                     latitude = new ArrayList<>();
                     for (int i = 0; i < events.size(); i++) {
                         TMEvent event = (TMEvent) events.get(i);
+                        // TODO add id here.
                         names.add(event.getName());
                         descriptions.add(event.getDescription());
                         imageURLs.add(event.getImages().get(0).getUrl());
