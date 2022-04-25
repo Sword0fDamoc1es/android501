@@ -66,6 +66,8 @@ public class signupActivity extends AppCompatActivity {
         // get info
         String  upwd = signup_pwd.getText().toString();
         Map<String,Object> dataToSave =  new HashMap<>();
+
+
         dataToSave.put("uid",uname);
         dataToSave.put("upwd",upwd);
 
@@ -96,21 +98,12 @@ public class signupActivity extends AppCompatActivity {
                     if (document.exists()) {
                         Log.d("GET", "DocumentSnapshot data: " + document.getData().get("uid"));
                     } else {
-//                        flag[0] = true;
+
 
                         Log.d("doc Reached", "No such document");
-//                        if (!document.getData().get("uid").toString().equals(name)){
-////                                valid = true;
-//
-//
-//
-////                            Log.d("flag true","valid");
-//                        }else{
-//                            Log.d("flag false","invalid");
-//                        }
+
                     }
-//                    flag[0] = false;
-//                    System.out.println("FFFFFFFFFFFFF!");
+
                 }else{
                     System.out.println("failed to get!");
                 }
