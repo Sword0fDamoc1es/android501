@@ -59,7 +59,6 @@ public class signupActivity extends AppCompatActivity {
         String uname = signup_name.getText().toString();
         checkValid(uname);
 
-
     }
     public void createAccount(){
         String uname = signup_name.getText().toString();
@@ -96,11 +95,9 @@ public class signupActivity extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         Log.d("GET", "DocumentSnapshot data: " + document.getData().get("uid"));
-//                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     } else {
 //                        flag[0] = true;
-                        valid = true;
-                        createAccount();
+
                         Log.d("doc Reached", "No such document");
 //                        if (!document.getData().get("uid").toString().equals(name)){
 ////                                valid = true;
