@@ -224,9 +224,11 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
                 break;
             case R.id.btnUserSearch:
+                checkExists(id);
                 Bundle b_us = new Bundle();
                 b_us.putString("username", username);
                 b_us.putString("id", id);
+                b_us.putStringArrayList("users",buffer);
                 UserSearchFragment usFrag = new UserSearchFragment();
                 usFrag.setArguments(b_us);
                 FragmentManager fmus = getActivity().getFragmentManager();

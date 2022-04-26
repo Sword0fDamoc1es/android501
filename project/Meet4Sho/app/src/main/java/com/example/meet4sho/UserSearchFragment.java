@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +20,11 @@ import com.example.meet4sho.api.RequestListener;
 import com.example.meet4sho.api.SearchFilter;
 import com.example.meet4sho.api.YelpRequest;
 import com.example.meet4sho.api.YelpRestaurant;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +35,13 @@ public class UserSearchFragment extends Fragment {
     public RecyclerView rvUsers;
     String id;
 
-    public List<String> usernames;
-    public List<String> bios;
+    public List<String> usernames = new ArrayList<>();
+    public List<String> bios = new ArrayList<>();
 
 
     public UserRecyclerAdapter ra;
+
+    private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/event_event");
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,6 +56,7 @@ public class UserSearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -57,20 +67,49 @@ public class UserSearchFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         id = bundle.getString("id");
-        usernames = new ArrayList<>();
+        usernames = bundle.getStringArrayList("users");
+        Log.d("what?"," the hack");
+        System.out.println(usernames.size());
+//        usernames = new ArrayList<>();
         bios = new ArrayList<>();
-
+//        checkExists(id);
+//        Log.d("tag!",usernames.get(1));
         String username = bundle.getString("username");
-        usernames.add(username);
-        bios.add("");
-
+//        usernames.add(username);
+        
         rvUsers = (RecyclerView) v.findViewById(R.id.rvUsers);
-
+//        Log.d("tag!",usernames.get(2));
         ra = new UserRecyclerAdapter(getActivity(), usernames, bios,getActivity().getFragmentManager());
         rvUsers.setAdapter(ra);
         rvUsers.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         return v;
+    }
+    public void checkExists(String name){
+        DocumentReference docCheck =  pDocRef.collection("interest").document(name);
+        docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Log.d("id is:",name);
+                    if (document.exists()) {
+                        Log.d("GET", "DocumentSnapshot data: " + document.getData().get("eid"));
+                        usernames =(ArrayList<String>) document.getData().get("list");
+                        System.out.println(usernames.get(2));
+                    } else {
+
+                        usernames = new ArrayList<>();
+                        Log.d("doc Reached", "No such document");
+
+                    }
+
+                }else{
+                    System.out.println("failed to get!");
+                }
+            }
+        });
+
     }
 
 }
