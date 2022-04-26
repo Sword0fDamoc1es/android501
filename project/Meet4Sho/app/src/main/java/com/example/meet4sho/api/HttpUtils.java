@@ -41,8 +41,10 @@ public class HttpUtils {
         try {
             reqURL = new URL(url);                                                      // Step 1: create a URL instance
             urlConnection = (HttpURLConnection) reqURL.openConnection();                // Step 2: open an http connection
-            for (String key: props.keySet()) {
-                urlConnection.setRequestProperty(key, props.get(key));                  // Step 3: set request properties (headers)
+            if (props != null) {
+                for (String key: props.keySet()) {
+                    urlConnection.setRequestProperty(key, props.get(key));              // Step 3: set request properties (headers)
+                }
             }
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());   // Step 4: get the response as an InputStream
             String responseString = IOUtil.toString(in);                                // Step 5: turn the response into a string
