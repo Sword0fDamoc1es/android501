@@ -117,7 +117,8 @@ public class signupActivity extends AppCompatActivity {
                         Log.d("GET", "DocumentSnapshot data: " + document.getData().get("uid"));
                     } else {
 
-
+                        valid = true;
+                        createAccount();
                         Log.d("doc Reached", "No such document");
 
                     }

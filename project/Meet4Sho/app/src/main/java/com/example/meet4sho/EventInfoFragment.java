@@ -3,6 +3,7 @@ package com.example.meet4sho;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 
 public class EventInfoFragment extends Fragment implements View.OnClickListener {
@@ -62,8 +65,9 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     TextView tvDescription;
     ImageView ivEventImg;
 
-    private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
-
+    private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/event_event");
+    private ArrayList<String> buffer;
+    public boolean valid = false;
     public EventInfoFragment() {
         // Required empty public constructor
     }
@@ -126,10 +130,42 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
         SearchFilter filter = new SearchFilter();
         filter.add("id", id);
+        checkExists(id);
         new TMRequest(new TMListener()).execute(filter);
 
         return v;
     }
+
+
+    public void checkExists(String name){
+        DocumentReference docCheck =  pDocRef.collection("interest").document(name);
+        docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Log.d("id is:",name);
+                    if (document.exists()) {
+                        Log.d("GET", "DocumentSnapshot data: " + document.getData().get("eid"));
+                        buffer =(ArrayList<String>) document.getData().get("list");
+                        System.out.println(buffer.get(0));
+                    } else {
+
+                        valid = true;
+                        buffer = new ArrayList<>();
+                        Log.d("doc Reached", "No such document");
+
+                    }
+
+                }else{
+                    System.out.println("failed to get!");
+                }
+            }
+        });
+
+    }
+
+
 
     @Override
     public void onClick(View v){
@@ -148,6 +184,44 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.btnRegister:
 //                setInterest();
+
+                // eid -> string
+                // list -> arrayList
+
+                // first fetch.
+                // how to fetch: if interested list is null:
+                //      create a arraylist<String> for it.
+                //
+
+
+                Map<String,Object> dataToSave =  new HashMap<>();
+                dataToSave.put("eid",id);
+                boolean bbb = buffer.contains(username);
+                System.out.println(buffer.size());
+                if(!bbb){
+
+                    buffer.add(buffer.size(),username);
+                }
+                dataToSave.put("list",buffer);
+                pDocRef.collection("interest").document(id).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Log.d("YES","save success");
+//                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
+//                            // this is where  we  add  data.
+//                            startActivity(i);
+                        }else{
+                            Log.w("NO","save failed");
+                        }
+                    }
+                });
+
+                // then push.
+
+
+
+
                 break;
             case R.id.btnUserSearch:
                 Bundle b_us = new Bundle();
