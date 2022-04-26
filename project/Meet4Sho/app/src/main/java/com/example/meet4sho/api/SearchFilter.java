@@ -9,6 +9,10 @@ public class SearchFilter {
     public void add(String key, String value){
         filters.put(key, value);
     }
+    
+    public String get(String key){
+        return filters.get(key);
+    }
 
     @Override
     public String toString() {
