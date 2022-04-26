@@ -28,8 +28,8 @@ public class UserSearchFragment extends Fragment {
     public RecyclerView rvUsers;
     String id;
 
-    public List<String> usernames = new ArrayList<>();
-    public List<String> bios = new ArrayList<>();
+    public List<String> usernames;
+    public List<String> bios;
 
 
     public UserRecyclerAdapter ra;
@@ -57,6 +57,8 @@ public class UserSearchFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         id = bundle.getString("id");
+        usernames = new ArrayList<>();
+        bios = new ArrayList<>();
 
         String username = bundle.getString("username");
         usernames.add(username);
