@@ -25,35 +25,24 @@
 
             <TextView
                 android:id="@+id/tvUsername"
-                android:layout_width="252dp"
-                android:layout_height="36dp"
+                android:layout_width="226dp"
+                android:layout_height="28dp"
+                android:background="#CDDC39"
                 android:gravity="center"
-                android:text="Title"
+                android:text="Name"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/tvDescription"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.428"
-                app:layout_constraintStart_toEndOf="@+id/ivPFP"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.111" />
-
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Location"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.504"
+                app:layout_constraintHorizontal_bias="0.296"
                 app:layout_constraintStart_toEndOf="@+id/ivPFP"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.86" />
+                app:layout_constraintVertical_bias="0.173" />
 
             <ImageView
                 android:id="@+id/ivPFP"
                 android:layout_width="107dp"
-                android:layout_height="134dp"
+                android:layout_height="120dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.019"
@@ -64,35 +53,16 @@
 
             <TextView
                 android:id="@+id/tvBio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="IsOpen"
-                app:layout_constraintBottom_toTopOf="@+id/tvRating"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.508"
-                app:layout_constraintStart_toEndOf="@+id/ivPFP"
-                app:layout_constraintTop_toBottomOf="@+id/tvUsername"
-                app:layout_constraintVertical_bias="1.0" />
-
-            <TextView
-                android:id="@+id/tvRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rating"
+                android:layout_width="224dp"
+                android:layout_height="43dp"
+                android:background="#CDDC39"
+                android:text="User does not have a bio!"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.285"
                 app:layout_constraintStart_toEndOf="@+id/ivPFP"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvDistance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Distance"
-                app:layout_constraintBottom_toTopOf="@+id/tvDescription"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivPFP"
-                app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+                app:layout_constraintTop_toBottomOf="@+id/tvUsername"
+                app:layout_constraintVertical_bias="0.515" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

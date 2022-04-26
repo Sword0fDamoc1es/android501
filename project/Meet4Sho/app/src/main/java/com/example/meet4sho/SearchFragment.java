@@ -59,6 +59,8 @@ public class SearchFragment extends Fragment {
     private List<String> longitude = new ArrayList<>();
     private List<String> latitude = new ArrayList<>();
 
+    String username;
+
     private TM_RecyclerAdapter ra;
 
 
@@ -77,6 +79,8 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Bundle bundle = this.getArguments();
+        username = bundle.getString("username");
         View v = inflater.inflate(R.layout.fragment_search, container, false);
 
         edtSearchBar = (EditText) v.findViewById(R.id.edtSearchBar);
@@ -86,7 +90,7 @@ public class SearchFragment extends Fragment {
         rvResults = (RecyclerView) v.findViewById(R.id.rvResults);
 
         // TODO add ids to the parameter.
-        ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
+        ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager(), username);
         // END TODO.
 
         rvResults.setAdapter(ra);
@@ -172,7 +176,7 @@ public class SearchFragment extends Fragment {
                         latitude.add(event.getVenue().getLatitude());
                         output += event.getName() + "\n";
                     }
-                    ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager());
+                    ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager(), username);
                     rvResults.setAdapter(ra);
                     rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
                 }

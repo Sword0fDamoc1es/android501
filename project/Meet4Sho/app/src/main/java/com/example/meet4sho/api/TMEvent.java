@@ -1,8 +1,9 @@
 package com.example.meet4sho.api;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TMEvent extends ApiEvent{
+public class TMEvent extends ApiEvent implements Serializable {
     private String id;
     private String name;
     private String description;
