@@ -70,6 +70,9 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         bottomNavigationView.setSelectedItemId(R.id.nav_search);
         View displayedView = (View) findViewById(R.id.displayedView);
 
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        searchFrag.setArguments(bundle);
         FragmentTransaction ft = fm.beginTransaction ();  //Create a reference to a fragment transaction.
         ft.add(R.id.displayedView, searchFrag, "searchFrag");  //now we have added our fragment to our Activity programmatically.  The other fragments exist, but have not been added yet.
         ft.addToBackStack ("searchFrag");  //why do we do this?
@@ -108,6 +111,9 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
     public void showSearch() {
         if (searchFrag == null)
             searchFrag = new SearchFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", username);
+        searchFrag.setArguments(bundle);
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.displayedView, searchFrag);
         fragmentTransaction.addToBackStack("searchFrag");

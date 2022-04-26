@@ -14,9 +14,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.example.meet4sho.api.RequestListener;
+import com.example.meet4sho.api.SearchFilter;
+import com.example.meet4sho.api.TMEvent;
+import com.example.meet4sho.api.TMRequest;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -30,6 +46,11 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     // TODO create id.
     private String id;
     // END TODO
+    private String url;
+
+    private String username;
+
+    TMEvent event;
 
     private String lat;
     private String lon;
@@ -38,6 +59,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     //private OnFragmentInteractionListener mListener;
 
+    TextView tvDescription;
+    ImageView ivEventImg;
+
+    private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
 
     public EventInfoFragment() {
         // Required empty public constructor
@@ -59,6 +84,12 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         id = bundle.getString("id");
 //        Log.d("ID INFO: ",id);
 
+        url = bundle.getString("url");
+
+        username = bundle.getString("username");
+
+        event = (TMEvent) bundle.getSerializable("event");
+
         // END TODO
         // the following code get the user name from sharedPref
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
@@ -66,12 +97,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         String getFromShared = sharedPref.getString(getString(R.string.preference_user_name), "nothing");
         Log.d("user name : ", getFromShared);
 
-
-
-
-
         String title = bundle.getString("name");
-        String description = bundle.getString("description");
         lon = bundle.getString("lg");
         lat = bundle.getString("lt");
 
@@ -81,30 +107,61 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         TextView tvTitleEvent = v.findViewById(R.id.tvTitleEvent);
         tvTitleEvent.setText(title);
 
-        TextView tvDescription = v.findViewById(R.id.tvDescriptionEvent);
-        tvDescription.setText(description);
+        tvDescription = v.findViewById(R.id.tvDescriptionEvent);
+
+        ivEventImg = v.findViewById(R.id.ivEventImg);
+        new TM_EventInfoActivity.DownloadImageTask(ivEventImg).execute(url);
 
         TextView tvLatLon = v.findViewById(R.id.tvLatLon);
-        tvLatLon.setText(lon+", "+lat);
+//        tvLatLon.setText(lon+", "+lat + " " + username);
 
         Button btnGoToRes = v.findViewById(R.id.btnGoToRes);
         btnGoToRes.setOnClickListener(this);
+
+        Button btnRegister = v.findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(this);
+
+        Button btnUserSearch = v.findViewById(R.id.btnUserSearch);
+        btnUserSearch.setOnClickListener(this);
+
+        SearchFilter filter = new SearchFilter();
+        filter.add("id", id);
+        new TMRequest(new TMListener()).execute(filter);
 
         return v;
     }
 
     @Override
     public void onClick(View v){
-        Bundle b = new Bundle();
-        b.putString("lg", lon);
-        b.putString("lt", lat);
-        RestaurantsFragment resFrag = new RestaurantsFragment();
-        resFrag.setArguments(b);
-        FragmentManager fm = getActivity().getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.displayedView, resFrag);
-        fragmentTransaction.addToBackStack("resFrag");
-        fragmentTransaction.commit();
+        switch (v.getId()) {
+            case R.id.btnGoToRes:
+                Bundle b = new Bundle();
+                b.putString("lg", lon);
+                b.putString("lt", lat);
+                RestaurantsFragment resFrag = new RestaurantsFragment();
+                resFrag.setArguments(b);
+                FragmentManager fm = getActivity().getFragmentManager();
+                FragmentTransaction fragmentTransaction = fm.beginTransaction();
+                fragmentTransaction.replace(R.id.displayedView, resFrag);
+                fragmentTransaction.addToBackStack("resFrag");
+                fragmentTransaction.commit();
+                break;
+            case R.id.btnRegister:
+//                setInterest();
+                break;
+            case R.id.btnUserSearch:
+                Bundle b_us = new Bundle();
+                b_us.putString("username", username);
+                b_us.putString("id", id);
+                UserSearchFragment usFrag = new UserSearchFragment();
+                usFrag.setArguments(b_us);
+                FragmentManager fmus = getActivity().getFragmentManager();
+                FragmentTransaction fragmentTransactionUserSearch = fmus.beginTransaction();
+                fragmentTransactionUserSearch.replace(R.id.displayedView, usFrag);
+                fragmentTransactionUserSearch.addToBackStack("usFrag");
+                fragmentTransactionUserSearch.commit();
+                break;
+        }
     }
 
 //    @Override
@@ -128,5 +185,45 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 //        // TODO: Update argument type and name
 //        void messageFromChildFragment(Map.Entry<String, ArrayList<String>> temp);
 //    }
+    //A function to update the page after TMListener retrieves the event. If this is done during onCreateView
+    //then event will still be null since TMListener has not finished running
+    private void updatePage(){
+        String classification = "";
+        String when = "";
+        String[] DateTime = event.getTime().getStartDateTime().split("T");
+        if(DateTime.length >= 2){
+            for(int i = 0; i < DateTime.length; i++){
+                when += DateTime[i] + " ";
+            }
+            when = when + "\n";
+        }
+        for(int i = 0; i < event.getClassifications().size(); i++){
+            classification += event.getClassifications().get(i).getSegment() + ", " +
+                    event.getClassifications().get(i).getGenre() + ", " +
+                    event.getClassifications().get(i).getSubgenre();
+        }
+        String description = event.getVenue().getName() + "\n" +
+                event.getVenue().getAddress1() + ", " +
+                event.getVenue().getCity() + ", " +
+                event.getVenue().getStateCode() + "\n " +
+                when +
+                classification + "\n" +
+                event.getUrl();
+        tvDescription.setText(description);
+    }
 
+    private class TMListener implements RequestListener {
+        @Override
+        public void updateViews(List events) {
+            // reference: https://stackoverflow.com/questions/17176655/android-error-only-the-original-thread-that-created-a-view-hierarchy-can-touch
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    event = (TMEvent) events.get(0);
+                    updatePage();
+
+                }
+            });
+        }
+    }
 }

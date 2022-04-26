@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileOtherFragment extends Fragment {
     public EditText edtBio;
     public TextView tvName;
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
@@ -34,7 +34,7 @@ public class ProfileFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 
-    public ProfileFragment() {
+    public ProfileOtherFragment() {
         // Required empty public constructor
     }
 
@@ -57,11 +57,11 @@ public class ProfileFragment extends Fragment {
         edtBio = v.findViewById(R.id.edtBio);
         setDescription();
 
-        Button btnText = v.findViewById(R.id.btnText);
-        btnText.setVisibility(View.GONE);
-
         Button btnSave = v.findViewById(R.id.btnProfSave);
-        btnSave.setOnClickListener(this::onClick);
+        btnSave.setVisibility(View.GONE);
+
+        Button btnText = v.findViewById(R.id.btnText);
+        btnText.setOnClickListener(this::onClick);
 
         return v;
     }
@@ -86,20 +86,5 @@ public class ProfileFragment extends Fragment {
     }
 
     public void onClick(View view){
-        String uid = tvName.getText().toString();
-        Map<String,Object> dataToSave =  new HashMap<>();
-        String descript = edtBio.getText().toString();
-        dataToSave.put("uid",uid);
-        dataToSave.put("descript",descript);
-        pDocRef.collection("user-bio").document(uid).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Log.d("YES","save success");
-                }else{
-                    Log.w("NO","save failed");
-                }
-            }
-        });
     }
 }

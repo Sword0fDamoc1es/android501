@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,12 +30,13 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
     List<String> imageURLS;
     List<String> longitude;
     List<String> latitude;
+    String username;
     Context context;
     FragmentManager fm;
 
     // TODO change the constructor, the first parameter will be ids array.
 
-    public TM_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f){
+    public TM_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f, String un){
         // TODO: add id
         ids = i;
         // END TODO
@@ -46,6 +46,7 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         imageURLS = u;
         longitude = lg;
         latitude = lt;
+        username = un;
         fm = f;
 
     }
@@ -88,6 +89,7 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
                 bundle.putString("url", url);
                 bundle.putString("lg", lg);
                 bundle.putString("lt", lt);
+                bundle.putString("username", username);
                 bundle.putStringArrayList("names", (ArrayList<String>) names);
                 bundle.putStringArrayList("descriptions", (ArrayList<String>) descriptions);
                 bundle.putStringArrayList("urls", (ArrayList<String>) imageURLS);
@@ -126,9 +128,9 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvTitle = itemView.findViewById(R.id.tvUsername);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-            ivPreview = itemView.findViewById(R.id.ivPreview);
+            ivPreview = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }

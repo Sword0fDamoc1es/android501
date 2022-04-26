@@ -21,15 +21,17 @@ import com.example.meet4sho.api.YelpRestaurant;
 
 import java.util.List;
 
-public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRecyclerAdapter.MyViewHolder> {
+public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.MyViewHolder> {
 
-    List<YelpRestaurant> restaurants;
+    List<String> usernames;
+    List<String> bios;
     Context context;
     FragmentManager fm;
 
-    public RestaurantRecyclerAdapter(Activity ct, List<YelpRestaurant> r, android.app.FragmentManager f){
+    public UserRecyclerAdapter(Activity ct, List<String> un, List<String> b, android.app.FragmentManager f){
         context = ct;
-        restaurants = r;
+        usernames = un;
+        bios = b;
         fm = f;
 
     }
@@ -37,32 +39,27 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.restaurant_row, parent, false);
+        View view = inflater.inflate(R.layout.user_search_row, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        YelpRestaurant restaurant = restaurants.get(position);
-        System.out.println(restaurant.getName());
-        holder.tvTitle.setText(restaurant.getName());
-        holder.tvDescription.setText(restaurant.getDisplay_address());
-        holder.tvIsOpen.setText("Phone: " + restaurant.getDisplay_phone());
-        holder.tvRating.setText("Rating: " + restaurant.getRating());
-        holder.tvDistance.setText("Distance: " + restaurant.getDistance());
-        new TM_EventInfoActivity.DownloadImageTask(holder.ivPreview).execute(restaurant.getImage_url());
+        String user = usernames.get(position);
+        holder.tvUsername.setText(user);
+        holder.tvBio.setText(bios.get(position));
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RestaurantInfoFragment resFrag = new RestaurantInfoFragment();
+                ProfileOtherFragment proFrag = new ProfileOtherFragment();
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("res", restaurant);
+                bundle.putString("username", user);
 
-                resFrag.setArguments(bundle);
+                proFrag.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
-                fragmentTransaction.replace(R.id.displayedView, resFrag);
+                fragmentTransaction.replace(R.id.displayedView, proFrag);
                 fragmentTransaction.addToBackStack("eiFrag");
                 fragmentTransaction.commit();
             }
@@ -72,29 +69,27 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return usernames.size();
     }
 
-    public void notifyData(List<YelpRestaurant> res) {
-        Log.d("notifyData ", res.size() + "");
-        this.restaurants = res;
+    public void notifyData(List<String> un, List<String> b) {
+        Log.d("notifyData ", un.size() + "");
+        this.usernames = un;
+        this.bios = b;
         notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle, tvIsOpen, tvRating, tvDistance, tvDescription;
-        ImageView ivPreview;
+        TextView tvUsername, tvBio;
+        ImageView ivPFP;
         ConstraintLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvUsername);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-            tvIsOpen = itemView.findViewById(R.id.tvBio);
-            tvRating = itemView.findViewById(R.id.tvRating);
-            tvDistance = itemView.findViewById(R.id.tvDistance);
-            ivPreview = itemView.findViewById(R.id.ivPFP);
+            tvUsername = itemView.findViewById(R.id.tvUsername);
+            tvBio = itemView.findViewById(R.id.tvBio);
+            ivPFP = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }
     }
