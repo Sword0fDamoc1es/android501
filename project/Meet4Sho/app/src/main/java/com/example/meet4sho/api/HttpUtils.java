@@ -1,4 +1,4 @@
-package com.example.meet4sho.api;
+package com.example.api_utilities.api;
 
 import android.util.Log;
 
@@ -41,12 +41,13 @@ public class HttpUtils {
         try {
             reqURL = new URL(url);                                                      // Step 1: create a URL instance
             urlConnection = (HttpURLConnection) reqURL.openConnection();                // Step 2: open an http connection
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());   // Step 3: get the response
-            //JSONParser parser = new JSONParser();                                       // Step 4: create a JSON parser
-            //root = (JSONObject) parser.parse(new InputStreamReader(in));                // Step 5: convert the input stream into a big json object
-            String responseString = IOUtil.toString(in);
+            for (String key: props.keySet()) {
+                urlConnection.setRequestProperty(key, props.get(key));                  // Step 3: set request properties (headers)
+            }
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());   // Step 4: get the response as an InputStream
+            String responseString = IOUtil.toString(in);                                // Step 5: turn the response into a string
             Log.i("----->", responseString);
-            root = new JSONObject(responseString);
+            root = new JSONObject(responseString);                                      // Step 6: turn the response into a JSONObject
         } catch (IOException | JSONException e) {      // handle exceptions
             e.printStackTrace();
         } finally {
@@ -81,6 +82,10 @@ public class HttpUtils {
         try {
             reqURL = new URL(url);                                                      // Step 1: create a URL instance
             urlConnection = (HttpURLConnection) reqURL.openConnection();                // Step 2: open an http connection
+            for (String key: props.keySet()) {
+                urlConnection.setRequestProperty(key, props.get(key));                  // Step 3: set request properties (headers)
+                Log.i("---->", key + " " + props.get(key));
+            }
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());   // Step 3: get the response
             result = IOUtil.toString(in);
         } catch (IOException e) {      // handle exceptions
