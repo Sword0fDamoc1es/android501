@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.meet4sho">
+    package="com.example.meet4sho" >
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
 
     <application
         android:allowBackup="true"
@@ -13,22 +13,40 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Meet4Sho">
+        android:theme="@style/Theme.Meet4Sho" >
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".MessageChatFragment"
+            android:exported="false" />
+        <activity
+            android:name=".MessagesListFragment"
+            android:exported="false" />
+        <activity
+            android:name=".signupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.signupActivity"
+            android:exported="false"
+            android:label="@string/title_activity_signup" />
+        <activity
+            android:name=".Firebase_playground"
+            android:exported="false" />
+        <activity
+            android:name=".loginActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Movie_MainActivity"></activity>
-        <activity android:name=".TM_MainActivity"></activity>
-        <activity android:name=".TM_EventInfoActivity"></activity>
-        <activity android:name=".Yelp_MainActivity"></activity>
-        <activity android:name=".Yelp_LocList"></activity>
-        <activity android:name=".Yelp_LocInfo"></activity>
+        <activity android:name=".Movie_MainActivity" />
+        <activity android:name=".TM_MainActivity" />
+        <activity android:name=".TM_EventInfoActivity" />
+        <activity android:name=".Yelp_MainActivity" />
+        <activity android:name=".Yelp_LocList" />
+        <activity android:name=".Yelp_LocInfo" />
+        <activity android:name=".AppActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

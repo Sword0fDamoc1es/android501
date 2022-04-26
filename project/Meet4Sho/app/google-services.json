@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "194485443616",
+    "project_id": "meet4show",
+    "storage_bucket": "meet4show.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194485443616:android:1f56d24caf76ec8e99f045",
+        "android_client_info": {
+          "package_name": "com.example.meet4sho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "194485443616-461but5ahdt7eb50fd6obg603gejrlc5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeMn-O5V1Bs9F_wLyx-ypFhPOUMrNGDjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "194485443616-461but5ahdt7eb50fd6obg603gejrlc5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
