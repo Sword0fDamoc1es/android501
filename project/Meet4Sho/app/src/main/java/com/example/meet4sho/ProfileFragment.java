@@ -21,6 +21,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +30,8 @@ public class ProfileFragment extends Fragment {
     public EditText edtBio;
     public TextView tvName;
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
+    private DocumentReference pDocRefUser = FirebaseFirestore.getInstance().document("front_end/user_event");
+    private ArrayList<String> bufferUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,6 +53,12 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         Bundle bundle = this.getArguments();
         String username = bundle.getString("username");
+
+        // TODO
+        // Marv's Comment: after the following line, bufferUser will get the arrayList of eventID
+        checkExistsUser(username);
+        // If user has not yet interested, it will be an empty array. So if u wanna display, remember to check if isEmpty.
+
         View v = inflater.inflate(R.layout.profile_page, container, false);
 
         tvName = v.findViewById(R.id.tvName);
@@ -64,6 +73,35 @@ public class ProfileFragment extends Fragment {
         btnSave.setOnClickListener(this::onClick);
 
         return v;
+    }
+
+    public void checkExistsUser(String name){
+        // input name, will be username
+        DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
+        docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Log.d("id is:",name);
+                    if (document.exists()) {
+                        Log.d("GET", "DocumentSnapshot data: " + document.getData().get("uid"));
+                        bufferUser =(ArrayList<String>) document.getData().get("event_list");
+//                        System.out.println(bufferUser.get(0));
+                    } else {
+
+//                        valid = true;
+                        bufferUser = new ArrayList<>();
+                        Log.d("doc Reached", "No such document");
+
+                    }
+
+                }else{
+                    System.out.println("failed to get!");
+                }
+            }
+        });
+
     }
     public void setDescription(){
         String uid = tvName.getText().toString();

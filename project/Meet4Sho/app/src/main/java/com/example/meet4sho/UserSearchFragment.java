@@ -85,6 +85,7 @@ public class UserSearchFragment extends Fragment {
 
         return v;
     }
+
     public void checkExists(String name){
         DocumentReference docCheck =  pDocRef.collection("interest").document(name);
         docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
