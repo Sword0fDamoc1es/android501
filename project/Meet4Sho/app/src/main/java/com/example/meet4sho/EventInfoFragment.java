@@ -66,7 +66,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     ImageView ivEventImg;
 
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/event_event");
+    private DocumentReference pDocRefUser = FirebaseFirestore.getInstance().document("front_end/user_event");
+    private ArrayList<ArrayList<String>> eventContainer = new ArrayList<>();
     private ArrayList<String> buffer;
+    private ArrayList<String> bufferUser;
     public boolean valid = false;
     public EventInfoFragment() {
         // Required empty public constructor
@@ -131,6 +134,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         SearchFilter filter = new SearchFilter();
         filter.add("id", id);
         checkExists(id);
+        checkExistsUser(username);
         new TMRequest(new TMListener()).execute(filter);
 
         return v;
@@ -148,11 +152,15 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                     if (document.exists()) {
                         Log.d("GET", "DocumentSnapshot data: " + document.getData().get("eid"));
                         buffer =(ArrayList<String>) document.getData().get("list");
+                        eventContainer.add(buffer);
+                        eventContainer.add((ArrayList<String>) document.getData().get("bio"));
                         System.out.println(buffer.get(0));
                     } else {
 
                         valid = true;
                         buffer = new ArrayList<>();
+                        eventContainer.add(buffer);
+                        eventContainer.add(new ArrayList<String>());
                         Log.d("doc Reached", "No such document");
 
                     }
@@ -165,7 +173,95 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    public void checkExistsUser(String name){
+        // input name, will be username
+        DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
+        docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Log.d("id is:",name);
+                    if (document.exists()) {
+                        Log.d("GET", "DocumentSnapshot data: " + document.getData().get("uid"));
+                        bufferUser =(ArrayList<String>) document.getData().get("event_list");
+//                        System.out.println(bufferUser.get(0));
+                    } else {
 
+//                        valid = true;
+                        bufferUser = new ArrayList<>();
+                        Log.d("doc Reached", "No such document");
+
+                    }
+
+                }else{
+                    System.out.println("failed to get!");
+                }
+            }
+        });
+
+    }
+
+    public void eventUpload(){
+        Map<String,Object> dataToSave =  new HashMap<>();
+        dataToSave.put("eid",id);
+        boolean bbb = buffer.contains(username);
+        String bio = "new bio here";
+
+        System.out.println(buffer.size());
+        if(!bbb){
+            // not contains.
+            // TODO change the following line into a eventContainer element.
+            buffer.add(buffer.size(),username);
+
+            eventContainer.get(1).add(eventContainer.get(1).size(),bio);
+        }else{
+            // contains, we need to switch the bio.
+            eventContainer.get(1).set(buffer.indexOf(username),bio);
+        }
+        dataToSave.put("list",buffer);
+        dataToSave.put("bio",eventContainer.get(1));
+        pDocRef.collection("interest").document(id).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d("YES","save success");
+//                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
+//                            // this is where  we  add  data.
+//                            startActivity(i);
+                }else{
+                    Log.w("NO","save failed");
+                }
+            }
+        });
+
+    }
+
+    public void userUpload(){
+        Map<String,Object> dataToSave =  new HashMap<>();
+        dataToSave.put("uid",username);
+        boolean bbb = bufferUser.contains(id);
+        System.out.println(bufferUser.size());
+        if(!bbb){
+
+            bufferUser.add(bufferUser.size(),id);
+        }
+        dataToSave.put("event_list",bufferUser);
+        pDocRefUser.collection("interest").document(username).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Log.d("YES","save success");
+//                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
+//                            // this is where  we  add  data.
+//                            startActivity(i);
+                }else{
+                    Log.w("NO","save failed");
+                }
+            }
+        });
+
+    }
 
     @Override
     public void onClick(View v){
@@ -183,39 +279,35 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 fragmentTransaction.commit();
                 break;
             case R.id.btnRegister:
-//                setInterest();
-
-                // eid -> string
-                // list -> arrayList
-
-                // first fetch.
-                // how to fetch: if interested list is null:
-                //      create a arraylist<String> for it.
-                //
 
 
-                Map<String,Object> dataToSave =  new HashMap<>();
-                dataToSave.put("eid",id);
-                boolean bbb = buffer.contains(username);
-                System.out.println(buffer.size());
-                if(!bbb){
+                eventUpload();
+                userUpload();
 
-                    buffer.add(buffer.size(),username);
-                }
-                dataToSave.put("list",buffer);
-                pDocRef.collection("interest").document(id).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            Log.d("YES","save success");
-//                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
-//                            // this is where  we  add  data.
-//                            startActivity(i);
-                        }else{
-                            Log.w("NO","save failed");
-                        }
-                    }
-                });
+
+
+//                Map<String,Object> dataToSave =  new HashMap<>();
+//                dataToSave.put("eid",id);
+//                boolean bbb = buffer.contains(username);
+//                System.out.println(buffer.size());
+//                if(!bbb){
+//
+//                    buffer.add(buffer.size(),username);
+//                }
+//                dataToSave.put("list",buffer);
+//                pDocRef.collection("interest").document(id).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if(task.isSuccessful()){
+//                            Log.d("YES","save success");
+////                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
+////                            // this is where  we  add  data.
+////                            startActivity(i);
+//                        }else{
+//                            Log.w("NO","save failed");
+//                        }
+//                    }
+//                });
 
                 // then push.
 
@@ -229,6 +321,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 b_us.putString("username", username);
                 b_us.putString("id", id);
                 b_us.putStringArrayList("users",buffer);
+                b_us.putStringArrayList("userBio",eventContainer.get(1));
                 UserSearchFragment usFrag = new UserSearchFragment();
                 usFrag.setArguments(b_us);
                 FragmentManager fmus = getActivity().getFragmentManager();

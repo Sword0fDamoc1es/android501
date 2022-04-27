@@ -71,7 +71,7 @@ public class UserSearchFragment extends Fragment {
         Log.d("what?"," the hack");
         System.out.println(usernames.size());
 //        usernames = new ArrayList<>();
-        bios = new ArrayList<>();
+        bios = bundle.getStringArrayList("userBio");
 //        checkExists(id);
 //        Log.d("tag!",usernames.get(1));
         String username = bundle.getString("username");
