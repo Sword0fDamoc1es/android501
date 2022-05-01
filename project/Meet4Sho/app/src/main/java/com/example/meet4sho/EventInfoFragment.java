@@ -119,7 +119,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         ivEventImg = v.findViewById(R.id.ivEventImg);
         new TM_EventInfoActivity.DownloadImageTask(ivEventImg).execute(url);
 
-        TextView tvLatLon = v.findViewById(R.id.tvLatLon);
+        //TextView tvLatLon = v.findViewById(R.id.tvLatLon);
 //        tvLatLon.setText(lon+", "+lat + " " + username);
 
         Button btnGoToRes = v.findViewById(R.id.btnGoToRes);

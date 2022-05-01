@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/tvTitleEvent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:text="TextView"
         android:textSize="24sp"
@@ -16,8 +16,8 @@
 
     <ImageView
         android:id="@+id/ivEventImg"
-        android:layout_width="295dp"
-        android:layout_height="233dp"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
         android:layout_below="@id/tvTitleEvent"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/llEventUsrInputLayout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:text="Nearby Restaurants"/>
 
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/btnGoToRes"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Space
@@ -94,7 +94,7 @@
         <Button
             android:id="@+id/btnUserSearch"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="5"
             android:text="User Search"/>
 
