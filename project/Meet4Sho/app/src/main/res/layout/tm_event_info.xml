@@ -35,7 +35,7 @@
     <LinearLayout
         android:id="@+id/llEventUsrInputLayout"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_below="@id/tvDescriptionEvent"
         android:orientation="horizontal">
 
@@ -49,10 +49,12 @@
             android:textColor="@color/black"/>
 
         <EditText
-            android:id="@+id/tvEventUsrInput"
+            android:id="@+id/edtEventUsrInput"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
+            android:text="hello, im interested in this event"
+            android:textSize="12dp"
             android:inputType="text"/>
 
     </LinearLayout>

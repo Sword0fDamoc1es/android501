@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     // comments from Marv, 4/24
     // TODO in this fragment, we need to create a sign-up button and send id as the key to it.
     //
+
+    private EditText edtEventUsrInput;
 
     private Bundle bundle;
     // TODO create id.
@@ -115,6 +118,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         tvTitleEvent.setText(title);
 
         tvDescription = v.findViewById(R.id.tvDescriptionEvent);
+
+        edtEventUsrInput = v.findViewById(R.id.edtEventUsrInput);
 
         ivEventImg = v.findViewById(R.id.ivEventImg);
         new TM_EventInfoActivity.DownloadImageTask(ivEventImg).execute(url);
@@ -206,7 +211,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         Map<String,Object> dataToSave =  new HashMap<>();
         dataToSave.put("eid",id);
         boolean bbb = buffer.contains(username);
-        String bio = "new bio here";
+        String bio = edtEventUsrInput.getText().toString();
 
         System.out.println(buffer.size());
         if(!bbb){
