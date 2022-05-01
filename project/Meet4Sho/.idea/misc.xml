@@ -9,8 +9,11 @@
         <entry key="app/src/main/res/layout/conversation_list_row.xml" value="0.4395833333333333" />
         <entry key="app/src/main/res/layout/event_info.xml" value="0.4395833333333333" />
         <entry key="app/src/main/res/layout/event_row.xml" value="0.4395833333333333" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/movie_mainscreen.xml" value="0.1956521739130435" />
-        <entry key="app/src/main/res/layout/tm_event_info.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/tm_event_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/tm_event_row.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/tm_mainscreen.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/yelp_loc_info.xml" value="0.1956521739130435" />
