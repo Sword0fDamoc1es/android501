@@ -284,8 +284,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 fragmentTransaction.commit();
                 break;
             case R.id.btnRegister:
-
-
+                Button btnRegisterTmp = v.findViewById(R.id.btnRegister);
+                btnRegisterTmp.setBackgroundColor(getResources().getColor(R.color.red_500));
                 eventUpload();
                 userUpload();
 
