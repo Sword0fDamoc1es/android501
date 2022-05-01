@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +48,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     //
 
     private EditText edtEventUsrInput;
+    private Button btnRegister;
 
     private Bundle bundle;
     // TODO create id.
@@ -130,8 +132,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         Button btnGoToRes = v.findViewById(R.id.btnGoToRes);
         btnGoToRes.setOnClickListener(this);
 
-        Button btnRegister = v.findViewById(R.id.btnRegister);
+        btnRegister = v.findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
+        eventCheck(username,id);
+
 
         Button btnUserSearch = v.findViewById(R.id.btnUserSearch);
         btnUserSearch.setOnClickListener(this);
@@ -143,6 +147,32 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         new TMRequest(new TMListener()).execute(filter);
 
         return v;
+    }
+
+    public void eventCheck(String name, String eventname){
+        DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
+//        Log.d("eventCHECK:",eventname);
+// Get the document, forcing the SDK to use the offline cache
+        docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    // Document found in the offline cache
+                    DocumentSnapshot document = task.getResult();
+                    if(document.exists()){
+//                        Log.d("eventCHECK","here");
+                        ArrayList<String> tmp =(ArrayList<String>) document.getData().get("event_list");
+                        Boolean bb = tmp.contains(eventname);
+                        if(bb){
+                            btnRegister.setBackgroundColor(getResources().getColor(R.color.red_500));
+                            Log.d("eventCHECK","here！！！");
+                        }
+                    }
+                } else {
+                    Log.d("here", "Cached get failed: ", task.getException());
+                }
+            }
+        });
     }
 
 
