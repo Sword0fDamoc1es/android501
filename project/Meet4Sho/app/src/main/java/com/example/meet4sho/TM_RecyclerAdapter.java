@@ -112,11 +112,14 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         return names.size();
     }
 
-    public void notifyData(List<String> names, List<String> descriptions, List<String> imageURLS) {
+    public void notifyData(List<String> id, List<String> names, List<String> descriptions, List<String> imageURLS, List<String> lon, List<String> lat) {
         Log.d("notifyData ", names.size() + "");
+        this.ids = id;
         this.names = names;
         this.descriptions = descriptions;
         this.imageURLS = imageURLS;
+        this.latitude = lon;
+        this.longitude = lat;
         notifyDataSetChanged();
     }
 

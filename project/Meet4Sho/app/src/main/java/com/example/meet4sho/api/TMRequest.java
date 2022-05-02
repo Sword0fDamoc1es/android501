@@ -30,7 +30,13 @@ public class TMRequest extends AsyncTask<SearchFilter, Void, Void> {
 //         listener.updateViews(result);
         JSONObject result = HttpUtils.sendRequest(url);
         try {
-            JSONArray events = result.getJSONObject("_embedded").getJSONArray("events");
+            JSONArray events;
+            if(result.getJSONObject("_embedded").optJSONArray("events") != null){
+                events = result.getJSONObject("_embedded").getJSONArray("events");
+            }else{
+                events = new JSONArray();
+                events.put(result);
+            }
             List<TMEvent> allEvents = new ArrayList<>();
             for (int i=0; i < events.length(); i++) {
                 JSONObject event = JSONUtils.getJSONObject(events, i);
