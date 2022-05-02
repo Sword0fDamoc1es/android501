@@ -97,9 +97,13 @@ public class ProfileOtherFragment extends Fragment {
         MessageChatFragment chatRoom = new MessageChatFragment();
         Bundle bundle = new Bundle();
 //                Intent i = new Intent(context, TM_EventInfoActivity.class);
-//        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        bundle.putString("Chat ID", "superhero1_user_superhero3");
-        Log.d("Chat ID", "superhero1_user_superhero3");
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.preference_file_name), Context.MODE_PRIVATE);
+
+        String currentLoggedInUsername = sharedPref.getString(getString(R.string.preference_user_name),"");
+
+        bundle.putString("Chat ID", currentLoggedInUsername + "_user_" + otherUser);
+        Log.d("Chat ID", currentLoggedInUsername + "_user_" + otherUser);
         bundle.putString("Recipient", otherUser);
 
 
