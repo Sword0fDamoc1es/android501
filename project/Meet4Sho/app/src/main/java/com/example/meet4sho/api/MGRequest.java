@@ -68,6 +68,7 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
             e.printStackTrace();
         }
 
+        if (film_id == null) return null;
         // search film id using MovieGlu's filmShowTimes and get showtimes for selected film at nearest cinemas
         Log.i("------>", film_id);
         String date = filter[0].get("date");
