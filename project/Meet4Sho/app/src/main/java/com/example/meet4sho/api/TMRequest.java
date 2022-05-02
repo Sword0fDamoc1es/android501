@@ -30,7 +30,14 @@ public class TMRequest extends AsyncTask<SearchFilter, Void, Void> {
 //         listener.updateViews(result);
         JSONObject result = HttpUtils.sendRequest(url);
         try {
-            JSONArray events = result.getJSONObject("_embedded").getJSONArray("events");
+            JSONArray events;
+            if(result != null){
+            if(result.getJSONObject("_embedded").optJSONArray("events") != null){
+                events = result.getJSONObject("_embedded").getJSONArray("events");
+            }else{
+                events = new JSONArray();
+                events.put(result);
+            }
             List<TMEvent> allEvents = new ArrayList<>();
             for (int i=0; i < events.length(); i++) {
                 JSONObject event = JSONUtils.getJSONObject(events, i);
@@ -194,7 +201,7 @@ public class TMRequest extends AsyncTask<SearchFilter, Void, Void> {
 //                                + "event_venue_longitude:   " + event_venue_longitude + "\n"
 //                                + "event_venue_latitude:    " + event_venue_latitude + "\n";
             }
-            listener.updateViews(allEvents);
+            listener.updateViews(allEvents);}
         } catch (JSONException e) {
             e.printStackTrace();
         }

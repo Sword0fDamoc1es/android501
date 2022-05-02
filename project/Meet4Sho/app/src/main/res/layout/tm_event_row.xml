@@ -11,9 +11,12 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="10dp"
         app:cardBackgroundColor="#8BC34A"
         app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
+        app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,52 +24,57 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="142dp"
+            android:background="@drawable/gradient1">
 
             <TextView
                 android:id="@+id/tvUsername"
-                android:layout_width="244dp"
-                android:layout_height="54dp"
+                android:layout_width="165dp"
+                android:layout_height="73dp"
                 android:gravity="center"
                 android:text="Title"
+                android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/tvDescription"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.622"
                 app:layout_constraintStart_toEndOf="@+id/ivPFP"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.301" />
+                app:layout_constraintVertical_bias="0.355" />
 
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="4dp"
                 android:text="Location"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.033"
                 app:layout_constraintStart_toEndOf="@+id/ivPFP" />
 
             <ImageView
                 android:id="@+id/ivPFP"
-                android:layout_width="107dp"
-                android:layout_height="134dp"
+                android:layout_width="171dp"
+                android:layout_height="129dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.019"
+                app:layout_constraintHorizontal_bias="0.049"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_bias="0.538"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/tvBio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:text="Date"
-                app:layout_constraintBottom_toTopOf="@+id/tvDescription"
+                android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDescription"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.907"
                 app:layout_constraintStart_toEndOf="@+id/ivPFP" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
