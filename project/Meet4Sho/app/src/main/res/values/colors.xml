@@ -12,5 +12,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_gray">#AACDCDCD</color>
+    <color name="gray_0">#AACDCDCD</color>
+    <color name="gray_1">#A8A8A8</color>
+    <color name="gray_2">#979797</color>
+    <color name="gray_3">#747474</color>
+    <color name="blue_1">#803A6DD1</color>
+    <color name="blue_2">#5BC9F9</color>
+    <color name="blue_3">#3A6DD1</color>
+    <color name="purple">#8656AF</color>
 </resources>

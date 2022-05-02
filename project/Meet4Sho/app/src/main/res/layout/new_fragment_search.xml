@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llEventSearchDate"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/searchbox_border"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvEventSearchDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/gray_1"
+            android:textSize="12dp"
+            android:text="@string/event_search_date"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginVertical="5dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_event_search_calendar"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEventSearchType"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/searchbox_border"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spEventSearchType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:textSize="12dp"
+            android:background="@android:color/transparent"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginVertical="5dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_event_search_type"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEventSearchCity"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/searchbox_border"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tvEventSearchCity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/gray_1"
+            android:textSize="12dp"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:hint="@string/event_search_city"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginVertical="5dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_event_search_city"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEventSearchDistance"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/searchbox_border"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spEventSearchDistance"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:textSize="12dp"
+            android:background="@android:color/transparent"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginVertical="5dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_event_search_dist"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llEventSearchName"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/searchbox_border"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/tvEventSearchName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/gray_1"
+            android:textSize="12dp"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:hint="@string/event_search_name"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginVertical="5dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_event_search_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEventSearch"
+            style="@style/searchBtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/event_search_btn"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"/>
+
+
+    </LinearLayout>
+</LinearLayout>

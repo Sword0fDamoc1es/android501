@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvEventInfoCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/ivEventInfoImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/event_info_img_test" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/ivEventInfoImg"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvEventInfoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="60dp"
+                        android:textColor="@color/white"
+                        android:textSize="36dp"
+                        android:textStyle="bold"
+                        android:text="The Batman"
+                        android:inputType="textMultiLine"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_event_info_city"/>
+
+                        <TextView
+                            android:id="@+id/tvEventInfoCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Boston, MA"
+                            android:textColor="@color/white"
+                            android:textSize="24dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_event_info_location"/>
+
+                        <TextView
+                            android:id="@+id/tvEventInfoVenue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Regal Fenway RPX"
+                            android:textColor="@color/white"
+                            android:textSize="24dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_event_info_time"/>
+
+                        <TextView
+                            android:id="@+id/tvEventInfoDayTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="May 1 2022 7:00 PM"
+                            android:textColor="@color/white"
+                            android:textSize="24dp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvEventInfoDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="12dp"
+                        android:inputType="textMultiLine"
+                        android:text="@string/event_info_detail"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

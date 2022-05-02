@@ -33,5 +33,23 @@
         <item>Review Count</item>
     </string-array>
 
-
+    <string name="event_search_date">Select Date</string>
+    <string-array name="event_search_types">
+        <item>Select Type of Event</item>
+        <item>Movies</item>
+        <item>Concerts, Sports, Arts ...</item>
+    </string-array>
+    <string name="event_search_city">Enter City Name</string>
+    <string-array name="event_search_dist">
+        <item>Select Your Distance Preference</item>
+        <item>10 miles</item>
+        <item>25 miles</item>
+        <item>50 miles</item>
+        <item>75 miles</item>
+        <item>100 miles</item>
+    </string-array>
+    <string name="event_search_name">Enter Event Name</string>
+    <string name="event_search_btn">See Results</string>
+    <string name="event_info_detail">
+When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate the city\'s hidden corruption and question his family's involvement.</string>
 </resources>
