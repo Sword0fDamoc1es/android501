@@ -199,9 +199,7 @@ public class SearchFragment extends Fragment {
                 String location = edtSearchCity.getText().toString();
                 Geocoder gc = new Geocoder(getActivity());
                 List<Address> addresses = gc.getFromLocationName(location, 1); // get the found Address Objects
-
                 for (Address a : addresses) {
-                    System.out.println(a);
                     if (a.hasLatitude() && a.hasLongitude()) {
                         inputLatitude = a.getLatitude();
                         inputLongitude = a.getLongitude();

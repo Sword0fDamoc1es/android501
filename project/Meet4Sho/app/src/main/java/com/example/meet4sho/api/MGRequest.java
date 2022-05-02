@@ -79,15 +79,11 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
             JSONObject film = result.getJSONObject("film");
             JSONArray cinemas = result.getJSONArray("cinemas");
             String movie_id = film.getString("film_id");
-            /*
-            Part I added
-             */
+
             String filmInfoURL = API_ENDPOINT + "filmDetails/?film_id=" + movie_id;
             JSONObject filmInfoResult = HttpUtils.sendRequest(filmInfoURL, props);
             String movie_info = filmInfoResult.getString("synopsis_long");
-
-            /*
-             */
+            
             String movie_name = film.getString("film_name");
             String movie_img = film.getJSONObject("images").getJSONObject("poster").getJSONObject("1").getJSONObject("medium").getString("film_image");
             movie_img = movie_img.replace("\\", "");
