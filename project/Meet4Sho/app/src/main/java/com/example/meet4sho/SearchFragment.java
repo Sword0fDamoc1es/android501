@@ -55,7 +55,7 @@ public class SearchFragment extends Fragment {
     public Map<String, ArrayList<String>> movies = new HashMap<String, ArrayList<String>>();
     private OnFragmentInteractionListener mListener;
 
-    private EditText edtSearchBar, edtSearchCity;
+    private EditText edtSearchBar, edtSearchCity, edtSearchDate;
     private Button btnSearch, btnMore;
     private Spinner spnCategories;
     private RecyclerView rvResults;
@@ -105,6 +105,7 @@ public class SearchFragment extends Fragment {
 
         edtSearchBar = (EditText) v.findViewById(R.id.edtSearchBar);
         edtSearchCity = (EditText) v.findViewById(R.id.edtSearchCity);
+        edtSearchDate = (EditText) v.findViewById(R.id.edtSearchDate);
         btnSearch = (Button) v.findViewById(R.id.btnSearch);
         btnMore = (Button) v.findViewById(R.id.btnMore);
         rvResults = (RecyclerView) v.findViewById(R.id.rvResults);
@@ -143,6 +144,8 @@ public class SearchFragment extends Fragment {
                     SearchFilter filter = new SearchFilter();
                     filter.add("city", edtSearchCity.getText().toString());
                     filter.add("keyword", edtSearchBar.getText().toString());
+                    if(!edtSearchDate.getText().toString().equals(""))
+                        filter.add("startDateTime", edtSearchDate.getText().toString() + "T00:00:00Z");
                     new TMRequest(new TMListener()).execute(filter);
                 }
             }
@@ -166,6 +169,7 @@ public class SearchFragment extends Fragment {
                     SearchFilter filter = new SearchFilter();
                     filter.add("city", edtSearchCity.getText().toString());
                     filter.add("keyword", edtSearchBar.getText().toString());
+                    filter.add("startDateTime", edtSearchDate.getText().toString());
                     filter.add("page", String.valueOf(pageNum));
                     new TMRequest(new TMListener()).execute(filter);
                 }
@@ -241,7 +245,7 @@ public class SearchFragment extends Fragment {
                         ids.add(event.getId());
                         // END TODO.
                         names.add(event.getName());
-                        descriptions.add(event.getDescription());
+                        descriptions.add(event.getTime().getStartDateTime());
                         imageURLs.add(event.getImages().get(0).getUrl());
                         longitude.add(event.getVenue().getLongitude());
                         latitude.add(event.getVenue().getLatitude());

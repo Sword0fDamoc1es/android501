@@ -89,9 +89,9 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvUsername);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
-            tvIsOpen = itemView.findViewById(R.id.tvBio);
+            tvIsOpen = itemView.findViewById(R.id.tvDate);
             tvRating = itemView.findViewById(R.id.tvRating);
             tvDistance = itemView.findViewById(R.id.tvDistance);
             ivPreview = itemView.findViewById(R.id.ivPFP);

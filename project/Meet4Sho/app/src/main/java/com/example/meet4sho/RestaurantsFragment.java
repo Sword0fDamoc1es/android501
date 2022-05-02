@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,9 @@ public class RestaurantsFragment extends Fragment {
                 filter.add("latitude", bundle.getString("lt"));
                 if(!edtResSearchBar.getText().toString().equals(""))
                     filter.add("term", edtResSearchBar.getText().toString());
-                filter.add("sort", spnResSort.getSelectedItem().toString());
+                String sort = getSort(spnResSort.getSelectedItem().toString());
+                Log.d("Sort: ", sort);
+                filter.add("sort_by", sort);
                 new YelpRequest(new YelpListener()).execute(filter);
                 ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());
                 rvResResults.setAdapter(ra);
@@ -88,6 +91,25 @@ public class RestaurantsFragment extends Fragment {
         });
 
         return v;
+    }
+
+    private String getSort(String s){
+        String sort = "";
+        switch(s){
+            case "Distance":
+                sort = "distance";
+                break;
+            case "Best Match":
+                sort = "best_match";
+                break;
+            case "Rating":
+                sort = "rating";
+                break;
+            case "Review Count":
+                sort = "review_count";
+                break;
+        }
+        return sort;
     }
 
     private class YelpListener implements RequestListener {

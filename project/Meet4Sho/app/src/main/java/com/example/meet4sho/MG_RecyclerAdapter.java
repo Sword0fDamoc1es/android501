@@ -133,7 +133,7 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvUsername);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             ivPreview = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);

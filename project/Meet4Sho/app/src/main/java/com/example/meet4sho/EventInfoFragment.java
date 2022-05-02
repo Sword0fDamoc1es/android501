@@ -412,7 +412,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 event.getVenue().getStateCode() + "\n " +
                 when +
                 classification + "\n" +
-                event.getUrl();
+                event.getUrl() + "\n" +
+                lon + ", " + lat;
         tvDescription.setText(description);
     }
 
