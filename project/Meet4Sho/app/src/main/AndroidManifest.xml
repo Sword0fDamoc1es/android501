@@ -46,7 +46,6 @@
         <activity android:name=".Yelp_LocList" />
         <activity android:name=".Yelp_LocInfo" />
         <activity android:name=".AppActivity" />
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

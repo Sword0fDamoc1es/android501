@@ -6,19 +6,25 @@ import java.util.List;
 public class MGCinema {
     private String cinema_id;
     private String cinema_name;
+    private double cinema_lat;
+    private double cinema_lng;
     private double cinema_distance;
     private String film_id;
     private String film_name;
     private String film_img;
+    private String film_info;
     private List<MGTime> times = new ArrayList<>();
 
-    public MGCinema(String cinema_id, String cinema_name, double cinema_distance, String film_id, String film_name, String film_img, List<MGTime> times) {
+    public MGCinema(String cinema_id, String cinema_name, double cinema_lat, double cinema_lng, double cinema_distance, String film_id, String film_name, String film_img, String film_info, List<MGTime> times) {
         this.cinema_id = cinema_id;
         this.cinema_name = cinema_name;
+        this.cinema_lat = cinema_lat;
+        this.cinema_lng = cinema_lng;
         this.cinema_distance = cinema_distance;
         this.film_id = film_id;
         this.film_name = film_name;
         this.film_img = film_img;
+        this.film_info = film_info;
         this.times = times;
     }
 
@@ -80,5 +86,25 @@ public class MGCinema {
 
     public void setFilm_img(String film_img) {
         this.film_img = film_img;
+    }
+
+    public String getFilm_info() { return film_info; }
+
+    public void setFilm_info(String film_info) { this.film_info = film_info; }
+
+    public double getCinema_lat() {
+        return cinema_lat;
+    }
+
+    public void setCinema_lat(double cinema_lat) {
+        this.cinema_lat = cinema_lat;
+    }
+
+    public double getCinema_lng() {
+        return cinema_lng;
+    }
+
+    public void setCinema_lng(double cinema_lng) {
+        this.cinema_lng = cinema_lng;
     }
 }

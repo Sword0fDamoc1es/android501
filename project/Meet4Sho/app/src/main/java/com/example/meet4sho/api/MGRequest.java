@@ -79,6 +79,15 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
             JSONObject film = result.getJSONObject("film");
             JSONArray cinemas = result.getJSONArray("cinemas");
             String movie_id = film.getString("film_id");
+            /*
+            Part I added
+             */
+            String filmInfoURL = API_ENDPOINT + "filmDetails/?film_id=" + movie_id;
+            JSONObject filmInfoResult = HttpUtils.sendRequest(filmInfoURL, props);
+            String movie_info = filmInfoResult.getString("synopsis_long");
+
+            /*
+             */
             String movie_name = film.getString("film_name");
             String movie_img = film.getJSONObject("images").getJSONObject("poster").getJSONObject("1").getJSONObject("medium").getString("film_image");
             movie_img = movie_img.replace("\\", "");
@@ -87,7 +96,14 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
                 String cinema_id = cinema.getString("cinema_id");
                 String cinema_name = cinema.getString("cinema_name");
                 Double cinema_distance = cinema.getDouble("distance");
-                MGCinema cinema_i = new MGCinema(cinema_id, cinema_name, cinema_distance, movie_id, movie_name, movie_img, new ArrayList<>());
+
+                String cinemaInfoURL = API_ENDPOINT + "cinemaDetails/?cinema_id=" + cinema_id;
+                JSONObject resultCinemaInfo = HttpUtils.sendRequest(cinemaInfoURL, props);
+                double cinema_lat = resultCinemaInfo.getDouble("lat");
+                double cinema_lng = resultCinemaInfo.getDouble("lng");
+
+
+                MGCinema cinema_i = new MGCinema(cinema_id, cinema_name, cinema_lat, cinema_lng, cinema_distance, movie_id, movie_name, movie_img, movie_info, new ArrayList<>());
                 JSONArray showings = cinema.getJSONObject("showings").getJSONObject("Standard").getJSONArray("times");
                 for (int j = 0; j < showings.length(); j++) {
                     JSONObject time = showings.getJSONObject(j);
