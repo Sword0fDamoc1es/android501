@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserSearchFragment extends Fragment {
+public class  UserSearchFragment extends Fragment {
 
     public RecyclerView rvUsers;
     String id;
