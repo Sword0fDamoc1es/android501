@@ -19,9 +19,9 @@
         android:layout_width="250dp"
         android:layout_height="200dp"
         android:layout_below="@id/tvTitleEvent"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        tools:srcCompat="@tools:sample/avatars"/>
+        android:layout_marginTop="10dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvDescriptionEvent"
