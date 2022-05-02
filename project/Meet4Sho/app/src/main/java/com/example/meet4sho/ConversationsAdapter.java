@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
                 Bundle bundle = new Bundle();
 //                Intent i = new Intent(context, TM_EventInfoActivity.class);
                 bundle.putString("Chat ID", chat.getConversationId());
+                Log.d("Chat ID", chat.getConversationId());
                 bundle.putString("Recipient", ((User)chat.getConversationWith()).getUid());
 
 

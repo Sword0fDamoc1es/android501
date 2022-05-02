@@ -1,6 +1,10 @@
 package com.example.meet4sho;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -15,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.cometchat.pro.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,6 +34,7 @@ public class ProfileOtherFragment extends Fragment {
     public EditText edtBio;
     public TextView tvName;
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
+    private String otherUser;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +60,8 @@ public class ProfileOtherFragment extends Fragment {
 
         tvName = v.findViewById(R.id.tvName);
         tvName.setText(username);
+        otherUser = username;
+
         edtBio = v.findViewById(R.id.edtBio);
         setDescription();
 
@@ -86,5 +94,22 @@ public class ProfileOtherFragment extends Fragment {
     }
 
     public void onClick(View view){
+        MessageChatFragment chatRoom = new MessageChatFragment();
+        Bundle bundle = new Bundle();
+//                Intent i = new Intent(context, TM_EventInfoActivity.class);
+//        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        bundle.putString("Chat ID", "superhero1_user_superhero3");
+        Log.d("Chat ID", "superhero1_user_superhero3");
+        bundle.putString("Recipient", otherUser);
+
+
+        chatRoom.setArguments(bundle);
+
+        FragmentManager fm = getActivity().getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.displayedView, chatRoom);
+        fragmentTransaction.addToBackStack("chatRoomFrag");
+        fragmentTransaction.commit();
+
     }
 }
