@@ -21,8 +21,8 @@
 
     <!-- The options for the drop down list in fragment_search -->
     <string-array name="search_options">
-        <item>Movies</item>
         <item>Events</item>
+        <item>Movies</item>
     </string-array>
 
     <string-array name="restaurant_sort_options">

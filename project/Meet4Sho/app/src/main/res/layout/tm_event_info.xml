@@ -64,9 +64,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/llEventUsrInputLayout"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:text="Nearby Restaurants"/>
+        android:layout_marginTop="10dp"
+        android:text="Nearby Restaurants" />
 
     <LinearLayout
         android:id="@+id/llEventBottomBtns"

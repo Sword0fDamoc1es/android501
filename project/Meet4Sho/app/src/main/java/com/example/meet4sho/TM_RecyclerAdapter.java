@@ -62,17 +62,15 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        // TODO get id based on postion:
-        String id = ids.get(position);
-        // END TODO
 
+        String id = ids.get(position);
         String title = names.get(position);
-        String description = descriptions.get(position);
+        String description = descriptions.get(position).split("T")[0];
         String url = imageURLS.get(position);
         String lg = longitude.get(position);
         String lt = latitude.get(position);
         holder.tvTitle.setText(title);
-        holder.tvDescription.setText(description);
+        holder.tvDate.setText(description);
         new TM_EventInfoActivity.DownloadImageTask(holder.ivPreview).execute(url);
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
@@ -125,14 +123,14 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle, tvDescription;
+        TextView tvTitle, tvDate;
         ImageView ivPreview;
         ConstraintLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvUsername);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvDate = itemView.findViewById(R.id.tvDate);
             ivPreview = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }

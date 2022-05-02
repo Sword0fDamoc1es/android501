@@ -17,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meet4sho.api.YelpRestaurant;
-
 import java.util.List;
 
 public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.MyViewHolder> {
@@ -87,8 +85,8 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUsername = itemView.findViewById(R.id.tvUsername);
-            tvBio = itemView.findViewById(R.id.tvBio);
+            tvUsername = itemView.findViewById(R.id.tvTitle);
+            tvBio = itemView.findViewById(R.id.tvDate);
             ivPFP = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }

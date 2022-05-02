@@ -93,6 +93,8 @@ public class ProfileOtherFragment extends Fragment {
 
         edtBio = v.findViewById(R.id.edtBio);
         setDescription();
+        edtBio.setFocusable(false);
+        edtBio.setEnabled(false);
 
         Button btnSave = v.findViewById(R.id.btnProfSave);
         btnSave.setVisibility(View.GONE);
@@ -205,7 +207,7 @@ public class ProfileOtherFragment extends Fragment {
                         ids.add(event.getId());
                         // END TODO.
                         names.add(event.getName());
-                        descriptions.add(event.getDescription());
+                        descriptions.add(event.getTime().getStartDateTime());
                         imageURLs.add(event.getImages().get(0).getUrl());
                         longitude.add(event.getVenue().getLongitude());
                         latitude.add(event.getVenue().getLatitude());
