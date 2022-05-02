@@ -67,6 +67,7 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        if (film_id == null) return null;
 
         // search film id using MovieGlu's filmShowTimes and get showtimes for selected film at nearest cinemas
         Log.i("------>", film_id);
@@ -83,7 +84,7 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
             String filmInfoURL = API_ENDPOINT + "filmDetails/?film_id=" + movie_id;
             JSONObject filmInfoResult = HttpUtils.sendRequest(filmInfoURL, props);
             String movie_info = filmInfoResult.getString("synopsis_long");
-            
+
             String movie_name = film.getString("film_name");
             String movie_img = film.getJSONObject("images").getJSONObject("poster").getJSONObject("1").getJSONObject("medium").getString("film_image");
             movie_img = movie_img.replace("\\", "");
