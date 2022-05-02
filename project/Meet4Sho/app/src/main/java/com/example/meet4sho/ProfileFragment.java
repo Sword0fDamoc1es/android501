@@ -34,28 +34,22 @@ import java.util.Map;
 
 
 public class ProfileFragment extends Fragment {
-    public EditText edtBio;
-    public TextView tvName;
-    public RecyclerView rvInterestedEvents;
+    private EditText edtBio;
+    private TextView tvName;
+    private RecyclerView rvInterestedEvents;
+
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
     private DocumentReference pDocRefUser = FirebaseFirestore.getInstance().document("front_end/user_event");
     private ArrayList<String> bufferUser;
 
-    // TODO: add private id ?
-    private List<String> ids = new ArrayList<>();
-    // END TODO.
-
-    private List<String> names = new ArrayList<>();
-    private List<String> descriptions = new ArrayList<>();
-    private List<String> imageURLs = new ArrayList<>();
-    private List<String> longitude = new ArrayList<>();
-    private List<String> latitude = new ArrayList<>();
+    private List<String> ids;
+    private List<String> names;
+    private List<String> descriptions;
+    private List<String> imageURLs;
+    private List<String> longitude;
+    private List<String> latitude;
 
     private TM_RecyclerAdapter ra;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -73,6 +67,13 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         Bundle bundle = this.getArguments();
         String username = bundle.getString("username");
+
+        ids = new ArrayList<>();
+        names = new ArrayList<>();
+        descriptions = new ArrayList<>();
+        imageURLs = new ArrayList<>();
+        longitude = new ArrayList<>();
+        latitude = new ArrayList<>();
 
         // TODO
         // Marv's Comment: after the following line, bufferUser will get the arrayList of eventID

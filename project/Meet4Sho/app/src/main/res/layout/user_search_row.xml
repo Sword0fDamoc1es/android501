@@ -11,9 +11,12 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="10dp"
         app:cardBackgroundColor="#8BC34A"
         app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
+        app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,15 +24,17 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient2">
 
             <TextView
                 android:id="@+id/tvUsername"
                 android:layout_width="226dp"
                 android:layout_height="28dp"
-                android:background="#CDDC39"
+                android:background="#FFFFFF"
                 android:gravity="center"
                 android:text="Name"
+                android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -43,6 +48,7 @@
                 android:id="@+id/ivPFP"
                 android:layout_width="107dp"
                 android:layout_height="120dp"
+                android:background="@drawable/ic_baseline_person_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.019"
@@ -55,8 +61,9 @@
                 android:id="@+id/tvBio"
                 android:layout_width="224dp"
                 android:layout_height="43dp"
-                android:background="#CDDC39"
+                android:background="#FFFFFF"
                 android:text="User does not have a bio!"
+                android:textColor="#000000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.285"
