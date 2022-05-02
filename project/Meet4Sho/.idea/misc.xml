@@ -3,16 +3,50 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/drawable-v24/gradient2.xml" value="0.1395" />
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/drawable/gradient1.xml" value="0.1" />
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/layout/event_row.xml" value="0.18885869565217392" />
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/layout/profile_page.xml" value="0.5" />
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/layout/restaurant_row.xml" value="0.5" />
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_info.xml" value="0.18819655521783182" />
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_row.xml" value="0.33" />
+        <entry key="..\:/Users/ekirb/OneDrive/BU/CS/CS501/Project/android501/project/Meet4Sho/app/src/main/res/layout/user_search_row.xml" value="0.33" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_baseline_person_24dp.xml" value="0.2435" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/drawable/ic_navbar_message.xml" value="0.2435" />
+        <entry key="app/src/main/res/drawable/ic_navbar_messages.xml" value="0.2435" />
+        <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2435" />
+        <entry key="app/src/main/res/layout/activity_firebase_playground.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_signup2.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/app_main_page.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/conversation_list_row.xml" value="0.4395833333333333" />
+        <entry key="app/src/main/res/layout/event_info.xml" value="0.4395833333333333" />
+        <entry key="app/src/main/res/layout/event_row.xml" value="0.19230769230769232" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/login_page.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/message_chat_page.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/messages_list_page.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/messages_page.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/movie_mainscreen.xml" value="0.1956521739130435" />
-        <entry key="app/src/main/res/layout/tm_event_info.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/profile_page.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/restaurant_row.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/restaurants_page.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/tm_event_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/tm_event_row.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/tm_mainscreen.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/user_search_page.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/layout/user_search_row.xml" value="0.23333333333333334" />
         <entry key="app/src/main/res/layout/yelp_loc_info.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/yelp_loc_list.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/yelp_mainscreen.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.23333333333333334" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2435" />
       </map>
     </option>
   </component>

@@ -53,21 +53,21 @@ public class TM_EventInfoActivity extends AppCompatActivity {
         ivEventImg = (ImageView) findViewById(R.id.ivEventImg);
         tvTitleEvent = (TextView) findViewById(R.id.tvTitleEvent);
         tvDescriptionEvent = (TextView) findViewById(R.id.tvDescriptionEvent);
-        btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                names = extras.getStringArrayList("names");
-                descriptions = extras.getStringArrayList("descriptions");
-                imgURLS = extras.getStringArrayList("urls");
-
-                Intent i = new Intent(getApplicationContext(),TM_MainActivity.class);
-                i.putStringArrayListExtra("names",(ArrayList<String>) names);
-                i.putStringArrayListExtra("descriptions",(ArrayList<String>) descriptions);
-                i.putStringArrayListExtra("urls",(ArrayList<String>) imgURLS);
-                startActivity(i);
-            }
-        });
+//        btnBack = (Button) findViewById(R.id.btnBack);
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                names = extras.getStringArrayList("names");
+//                descriptions = extras.getStringArrayList("descriptions");
+//                imgURLS = extras.getStringArrayList("urls");
+//
+//                Intent i = new Intent(getApplicationContext(),AppActivity.class);
+//                i.putStringArrayListExtra("names",(ArrayList<String>) names);
+//                i.putStringArrayListExtra("descriptions",(ArrayList<String>) descriptions);
+//                i.putStringArrayListExtra("urls",(ArrayList<String>) imgURLS);
+//                startActivity(i);
+//            }
+//        });
 
         tvDescriptionEvent.setText(description);
         tvTitleEvent.setText(title);
