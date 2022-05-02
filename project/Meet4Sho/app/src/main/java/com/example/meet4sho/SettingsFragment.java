@@ -1,6 +1,7 @@
 package com.example.meet4sho;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -41,6 +42,7 @@ public class SettingsFragment extends Fragment {
     private EditText editSettingsPassword;
     private SeekBar sbSettingsDistance;
     private Button btnSettingSave;
+    private Button btnSignOut;
     private String username;
 
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
@@ -76,8 +78,18 @@ public class SettingsFragment extends Fragment {
         editSettingsPhone = v.findViewById(R.id.edtSettingsPhone);
         sbSettingsDistance = v.findViewById(R.id.sbSettingsDistance);
         btnSettingSave = v.findViewById(R.id.btnSettingsSave);
+        btnSignOut = v.findViewById(R.id.btnSignOut);
 
         btnSettingSave.setOnClickListener(this::onClick);
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), loginActivity.class );
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                getActivity().startActivity(intent);
+            }
+        });
 
         return v;
     }

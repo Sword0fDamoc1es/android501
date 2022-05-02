@@ -1,6 +1,10 @@
 package com.example.meet4sho;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -21,6 +25,9 @@ import com.example.meet4sho.api.RequestListener;
 import com.example.meet4sho.api.SearchFilter;
 import com.example.meet4sho.api.TMEvent;
 import com.example.meet4sho.api.TMRequest;
+
+import com.cometchat.pro.models.User;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,6 +48,9 @@ public class ProfileOtherFragment extends Fragment {
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
     private DocumentReference pDocRefUser = FirebaseFirestore.getInstance().document("front_end/user_event");
     private ArrayList<String> bufferUser;
+
+    private String otherUser;
+
 
     private List<String> ids;
     private List<String> names;
@@ -79,6 +89,8 @@ public class ProfileOtherFragment extends Fragment {
 
         tvName = v.findViewById(R.id.tvName);
         tvName.setText(username);
+        otherUser = username;
+
         edtBio = v.findViewById(R.id.edtBio);
         setDescription();
 
@@ -155,6 +167,27 @@ public class ProfileOtherFragment extends Fragment {
     }
 
     public void onClick(View view){
+        MessageChatFragment chatRoom = new MessageChatFragment();
+        Bundle bundle = new Bundle();
+//                Intent i = new Intent(context, TM_EventInfoActivity.class);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.preference_file_name), Context.MODE_PRIVATE);
+
+        String currentLoggedInUsername = sharedPref.getString(getString(R.string.preference_user_name),"");
+
+        bundle.putString("Chat ID", currentLoggedInUsername + "_user_" + otherUser);
+        Log.d("Chat ID", currentLoggedInUsername + "_user_" + otherUser);
+        bundle.putString("Recipient", otherUser);
+
+
+        chatRoom.setArguments(bundle);
+
+        FragmentManager fm = getActivity().getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.displayedView, chatRoom);
+        fragmentTransaction.addToBackStack("chatRoomFrag");
+        fragmentTransaction.commit();
+
     }
 
     private class TMListener implements RequestListener {
