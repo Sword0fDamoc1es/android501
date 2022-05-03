@@ -1,12 +1,16 @@
 package com.example.meet4sho.api;
 
-public class MGTime {
+import java.io.Serializable;
+
+public class MGTime implements Serializable {
     private String startTime;
     private String endTime;
+    private String date;
 
-    public MGTime(String startTime, String endTime) {
+    public MGTime(String startTime, String endTime, String date) {
         this.startTime = startTime;
         this.endTime = endTime;
+        this.date = date;
     }
 
     public String getStartTime() {
@@ -23,5 +27,13 @@ public class MGTime {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

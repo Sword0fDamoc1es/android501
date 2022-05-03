@@ -114,7 +114,7 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle, tvDate;
+        TextView tvTitle, tvDate, tvCinemaName;
         ImageView ivPreview;
         ConstraintLayout mainLayout;
 
@@ -122,6 +122,8 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDate = itemView.findViewById(R.id.tvDate);
+            tvCinemaName = itemView.findViewById(R.id.tvCinemaName);
+            tvCinemaName.setVisibility(View.INVISIBLE);
             ivPreview = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }
