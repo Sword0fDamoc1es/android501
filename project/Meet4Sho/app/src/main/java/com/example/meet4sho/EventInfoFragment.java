@@ -155,8 +155,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     public void eventCheck(String name, String eventname){
         DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
-//        Log.d("eventCHECK:",eventname);
-// Get the document, forcing the SDK to use the offline cache
         docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -250,7 +248,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         System.out.println(buffer.size());
         if(!bbb){
             // not contains.
-            // TODO change the following line into a eventContainer element.
             buffer.add(buffer.size(),username);
 
             eventContainer.get(1).add(eventContainer.get(1).size(),bio);
@@ -265,9 +262,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Log.d("YES","save success");
-//                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
-//                            // this is where  we  add  data.
-//                            startActivity(i);
                 }else{
                     Log.w("NO","save failed");
                 }
@@ -291,9 +285,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Log.d("YES","save success");
-//                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
-//                            // this is where  we  add  data.
-//                            startActivity(i);
                 }else{
                     Log.w("NO","save failed");
                 }
@@ -322,37 +313,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 btnRegisterTmp.setBackgroundColor(getResources().getColor(R.color.red_500));
                 eventUpload();
                 userUpload();
-
-
-
-//                Map<String,Object> dataToSave =  new HashMap<>();
-//                dataToSave.put("eid",id);
-//                boolean bbb = buffer.contains(username);
-//                System.out.println(buffer.size());
-//                if(!bbb){
-//
-//                    buffer.add(buffer.size(),username);
-//                }
-//                dataToSave.put("list",buffer);
-//                pDocRef.collection("interest").document(id).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if(task.isSuccessful()){
-//                            Log.d("YES","save success");
-////                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
-////                            // this is where  we  add  data.
-////                            startActivity(i);
-//                        }else{
-//                            Log.w("NO","save failed");
-//                        }
-//                    }
-//                });
-
-                // then push.
-
-
-
-
                 break;
             case R.id.btnUserSearch:
                 checkExists(id);
@@ -372,29 +332,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void messageFromChildFragment(Map.Entry<String, ArrayList<String>> temp);
-//    }
-    //A function to update the page after TMListener retrieves the event. If this is done during onCreateView
-    //then event will still be null since TMListener has not finished running
     private void updatePage(){
         String classification = "";
         String when = "";
