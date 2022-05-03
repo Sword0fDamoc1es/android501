@@ -76,38 +76,6 @@
         android:layout_height="1dp"
         android:background="@color/light_gray"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-            <TextView
-                android:id="@+id/tvSettingsDistance"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:textSize="18dp"
-                android:text="Distance:"/>
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"/>
-            <TextView
-                android:id="@+id/tvSettingsDistanceValue"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textSize="18dp"
-                android:text="0 miles"
-                android:textAlignment="gravity"
-                android:gravity="right|center_vertical"/>
-        </LinearLayout>
-    </LinearLayout>
-
     <Space
         android:layout_width="match_parent"
         android:layout_height="5dp"/>
