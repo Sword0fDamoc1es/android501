@@ -106,8 +106,8 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         this.names = names;
         this.descriptions = descriptions;
         this.imageURLS = imageURLS;
-        this.latitude = lon;
-        this.longitude = lat;
+        this.latitude = lat;
+        this.longitude = lon;
         notifyDataSetChanged();
     }
 
