@@ -97,6 +97,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 //        Log.d("ID INFO: ",id);
 
         url = bundle.getString("url");
+        String cname = bundle.getString("cinema_name");
+        if(cname==null){
+            Log.d("whatwhat","here");
+        }
 
         username = bundle.getString("username");
 

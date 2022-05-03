@@ -71,6 +71,11 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
 
         String title = names.get(position);
         String description = descriptions.get(position);
+        if(description==null){
+            Log.d("Alert","!!!!!!!!!!!!");
+        }else{
+            Log.d("Alert",description);
+        }
         String url = imageURLS.get(position);
         String lg = longitude.get(position);
         String lt = latitude.get(position);

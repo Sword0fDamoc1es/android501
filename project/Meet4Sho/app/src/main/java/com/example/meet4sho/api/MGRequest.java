@@ -19,11 +19,19 @@ import java.util.Map;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
+//    client:	BOST_0
+//    x-api-key:	fms66r7H056EXLIIZhgcg8pquCOwXbCo4EpfVJhl
+//    authorization:	Basic Qk9TVF8wX1hYOmFoUGVtdGFzSTIxQQ==
+//    territory:	XX
+//    api-version:	v200
+//    geolocation:	-22.0;14.0 (Recommended location, note initial minus character)
+//    device-datetime:	yyyy-mm-ddThh:mm:ss.sssZ (ISO 8601 format, e.g. 2018-09-14T08:30:17.360Z)
+
     // API constants
     private final String API_ENDPOINT = "https://api-gate2.movieglu.com/";
-    private final String API_CLIENT = "MEET_0";
-    private final String API_KEY = "y2bw2c1y0d9MKeUZRDrRC2lJWccKZ8yn67OW5FEg";
-    private final String API_AUTH = "Basic TUVFVF8wOjR5VnJSZnVQMUhEYw==";
+    private final String API_CLIENT = "BOST_2";
+    private final String API_KEY = "Q6kzlQh7TN7FBxHVoIa527mwZ7Cf78Ot5e9jMKqpl";
+    private final String API_AUTH = "Basic Qk9TVF8yOjVaSXlPZ2EwV3NMcg==";
     private final String API_TERRITORY = "US";
     private final String API_VERSION = "v200";
     // member variables
@@ -43,14 +51,14 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
     protected Void doInBackground(SearchFilter... filter) {
         // set request headers
         Map<String, String> props = new HashMap<>();
-        props.put("api-version", API_VERSION);
-        props.put("territory", API_TERRITORY);
-        props.put("authorization", API_AUTH);
-        props.put("x-api-key", API_KEY);
-        props.put("client", API_CLIENT);
-        props.put("device-datetime", deviceDatetime);
+        props.put("api-version", "v200");
+        props.put("territory", "US");
+        props.put("authorization", "Basic Qk9TVF8yOjVaSXlPZ2EwV3NMcg==");
+        props.put("x-api-key", "Q6kzlQh7TN7FBxHVoIa527mwZ7Cf78Ot5e9jMKqp");
+        props.put("client", "BOST_2");
+        props.put("device-datetime", "2022-05-01T21:23:51.027Z");
         props.put("geolocation", Double.toString(latitude) + ";" + Double.toString(longitude));
-
+        Log.d("MRRequest",deviceDatetime);
         // search film name using MovieGlu's filmLiveSearch and get a film id
 //        String query = filter[0].toString().replaceAll(" ", "+").substring(1);
 //        if (query.charAt(query.length()-1) == '+') query = query.substring(0,query.length()-1);
@@ -58,6 +66,8 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
 //        Log.i("------>", url);
         String name = filter[0].get("query").replace(' ', '+');
         if (name.charAt(name.length()-1) == '+') name = name.substring(0, name.length()-1);
+//        Log.d("MGRequest",name);
+
         String url = API_ENDPOINT + "filmLiveSearch/?query=" + name + "&n=1";
         Log.i("------>", url);
         JSONObject result = HttpUtils.sendRequest(url, props);
@@ -68,6 +78,7 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
             e.printStackTrace();
         }
         if (film_id == null) return null;
+
 
         // search film id using MovieGlu's filmShowTimes and get showtimes for selected film at nearest cinemas
         Log.i("------>", film_id);
