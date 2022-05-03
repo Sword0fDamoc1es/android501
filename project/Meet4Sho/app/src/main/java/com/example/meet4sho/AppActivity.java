@@ -58,6 +58,7 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
         seditr.apply();
 
         //initCometChat();
+        initMessagesList();
 
         messageFrag = new MessagesListFragment();
         searchFrag = new SearchFragment();
@@ -100,7 +101,6 @@ public class AppActivity extends AppCompatActivity implements SearchFragment.OnF
     public void showMessages() {
         if (messageFrag == null)
             messageFrag = new MessagesListFragment();
-        initMessagesList();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.displayedView, messageFrag);
         fragmentTransaction.addToBackStack("messageFrag");
