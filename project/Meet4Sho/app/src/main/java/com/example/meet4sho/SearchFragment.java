@@ -124,6 +124,7 @@ public class SearchFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+                pageNum = 0;
                 String text = spnCategories.getSelectedItem().toString();
                 if(text.equals("Movies")) {
                     SearchFilter filter = new SearchFilter();
@@ -239,7 +240,8 @@ public class SearchFragment extends Fragment {
                         latitude.add(event.getVenue().getLatitude());
                         output += event.getName() + "\n";
                     }
-                    ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager(), username);
+                    ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs,
+                            longitude, latitude, getActivity().getFragmentManager(), username);
                     rvResults.setAdapter(ra);
                     rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
                 }
