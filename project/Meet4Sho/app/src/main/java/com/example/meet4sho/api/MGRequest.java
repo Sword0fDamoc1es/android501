@@ -6,11 +6,22 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.meet4sho.RestaurantRecyclerAdapter;
+import com.example.meet4sho.RestaurantsFragment;
+
+import org.apache.commons.io.IOUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +30,9 @@ import java.util.Map;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
+
+    private final String YELP_API_KEY = "88RR4WnZJtAJeY_z4UA6bR-NhnlmhFk5zYFqxD30lDTrpfa543apNhHmDzum2ElLWI4od6pGjBfMjIoG7T9ReRU8vYaQejY57KwBwKwoj-r9ID9ahOJG4D1d5TRDYnYx";
+
 //    client:	BOST_0
 //    x-api-key:	fms66r7H056EXLIIZhgcg8pquCOwXbCo4EpfVJhl
 //    authorization:	Basic Qk9TVF8wX1hYOmFoUGVtdGFzSTIxQQ==
@@ -29,9 +43,9 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
 
     // API constants
     private final String API_ENDPOINT = "https://api-gate2.movieglu.com/";
-    private final String API_CLIENT = "BOST_2";
-    private final String API_KEY = "Q6kzlQh7TN7FBxHVoIa527mwZ7Cf78Ot5e9jMKqpl";
-    private final String API_AUTH = "Basic Qk9TVF8yOjVaSXlPZ2EwV3NMcg==";
+    private final String API_CLIENT = "NYU";
+    private final String API_KEY = "5H78ZTGLPI8j1e24ewsfh5lrita93T3S2GPxQkNQ";
+    private final String API_AUTH = "Basic TIIVOmgyVjVKZUdqTU9IQw==";
     private final String API_TERRITORY = "US";
     private final String API_VERSION = "v200";
     // member variables
@@ -53,10 +67,10 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
         Map<String, String> props = new HashMap<>();
         props.put("api-version", "v200");
         props.put("territory", "US");
-        props.put("authorization", "Basic Qk9TVF8yOjVaSXlPZ2EwV3NMcg==");
-        props.put("x-api-key", "Q6kzlQh7TN7FBxHVoIa527mwZ7Cf78Ot5e9jMKqp");
-        props.put("client", "BOST_2");
-        props.put("device-datetime", "2022-05-01T21:23:51.027Z");
+        props.put("authorization", "Basic VEVNUDpoYnY0d3UxbjNUS3o=");
+        props.put("x-api-key", "Q0L1MNqQv92z7veqQ1JJJ4EHdPhyGTna1B1K1SFz");
+        props.put("client", "TEMP");
+        props.put("device-datetime", deviceDatetime);
         props.put("geolocation", Double.toString(latitude) + ";" + Double.toString(longitude));
         Log.d("MRRequest",deviceDatetime);
         // search film name using MovieGlu's filmLiveSearch and get a film id
@@ -92,10 +106,6 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
             JSONArray cinemas = result.getJSONArray("cinemas");
             String movie_id = film.getString("film_id");
 
-            String filmInfoURL = API_ENDPOINT + "filmDetails/?film_id=" + movie_id;
-            JSONObject filmInfoResult = HttpUtils.sendRequest(filmInfoURL, props);
-            String movie_info = filmInfoResult.getString("synopsis_long");
-
             String movie_name = film.getString("film_name");
             String movie_img = film.getJSONObject("images").getJSONObject("poster").getJSONObject("1").getJSONObject("medium").getString("film_image");
             movie_img = movie_img.replace("\\", "");
@@ -105,26 +115,47 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
                 String cinema_name = cinema.getString("cinema_name");
                 Double cinema_distance = cinema.getDouble("distance");
 
-                String cinemaInfoURL = API_ENDPOINT + "cinemaDetails/?cinema_id=" + cinema_id;
-                JSONObject resultCinemaInfo = HttpUtils.sendRequest(cinemaInfoURL, props);
-                double cinema_lat = resultCinemaInfo.getDouble("lat");
-                double cinema_lng = resultCinemaInfo.getDouble("lng");
+                SearchFilter filterForMovie = new SearchFilter();
+                String urlS = "https://api.yelp.com/v3/businesses/search?";
+                filterForMovie.add("longitude", String.valueOf(longitude));
+                filterForMovie.add("latitude", String.valueOf(latitude));
+                filterForMovie.add("term", cinema_name);
+                urlS += "longitude="+longitude+"&latitude="+latitude+"&term="+cinema_name;
+
+                URL YelpURL = new URL(urlS);                                                                           // create a new URL object
+                HttpURLConnection urlConnection = (HttpURLConnection) YelpURL.openConnection();                                               // open a new HTTP url connection
+                urlConnection.setRequestProperty("Authorization", "Bearer " + YELP_API_KEY);                                 // set request header
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());                               // get response result from GET request
+                String httpResponse = IOUtil.toString(in);
+                JSONObject YelpResult = new JSONObject(httpResponse);
+                JSONArray movieTheaters = YelpResult.getJSONArray("businesses");
+                Log.d("Yelp Movies", movieTheaters.toString());
+                JSONObject movieTheater = JSONUtils.getJSONObject(movieTheaters, 0);
+                String latToProvide = JSONUtils.getJSONObject(movieTheater,"coordinates").getString("latitude");
+                String lngToProvide = JSONUtils.getJSONObject(movieTheater,"coordinates").getString("longitude");
 
 
-                MGCinema cinema_i = new MGCinema(cinema_id, cinema_name, cinema_lat, cinema_lng, cinema_distance, movie_id, movie_name, movie_img, movie_info, new ArrayList<>());
+                double cinema_lat = Double.parseDouble(latToProvide);
+                double cinema_lng = Double.parseDouble(lngToProvide);
+
+
+                MGCinema cinema_i = new MGCinema(cinema_id, cinema_name, cinema_lat, cinema_lng, cinema_distance, movie_id, movie_name, movie_img, new ArrayList<>());
                 JSONArray showings = cinema.getJSONObject("showings").getJSONObject("Standard").getJSONArray("times");
                 for (int j = 0; j < showings.length(); j++) {
                     JSONObject time = showings.getJSONObject(j);
                     String start_time = time.getString("start_time");
                     String end_time = time.getString("end_time");
-                    cinema_i.addTime(new MGTime(start_time, end_time));
+                    cinema_i.addTime(new MGTime(start_time, end_time, date));
                 }
                 allEvents.add(cinema_i);
             }
             listener.updateViews(allEvents);
-        } catch (JSONException e) {
+        } catch (JSONException | MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
+
 }

@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meet4sho.api.MGCinema;
 import com.example.meet4sho.api.MGRequest;
+import com.example.meet4sho.api.MGTime;
 import com.example.meet4sho.api.RequestListener;
 import com.example.meet4sho.api.SearchFilter;
 import com.example.meet4sho.api.TMEvent;
@@ -78,15 +79,19 @@ public class SearchFragment extends Fragment {
 
     private List<String> cinemaNames = new ArrayList<>();
 
+    private List<List<MGTime>> movieTimes = new ArrayList<>();
+
     String username;
 
     private TM_RecyclerAdapter ra;
     private MG_RecyclerAdapter ta;
 
+    private boolean ticketmaster;
+
 
     public SearchFragment() {
         // Required empty public constructor
-
+        ticketmaster = true;
     }
 
 
@@ -113,9 +118,12 @@ public class SearchFragment extends Fragment {
         spnCategories = (Spinner) v.findViewById(R.id.spnCategories);
 
         ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager(), username);
-        ta = new MG_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, cinemaNames, getActivity().getFragmentManager(), username);
+        ta = new MG_RecyclerAdapter(getActivity(),ids, names, imageURLs, longitude, latitude, cinemaNames, movieTimes, getActivity().getFragmentManager(), username);
 
-        rvResults.setAdapter(ra);
+        if(ticketmaster)
+            rvResults.setAdapter(ra);
+        else
+            rvResults.setAdapter(ta);
         rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
@@ -126,6 +134,7 @@ public class SearchFragment extends Fragment {
             public void onClick(View view) {
                 String text = spnCategories.getSelectedItem().toString();
                 if(text.equals("Movies")) {
+                    ticketmaster = false;
                     SearchFilter filter = new SearchFilter();
                     filter.add("city", edtSearchCity.getText().toString());
                     filter.add("query", edtSearchBar.getText().toString());
@@ -136,6 +145,7 @@ public class SearchFragment extends Fragment {
                     new MGRequest(new MGListener(),inputLatitude,inputLongitude).execute(filter);
                 }
                 else {
+                    ticketmaster = true;
                     SearchFilter filter = new SearchFilter();
                     filter.add("city", edtSearchCity.getText().toString());
                     filter.add("keyword", edtSearchBar.getText().toString());
@@ -152,7 +162,6 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 pageNum++;
                 String text = spnCategories.getSelectedItem().toString();
-
                 if(text.equals("Movies")) {
                     SearchFilter filter = new SearchFilter();
                     filter.add("city", edtSearchCity.getText().toString());
@@ -262,18 +271,19 @@ public class SearchFragment extends Fragment {
                     longitude = new ArrayList<>();
                     latitude = new ArrayList<>();
                     cinemaNames = new ArrayList<>();
+                    movieTimes = new ArrayList<>();
                     for (int i = 0; i < events.size(); i++) {
                         MGCinema event = (MGCinema) events.get(i);
                         ids.add(event.getFilm_id());
                         names.add(event.getFilm_name());
-                        descriptions.add(event.getFilm_info());
                         imageURLs.add(event.getFilm_img());
                         longitude.add(String.valueOf(event.getCinema_lng()));
                         latitude.add(String.valueOf(event.getCinema_lat()));
                         cinemaNames.add(event.getCinema_name());
+                        movieTimes.add(event.getTimes());
                         output += event.getFilm_name() + "\n";
                     }
-                    ta = new MG_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, cinemaNames, getActivity().getFragmentManager(), username);
+                    ta = new MG_RecyclerAdapter(getActivity(),ids, names, imageURLs, longitude, latitude, cinemaNames, movieTimes, getActivity().getFragmentManager(), username);
                     rvResults.setAdapter(ta);
                     rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
                 }

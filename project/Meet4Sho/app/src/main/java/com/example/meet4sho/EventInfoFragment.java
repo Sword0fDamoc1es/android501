@@ -102,6 +102,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
             Log.d("whatwhat","here");
         }
 
+
         username = bundle.getString("username");
 
         event = (TMEvent) bundle.getSerializable("event");
@@ -124,6 +125,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         tvTitleEvent.setText(title);
 
         tvDescription = v.findViewById(R.id.tvDescriptionEvent);
+        String date = bundle.getString("date");
+        if(date!=null)
+            tvDescription.setText(date);
+
 
         edtEventUsrInput = v.findViewById(R.id.edtEventUsrInput);
 
