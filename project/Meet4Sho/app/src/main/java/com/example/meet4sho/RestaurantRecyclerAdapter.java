@@ -63,7 +63,7 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
 
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.displayedView, resFrag);
-                fragmentTransaction.addToBackStack("eiFrag");
+                fragmentTransaction.addToBackStack("resFrag");
                 fragmentTransaction.commit();
             }
         });

@@ -22,9 +22,7 @@ import java.util.List;
 
 public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.MyViewHolder> {
 
-    // TODO: add id
     List<String> ids;
-    // END TODO
     List<String> names;
     List<String> descriptions;
     List<String> imageURLS;
@@ -34,12 +32,9 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
     Context context;
     FragmentManager fm;
 
-    // TODO change the constructor, the first parameter will be ids array.
-
-    public TM_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f, String un){
-        // TODO: add id
+    public TM_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> d, List<String> u,
+                              List<String> lg, List<String> lt,android.app.FragmentManager f, String un){
         ids = i;
-        // END TODO
         context = ct;
         names = n;
         descriptions = d;
@@ -50,7 +45,6 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         fm = f;
 
     }
-    // END TODO
 
     @NonNull
     @Override
@@ -78,10 +72,8 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
             public void onClick(View view) {
                 EventInfoFragment eiFrag = new EventInfoFragment();
                 Bundle bundle = new Bundle();
-//                Intent i = new Intent(context, TM_EventInfoActivity.class);
-                // TODO: add id
+
                 bundle.putString("id",id);
-                // END TODO.
                 bundle.putString("name", title);
                 bundle.putString("description", description);
                 bundle.putString("url", url);
@@ -98,8 +90,6 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
                 fragmentTransaction.replace(R.id.displayedView, eiFrag);
                 fragmentTransaction.addToBackStack("eiFrag");
                 fragmentTransaction.commit();
-
-//                context.startActivity(i);
             }
         });
 
