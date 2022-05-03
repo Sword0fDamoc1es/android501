@@ -40,7 +40,6 @@ public class SettingsFragment extends Fragment {
     private EditText editSettingsEmail;
     private EditText editSettingsPhone;
     private EditText editSettingsPassword;
-    private SeekBar sbSettingsDistance;
     private Button btnSettingSave;
     private Button btnSignOut;
     private String username;
@@ -76,7 +75,6 @@ public class SettingsFragment extends Fragment {
         editSettingsEmail = v.findViewById(R.id.edtSettingsEmail);
         editSettingsPassword = v.findViewById(R.id.edtSettingsPassword);
         editSettingsPhone = v.findViewById(R.id.edtSettingsPhone);
-        sbSettingsDistance = v.findViewById(R.id.sbSettingsDistance);
         btnSettingSave = v.findViewById(R.id.btnSettingsSave);
         btnSignOut = v.findViewById(R.id.btnSignOut);
 

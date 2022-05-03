@@ -67,9 +67,9 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
         Map<String, String> props = new HashMap<>();
         props.put("api-version", "v200");
         props.put("territory", "US");
-        props.put("authorization", "Basic VEVNUDpoYnY0d3UxbjNUS3o=");
-        props.put("x-api-key", "Q0L1MNqQv92z7veqQ1JJJ4EHdPhyGTna1B1K1SFz");
-        props.put("client", "TEMP");
+        props.put("authorization", "Basic VU5JVl81OTpPR2lBeng4b1E3UWQ=");
+        props.put("x-api-key", "NaNAgqb9cgPRncNlw1vm8estEInA4B17e7sn5rLb\n");
+        props.put("client", "UNIV_59");
         props.put("device-datetime", deviceDatetime);
         props.put("geolocation", Double.toString(latitude) + ";" + Double.toString(longitude));
         Log.d("MRRequest",deviceDatetime);
