@@ -60,8 +60,8 @@ public class SearchFragment extends Fragment {
     private Spinner spnCategories;
     private RecyclerView rvResults;
 
-    private double inputLatitude;
-    private double inputLongitude;
+    private double inputLatitude = 42.350444;
+    private double inputLongitude = -71.105377;
 
     private int pageNum = 1;
 
@@ -101,6 +101,7 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         Bundle bundle = this.getArguments();
         username = bundle.getString("username");
+
         View v = inflater.inflate(R.layout.fragment_search, container, false);
 
         edtSearchBar = (EditText) v.findViewById(R.id.edtSearchBar);
@@ -111,14 +112,8 @@ public class SearchFragment extends Fragment {
         rvResults = (RecyclerView) v.findViewById(R.id.rvResults);
         spnCategories = (Spinner) v.findViewById(R.id.spnCategories);
 
-        inputLatitude = 42.350444;
-        inputLongitude = -71.105377;
-
-        // TODO add ids to the parameter.
         ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager(), username);
         ta = new MG_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, cinemaNames, getActivity().getFragmentManager(), username);
-
-        // END TODO.
 
         rvResults.setAdapter(ra);
         rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -217,7 +212,6 @@ public class SearchFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void messageFromParentFragment(Map.Entry<String, ArrayList<String>> temp);
     }
 
@@ -229,11 +223,7 @@ public class SearchFragment extends Fragment {
                 @Override
                 public void run() {
                     String output = "";
-
-                    // TODO ids:
                     ids = new ArrayList<>();
-                    // END TODO.
-
                     names = new ArrayList<>();
                     descriptions = new ArrayList<>();
                     imageURLs = new ArrayList<>();
@@ -241,9 +231,7 @@ public class SearchFragment extends Fragment {
                     latitude = new ArrayList<>();
                     for (int i = 0; i < events.size(); i++) {
                         TMEvent event = (TMEvent) events.get(i);
-                        // TODO add id here.
                         ids.add(event.getId());
-                        // END TODO.
                         names.add(event.getName());
                         descriptions.add(event.getTime().getStartDateTime());
                         imageURLs.add(event.getImages().get(0).getUrl());
@@ -267,11 +255,7 @@ public class SearchFragment extends Fragment {
                 @Override
                 public void run() {
                     String output = "";
-
-                    // TODO ids:
                     ids = new ArrayList<>();
-                    // END TODO.
-
                     names = new ArrayList<>();
                     descriptions = new ArrayList<>();
                     imageURLs = new ArrayList<>();
@@ -280,9 +264,7 @@ public class SearchFragment extends Fragment {
                     cinemaNames = new ArrayList<>();
                     for (int i = 0; i < events.size(); i++) {
                         MGCinema event = (MGCinema) events.get(i);
-                        // TODO add id here.
                         ids.add(event.getFilm_id());
-                        // END TODO.
                         names.add(event.getFilm_name());
                         descriptions.add(event.getFilm_info());
                         imageURLs.add(event.getFilm_img());
