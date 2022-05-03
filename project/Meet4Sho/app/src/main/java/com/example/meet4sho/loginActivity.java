@@ -107,6 +107,9 @@ public class loginActivity extends AppCompatActivity {
     }
 
     private void initCometChat() {
+        /**
+         * 1.)
+         */
         AppSettings appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
         CometChat.init(this, appID, appSettings, new CometChat.CallbackListener<String>() {
             @Override

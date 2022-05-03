@@ -3,16 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="1000dp"
+    android:background="@drawable/gradient3">
 
     <TextView
         android:id="@+id/tvTitleEvent"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
+        android:gravity="center"
         android:text="TextView"
+        android:textColor="#000000"
         android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivEventImg"
@@ -28,9 +31,12 @@
         android:layout_width="350dp"
         android:layout_height="150dp"
         android:layout_below="@id/ivEventImg"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:gravity="center" />
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:textColor="#000000" />
 
     <LinearLayout
         android:id="@+id/llEventUsrInputLayout"
@@ -44,18 +50,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="#878787"
+            android:gravity="center"
             android:text="Input:"
-            android:textSize="12sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
         <EditText
             android:id="@+id/edtEventUsrInput"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="7"
-            android:text="hello, im interested in this event"
-            android:textSize="12dp"
-            android:inputType="text"/>
+            android:background="#FFFFFF"
+            android:inputType="text"
+            android:text="Hello, I'm interested in this event!"
+            android:textSize="12dp" />
 
     </LinearLayout>
 
@@ -65,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/llEventUsrInputLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="Nearby Restaurants" />
 
     <LinearLayout
@@ -79,31 +88,31 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:text="Interested"/>
+            android:text="Interested" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btnUserSearch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:text="User Search"/>
+            android:text="User Search" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
 
     </LinearLayout>

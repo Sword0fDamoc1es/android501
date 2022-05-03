@@ -101,6 +101,7 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
         Log.i("------>", url);
         result = HttpUtils.sendRequest(url, props);
         List<MGCinema> allEvents = new ArrayList<>();
+        if(result != null){
         try {
             JSONObject film = result.getJSONObject("film");
             JSONArray cinemas = result.getJSONArray("cinemas");
@@ -154,7 +155,7 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }}
         return null;
     }
 

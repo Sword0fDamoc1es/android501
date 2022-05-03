@@ -3,12 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/drawable-v24/gradient2.xml" value="0.2265" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/drawable/bg_custom.xml" value="0.2265" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/drawable/gradient1.xml" value="0.2265" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/drawable/gradient3.xml" value="0.2265" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/app_main_page.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/conversation_list_row.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/event_row.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_settings.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/messages_list_page.xml" value="0.18432971014492755" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/settings_page.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_info.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_row.xml" value="0.4" />
       </map>
     </option>
