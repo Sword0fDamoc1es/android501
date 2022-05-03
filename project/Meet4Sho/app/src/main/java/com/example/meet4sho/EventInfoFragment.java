@@ -22,6 +22,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.meet4sho.api.MGCinema;
+import com.example.meet4sho.api.MGTime;
 import com.example.meet4sho.api.RequestListener;
 import com.example.meet4sho.api.SearchFilter;
 import com.example.meet4sho.api.TMEvent;
@@ -75,6 +77,11 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     private ArrayList<ArrayList<String>> eventContainer = new ArrayList<>();
     private ArrayList<String> buffer;
     private ArrayList<String> bufferUser;
+
+    private List<MGTime> movieTimes;
+    boolean movieEvent = false;
+    private String cname;
+
     public boolean valid = false;
     public EventInfoFragment() {
         // Required empty public constructor
@@ -97,7 +104,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 //        Log.d("ID INFO: ",id);
 
         url = bundle.getString("url");
-        String cname = bundle.getString("cinema_name");
+        cname = bundle.getString("cinema_name");
         if(cname==null){
             Log.d("whatwhat","here");
         }
@@ -125,10 +132,25 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         tvTitleEvent.setText(title);
 
         tvDescription = v.findViewById(R.id.tvDescriptionEvent);
-        String date = bundle.getString("date");
-        if(date!=null)
-            tvDescription.setText(date);
 
+        movieTimes = (List<MGTime>) bundle.getSerializable("dates");
+        if(movieTimes == null){
+            movieEvent = false;
+        }
+        else {
+            movieEvent = true;
+        }
+        String date = bundle.getString("date");
+        if(date!=null) {
+            if(movieEvent) {
+                String description = cname + " Show Times: \n";
+                for (MGTime item: movieTimes) {
+                    description += item.getStartTime() + "; ";
+                }
+                System.out.println(description);
+                tvDescription.setText(description);
+            }
+        }
 
         edtEventUsrInput = v.findViewById(R.id.edtEventUsrInput);
 
@@ -404,13 +426,13 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         String classification = "";
         String when = "";
         String[] DateTime = event.getTime().getStartDateTime().split("T");
-        if(DateTime.length >= 2){
-            for(int i = 0; i < DateTime.length; i++){
+        if (DateTime.length >= 2) {
+            for (int i = 0; i < DateTime.length; i++) {
                 when += DateTime[i] + " ";
             }
             when = when + "\n";
         }
-        for(int i = 0; i < event.getClassifications().size(); i++){
+        for (int i = 0; i < event.getClassifications().size(); i++) {
             classification += event.getClassifications().get(i).getSegment() + ", " +
                     event.getClassifications().get(i).getGenre() + ", " +
                     event.getClassifications().get(i).getSubgenre();

@@ -1,6 +1,8 @@
 package com.example.meet4sho.api;
 
-public class MGTime {
+import java.io.Serializable;
+
+public class MGTime implements Serializable {
     private String startTime;
     private String endTime;
     private String date;

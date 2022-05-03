@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.meet4sho.api.MGTime;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +101,7 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
                 bundle.putString("cinema_name", cinemaName);
                 bundle.putString("username", username);
                 bundle.putStringArrayList("names", (ArrayList<String>) names);
-                bundle.putSerializable("dates", (ArrayList<List<MGTime>>) movieTimes);
+                bundle.putSerializable("dates", (Serializable) movieTime);
                 bundle.putStringArrayList("urls", (ArrayList<String>) imageURLS);
 
                 eiFrag.setArguments(bundle);
