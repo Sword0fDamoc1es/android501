@@ -139,6 +139,8 @@ public class SearchFragment extends Fragment {
                     filter.add("city", edtSearchCity.getText().toString());
                     filter.add("query", edtSearchBar.getText().toString());
                     String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                    if(!edtSearchDate.getText().toString().equals(""))
+                        date = edtSearchDate.getText().toString();
                     filter.add("date", date);
                     findLatAndLon();
                     Log.d("LatAndLon", inputLatitude + " " +inputLongitude);

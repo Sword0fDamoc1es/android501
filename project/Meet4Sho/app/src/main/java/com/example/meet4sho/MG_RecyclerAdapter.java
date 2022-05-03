@@ -80,6 +80,7 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
         holder.tvTitle.setText(title);
         String date = movieTime.get(0).getDate();
         holder.tvDate.setText(date);
+        holder.tvCinemaName.setText(cinemaName);
         new TM_EventInfoActivity.DownloadImageTask(holder.ivPreview).execute(url);
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +131,7 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle, tvDate;
+        TextView tvTitle, tvDate, tvCinemaName;
         ImageView ivPreview;
         ConstraintLayout mainLayout;
 
@@ -138,6 +139,7 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvDate = itemView.findViewById(R.id.tvDate);
+            tvCinemaName = itemView.findViewById(R.id.tvCinemaName);
             ivPreview = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }

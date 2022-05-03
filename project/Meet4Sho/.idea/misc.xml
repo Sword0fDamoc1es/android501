@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/event_row.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_settings.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_row.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_row.xml" value="0.4" />
       </map>
     </option>
   </component>
