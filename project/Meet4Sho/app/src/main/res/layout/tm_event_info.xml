@@ -9,21 +9,20 @@
     <TextView
         android:id="@+id/tvTitleEvent"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="TextView"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/ivEventImg"
         android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:layout_below="@id/tvTitleEvent"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -82,7 +81,6 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/btnGoToRes"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <Space
