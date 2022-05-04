@@ -80,6 +80,8 @@ public class loginActivity extends AppCompatActivity {
     public void onLogin(View view){
         String uname = edtUsername.getText().toString();
         String upwd = edtPassword.getText().toString();
+
+        // the rest is the implementation of how to compare input with firebase data.
         DocumentReference docRef = pDocRef.collection("user").document(uname);
         DocumentSnapshot document;
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

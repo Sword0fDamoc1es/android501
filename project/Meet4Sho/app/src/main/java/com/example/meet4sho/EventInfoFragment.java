@@ -72,14 +72,21 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     TextView tvDescription;
     ImageView ivEventImg;
 
+    // comment from Marv:
+    // here's the database path for event and user.
+    // event: pDocRef.
+    // user: pDocRefUser.
+
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/event_event");
     private DocumentReference pDocRefUser = FirebaseFirestore.getInstance().document("front_end/user_event");
     private ArrayList<ArrayList<String>> eventContainer = new ArrayList<>();
+    // we need two buffer to hold the data from database.
     private ArrayList<String> buffer;
     private ArrayList<String> bufferUser;
 
     private List<MGTime> movieTimes;
     boolean movieEvent = false;
+    //we need cname to check whther this is a movie input or a event input.
     private String cname;
 
     public boolean valid = false;
@@ -165,6 +172,13 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
         btnRegister = v.findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
+
+        // for the rest functions like: eventCheck,checkExists,checkExistsUsers..
+        // we need to do it here, they cannot be done in the same life-cycle.
+        // that is because they are sync. so we may fetch stale data.
+        // run them here keep the read/write in good sequence.
+
+
         eventCheck(username,id);
 
 
@@ -180,6 +194,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         return v;
     }
 
+    // this function check whether a user already sign-up
     public void eventCheck(String name, String eventname){
         DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
 //        Log.d("eventCHECK:",eventname);
@@ -207,6 +222,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     }
 
 
+    // this function fetch the events data from the database.
+    // this includes: userid list, and user bio list.
     public void checkExists(String name){
         DocumentReference docCheck =  pDocRef.collection("interest").document(name);
         docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -239,6 +256,8 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    // this function fetch data from database,
+    // this includes users' event list.
     public void checkExistsUser(String name){
         // input name, will be username
         DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
@@ -268,6 +287,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    // for the event, we need to upload userid and new user bio to correspodning event.
     public void eventUpload(){
         Map<String,Object> dataToSave =  new HashMap<>();
         dataToSave.put("eid",id);
@@ -275,6 +295,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         String bio = edtEventUsrInput.getText().toString();
 
         System.out.println(buffer.size());
+        // this means user not yet registered.
         if(!bbb){
             // not contains.
             // TODO change the following line into a eventContainer element.
@@ -303,6 +324,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
+    // upload user's info
     public void userUpload(){
         Map<String,Object> dataToSave =  new HashMap<>();
         dataToSave.put("uid",username);
@@ -386,6 +408,9 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 Bundle b_us = new Bundle();
                 b_us.putString("username", username);
                 b_us.putString("id", id);
+                // we need to pass the latest buffer and bio to the next fragment.
+                // this is because those info need to be display at onCreateView life cycle.
+                // there's no way to fetch these data in a previos life-cycle than that.
                 b_us.putStringArrayList("users",buffer);
                 b_us.putStringArrayList("userBio",eventContainer.get(1));
                 UserSearchFragment usFrag = new UserSearchFragment();

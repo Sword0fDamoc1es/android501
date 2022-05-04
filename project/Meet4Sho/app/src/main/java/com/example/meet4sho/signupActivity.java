@@ -40,6 +40,7 @@ public class signupActivity extends AppCompatActivity {
     public Button btnCreate;
     private Boolean valid = false;
 
+    // path of database - user
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
 
     // here is my work-flow of signup:
@@ -75,6 +76,8 @@ public class signupActivity extends AppCompatActivity {
         checkValid(uname);
 
     }
+
+    // create a account
     public void createAccount(){
         String uname = signup_name.getText().toString();
 
@@ -90,6 +93,7 @@ public class signupActivity extends AppCompatActivity {
         dataToSave.put("upwd",upwd);
 
         Log.d("HERE","end here");
+        // write the new info info the database.
         pDocRef.collection("user").document(uname).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -105,6 +109,8 @@ public class signupActivity extends AppCompatActivity {
         });
     }
 
+
+    // check whether this username is occupied.
     public void checkValid(String name){
         DocumentReference docCheck =  pDocRef.collection("user").document(name);
         String checkName = "";
