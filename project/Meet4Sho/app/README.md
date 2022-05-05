@@ -47,7 +47,7 @@
 -   **Result**: A generic class that holds a result success w/ data or an error exception.
 
 ## model Sub-package
--	***LoggedInUser***: Data class that captures user information for logged in users retrieved from LoginRepository
+-	**LoggedInUser**: Data class that captures user information for logged in users retrieved from LoginRepository
 
 # messages Package
 -   **MessageWrapper**: MessageWrapper that is required for CometChat to work
