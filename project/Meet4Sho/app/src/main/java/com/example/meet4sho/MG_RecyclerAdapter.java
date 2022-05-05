@@ -23,11 +23,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.MyViewHolder> {
 
-    // TODO: add id
+/**
+ * RecyclerView that displays all the information for every MGCinema Object that we constructed
+ *      from the MGRequest class (MovieGlu api call)
+ */
+public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.MyViewHolder> {
     List<String> ids;
-    // END TODO
     List<String> names;
     List<String> imageURLS;
     List<String> longitude;
@@ -38,13 +40,9 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
     Context context;
     FragmentManager fm;
 
-    // TODO change the constructor, the first parameter will be ids array.
-
     public MG_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> u, List<String> lt,
                               List<String> lg, List<String> cn, List<List<MGTime>> times, android.app.FragmentManager f, String un){
-        // TODO: add id
         ids = i;
-        // END TODO
         context = ct;
         names = n;
         imageURLS = u;
@@ -56,7 +54,6 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
         fm = f;
 
     }
-    // END TODO
 
     @NonNull
     @Override
@@ -66,12 +63,17 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
         return new MyViewHolder(view);
     }
 
+    /**
+     * 1.) Get the information from a MGCinema object pertaining to specific position
+     *          so that we may pass them into the EventInfoFragment fragment if the
+     *          user ends up selecting that cinema
+     * 2.) Set a ViewHolder Object's textview to the name of the cinema that pertains to that MGCinema object
+     * 3.) Set an on-click event on each ViewHolder so that when a user clicks
+     *      on it, it takes them to the EventInfoFragment fragment
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        // TODO get id based on postion:
         String id = ids.get(position);
-        // END TODO
-
         String title = names.get(position);
         String url = imageURLS.get(position);
         String lg = longitude.get(position);
@@ -89,10 +91,7 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
             public void onClick(View view) {
                 EventInfoFragment eiFrag = new EventInfoFragment();
                 Bundle bundle = new Bundle();
-//                Intent i = new Intent(context, TM_EventInfoActivity.class);
-                // TODO: add id
                 bundle.putString("id",id);
-                // END TODO.
                 bundle.putString("name", title);
                 bundle.putString("date", date);
                 bundle.putString("url", url);
@@ -103,15 +102,12 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
                 bundle.putStringArrayList("names", (ArrayList<String>) names);
                 bundle.putSerializable("dates", (Serializable) movieTime);
                 bundle.putStringArrayList("urls", (ArrayList<String>) imageURLS);
-
                 eiFrag.setArguments(bundle);
-
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.displayedView, eiFrag);
                 fragmentTransaction.addToBackStack("eiFrag");
                 fragmentTransaction.commit();
 
-//                context.startActivity(i);
             }
         });
 
@@ -130,6 +126,9 @@ public class MG_RecyclerAdapter extends RecyclerView.Adapter<MG_RecyclerAdapter.
         notifyDataSetChanged();
     }
 
+    /**
+     * An Object that will be used to display every MGCinema in the RecyclerView
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle, tvDate, tvCinemaName;

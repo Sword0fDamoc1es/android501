@@ -19,8 +19,14 @@ import com.cometchat.pro.models.User;
 
 import java.util.List;
 
+/**
+ * A Recyclerview to display all the conversations/chat-rooms that the user has
+ */
 public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdapter.ConversationViewHolder> {
 
+    /**
+     * Set up class specific variables
+     */
     private List<Conversation> conversations;
     private Context context;
     private FragmentManager fm;
@@ -39,6 +45,13 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
 
     @Override
     public void onBindViewHolder(ConversationViewHolder holder, int position) {
+        /**
+         * 1.) Get the conversation pertaining to specific position
+         * 2.) Set a ViewHolder Object's textview to the name of the person
+         *      that the current user has a conversation/chat-room with
+         * 3.) Set an on-click event on each ViewHolder so that when a user clicks
+         *      on it, it takes them to the chatRoom fragment (A chat-room to text in)
+         */
         Conversation chat = conversations.get(position);
         holder.conversationNameTextView.setText(((User)chat.getConversationWith()).getName());
         holder.containerLayout.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +59,6 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
             public void onClick(View view) {
                 MessageChatFragment chatRoom = new MessageChatFragment();
                 Bundle bundle = new Bundle();
-//                Intent i = new Intent(context, TM_EventInfoActivity.class);
                 bundle.putString("Chat ID", chat.getConversationId());
                 Log.d("Chat ID", chat.getConversationId());
                 bundle.putString("Recipient", ((User)chat.getConversationWith()).getUid());
@@ -58,15 +70,19 @@ public class ConversationsAdapter extends RecyclerView.Adapter<ConversationsAdap
                 fragmentTransaction.replace(R.id.displayedView, chatRoom);
                 fragmentTransaction.addToBackStack("chatRoomFrag");
                 fragmentTransaction.commit();
-
-//                context.startActivity(i);
             }
         });
     }
 
+    /**
+     * Get the amount of conversations that a user has
+     */
     @Override
     public int getItemCount() { return conversations.size(); }
 
+    /**
+     * An Object that will be used to display every conversation in the RecyclerView
+     */
     public class ConversationViewHolder extends RecyclerView.ViewHolder {
         TextView conversationNameTextView;
         LinearLayout containerLayout;

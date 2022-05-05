@@ -42,54 +42,47 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-
+/**
+ * This class displays all the info pertaining to a specific event/movie when a user
+ *      clicks on it from the RecyclerView in the SearchFragment class
+ */
 public class EventInfoFragment extends Fragment implements View.OnClickListener {
-
-    // comments from Marv, 4/24
-    // TODO in this fragment, we need to create a sign-up button and send id as the key to it.
-    //
 
     private EditText edtEventUsrInput;
     private Button btnRegister;
-
     private Bundle bundle;
-    // TODO create id.
     private String id;
-    // END TODO
     private String url;
-
     private String username;
-
     TMEvent event;
-
     private String lat;
     private String lon;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    //private OnFragmentInteractionListener mListener;
 
     TextView tvDescription;
     ImageView ivEventImg;
 
-    // comment from Marv:
-    // here's the database path for event and user.
-    // event: pDocRef.
-    // user: pDocRefUser.
-
+    /**
+     * The database path for event and user.
+     * event: pDocRef.
+     * user: pDocRefUser.
+     *
+     * Buffers to hold the data from database.
+     */
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/event_event");
     private DocumentReference pDocRefUser = FirebaseFirestore.getInstance().document("front_end/user_event");
     private ArrayList<ArrayList<String>> eventContainer = new ArrayList<>();
-    // we need two buffer to hold the data from database.
     private ArrayList<String> buffer;
     private ArrayList<String> bufferUser;
 
-    private List<MGTime> movieTimes;
-    boolean movieEvent = false;
-    //we need cname to check whther this is a movie input or a event input.
+    /**
+     * cname to check whether this is a movie input or a ticketmaster event input.
+     */
     private String cname;
 
     public boolean valid = false;
+    private List<MGTime> movieTimes;
+    boolean movieEvent = false;
+
     public EventInfoFragment() {
         // Required empty public constructor
     }
@@ -106,40 +99,43 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.tm_event_info, container, false);
         bundle = this.getArguments();
-        // TODO get id
-        id = bundle.getString("id");
-//        Log.d("ID INFO: ",id);
 
+
+        id = bundle.getString("id");
         url = bundle.getString("url");
         cname = bundle.getString("cinema_name");
         if(cname==null){
             Log.d("whatwhat","here");
         }
-
-
         username = bundle.getString("username");
-
         event = (TMEvent) bundle.getSerializable("event");
 
-        // END TODO
+
         // the following code get the user name from sharedPref
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.preference_file_name), Context.MODE_PRIVATE);
         String getFromShared = sharedPref.getString(getString(R.string.preference_user_name), "nothing");
         Log.d("user name : ", getFromShared);
 
+
+        /**
+         * Get name, and longitude and latitude of the specific event we clicked on
+         */
         String title = bundle.getString("name");
         lon = bundle.getString("lg");
         lat = bundle.getString("lt");
 
-//        String location = bundle.getString("Location");
-//        String releaseDate = bundle.getString("Release Date");
 
+        /**
+         * Set the views with the specific event's info
+         *      (i.e. Title, description, event times)
+         * How we set that information up depends on whether it is a movie event or ticketmaster event
+         *      Thus why we have a boolean called movieEvent
+         */
         TextView tvTitleEvent = v.findViewById(R.id.tvTitleEvent);
         tvTitleEvent.setText(title);
 
         tvDescription = v.findViewById(R.id.tvDescriptionEvent);
-
         movieTimes = (List<MGTime>) bundle.getSerializable("dates");
         if(movieTimes == null){
             movieEvent = false;
@@ -164,27 +160,18 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         ivEventImg = v.findViewById(R.id.ivEventImg);
         new TM_EventInfoActivity.DownloadImageTask(ivEventImg).execute(url);
 
-        //TextView tvLatLon = v.findViewById(R.id.tvLatLon);
-//        tvLatLon.setText(lon+", "+lat + " " + username);
 
+        /**
+         * Set up buttons with onClickListeners
+         */
         Button btnGoToRes = v.findViewById(R.id.btnGoToRes);
         btnGoToRes.setOnClickListener(this);
-
         btnRegister = v.findViewById(R.id.btnRegister);
         btnRegister.setOnClickListener(this);
-
-        // for the rest functions like: eventCheck,checkExists,checkExistsUsers..
-        // we need to do it here, they cannot be done in the same life-cycle.
-        // that is because they are sync. so we may fetch stale data.
-        // run them here keep the read/write in good sequence.
-
-
-        eventCheck(username,id);
-
-
         Button btnUserSearch = v.findViewById(R.id.btnUserSearch);
         btnUserSearch.setOnClickListener(this);
 
+        eventCheck(username,id);
         SearchFilter filter = new SearchFilter();
         filter.add("id", id);
         checkExists(id);
@@ -194,11 +181,12 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         return v;
     }
 
-    // this function check whether a user already sign-up
+    /**
+     * Checks whether a user already signed-up
+     * Get the document, forcing the SDK to use the offline cache
+     */
     public void eventCheck(String name, String eventname){
         DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
-//        Log.d("eventCHECK:",eventname);
-// Get the document, forcing the SDK to use the offline cache
         docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -206,7 +194,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                     // Document found in the offline cache
                     DocumentSnapshot document = task.getResult();
                     if(document.exists()){
-//                        Log.d("eventCHECK","here");
                         ArrayList<String> tmp =(ArrayList<String>) document.getData().get("event_list");
                         Boolean bb = tmp.contains(eventname);
                         if(bb){
@@ -222,8 +209,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
     }
 
 
-    // this function fetch the events data from the database.
-    // this includes: userid list, and user bio list.
+    /**
+     * Function fetches the events data from the database.
+     *      includes: userid list and user bio list.
+     */
     public void checkExists(String name){
         DocumentReference docCheck =  pDocRef.collection("interest").document(name);
         docCheck.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -256,8 +245,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
-    // this function fetch data from database,
-    // this includes users' event list.
+    /**
+     * Function fetches data from database,
+     *      Includes users' event list.
+     */
     public void checkExistsUser(String name){
         // input name, will be username
         DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
@@ -270,15 +261,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                     if (document.exists()) {
                         Log.d("GET", "DocumentSnapshot data: " + document.getData().get("uid"));
                         bufferUser =(ArrayList<String>) document.getData().get("event_list");
-//                        System.out.println(bufferUser.get(0));
                     } else {
-
-//                        valid = true;
                         bufferUser = new ArrayList<>();
                         Log.d("doc Reached", "No such document");
-
                     }
-
                 }else{
                     System.out.println("failed to get!");
                 }
@@ -287,7 +273,9 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
-    // for the event, we need to upload userid and new user bio to correspodning event.
+    /**
+     * For the event, we need to upload userid and new user bio to corresponding event.
+     */
     public void eventUpload(){
         Map<String,Object> dataToSave =  new HashMap<>();
         dataToSave.put("eid",id);
@@ -298,9 +286,7 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         // this means user not yet registered.
         if(!bbb){
             // not contains.
-            // TODO change the following line into a eventContainer element.
             buffer.add(buffer.size(),username);
-
             eventContainer.get(1).add(eventContainer.get(1).size(),bio);
         }else{
             // contains, we need to switch the bio.
@@ -313,9 +299,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Log.d("YES","save success");
-//                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
-//                            // this is where  we  add  data.
-//                            startActivity(i);
                 }else{
                     Log.w("NO","save failed");
                 }
@@ -324,7 +307,9 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
-    // upload user's info
+    /**
+     * Upload user's info
+     */
     public void userUpload(){
         Map<String,Object> dataToSave =  new HashMap<>();
         dataToSave.put("uid",username);
@@ -351,6 +336,15 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
 
     }
 
+
+    /**
+     * On click events depending on what button the user clicks
+     * btnGoToRes: Switch to the RestaurantsFragment fragment that shows all the restaurants near the event's location
+     * btnRegister: Sign up user to the event's interested list so that other user's can see that they're
+     *              interested in going
+     * btnUserSearch: Switch to UserSearchFragment fragment that shows a list of all the user's who have indicated
+     *                that they're interested in going to the event
+     */
     @Override
     public void onClick(View v){
         switch (v.getId()) {
@@ -371,37 +365,6 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
                 btnRegisterTmp.setBackgroundColor(getResources().getColor(R.color.red_500));
                 eventUpload();
                 userUpload();
-
-
-
-//                Map<String,Object> dataToSave =  new HashMap<>();
-//                dataToSave.put("eid",id);
-//                boolean bbb = buffer.contains(username);
-//                System.out.println(buffer.size());
-//                if(!bbb){
-//
-//                    buffer.add(buffer.size(),username);
-//                }
-//                dataToSave.put("list",buffer);
-//                pDocRef.collection("interest").document(id).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if(task.isSuccessful()){
-//                            Log.d("YES","save success");
-////                            Intent i = new Intent(getApplicationContext(),loginActivity.class);
-////                            // this is where  we  add  data.
-////                            startActivity(i);
-//                        }else{
-//                            Log.w("NO","save failed");
-//                        }
-//                    }
-//                });
-
-                // then push.
-
-
-
-
                 break;
             case R.id.btnUserSearch:
                 checkExists(id);
@@ -424,29 +387,10 @@ public class EventInfoFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void messageFromChildFragment(Map.Entry<String, ArrayList<String>> temp);
-//    }
-    //A function to update the page after TMListener retrieves the event. If this is done during onCreateView
-    //then event will still be null since TMListener has not finished running
+    /**
+     * Function to update the page after TMListener retrieves the event. If this is done during onCreateView
+     *      then event will still be null since TMListener has not finished running
+     */
     private void updatePage(){
         String classification = "";
         String when = "";

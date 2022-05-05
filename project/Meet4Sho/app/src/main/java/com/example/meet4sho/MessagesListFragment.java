@@ -20,11 +20,10 @@ import com.cometchat.pro.models.Conversation;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Fragment that displays all the conversations/chat-rooms that a user is in
+ */
 public class MessagesListFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private View v;
     private ConversationsAdapter ca;
@@ -51,18 +50,19 @@ public class MessagesListFragment extends Fragment {
 
         getConversationsList();
 
-
-
         return v;
     }
 
+    /**
+     * Retrieve all the conversations/chat-rooms that a user is in via CometChat and display them
+     *      on the RecyclerView
+     */
     public void getConversationsList() {
         ConversationsRequest conversationsRequest = new ConversationsRequest.ConversationsRequestBuilder().build();
-
         conversationsRequest.fetchNext(new CometChat.CallbackListener<List<Conversation>>() {
             @Override
             public void onSuccess(List<Conversation> conversations) {
-                // Hanlde list of conversations
+                // Handle list of conversations
                 conversationsList = conversations;
                 ca = new ConversationsAdapter(getActivity(), conversationsList, getActivity().getFragmentManager());
 

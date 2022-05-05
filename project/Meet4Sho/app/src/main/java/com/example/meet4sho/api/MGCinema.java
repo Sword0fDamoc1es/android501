@@ -3,6 +3,24 @@ package com.example.meet4sho.api;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This class creates an Object called MGCinema that saves all the info we
+ * get back from MovieGlu when we request for a specific movie at a specific cinema
+ * Methods: Just set and get methods
+ *
+ * cinema_id: A cinema's ID as assigned by MovieGlu
+ * cinema_name: The name of the cinema
+ * cinema_lat: Latitude of the cinema
+ * cinema_lng: Longitude of the cinema
+ * film_id: The ID of the film we requested as assigned by MovieGlu
+ * film_name: The name of the film
+ * film_img: URL to the film's movie poster
+ * times: An ArrayList of MGTime objects (MGTime is an object containing a movie's start time,
+ *      end time, and date of showing at this specfic cinema)
+ *
+ */
+
 public class MGCinema {
     private String cinema_id;
     private String cinema_name;

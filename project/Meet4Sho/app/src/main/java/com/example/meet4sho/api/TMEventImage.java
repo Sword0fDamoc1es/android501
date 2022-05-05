@@ -1,5 +1,8 @@
 package com.example.meet4sho.api;
 
+/**
+ * An object that contains a Ticketmaster event's poster URL, and width and height of the poster
+ */
 public class TMEventImage {
     private String url;
     private int width;

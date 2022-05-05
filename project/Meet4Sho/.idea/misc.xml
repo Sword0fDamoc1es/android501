@@ -9,12 +9,24 @@
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/drawable/gradient3.xml" value="0.2265" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/app_main_page.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/conversation_list_row.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/event_info.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/event_row.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_dashboard.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_notifications.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_search.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/fragment_settings.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/messages_list_page.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/messages_page.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/movie_mainscreen.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/restaurant_row.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/restaurants_page.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/settings_page.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_info.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/tm_event_row.xml" value="0.4" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/yelp_loc_info.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/yelp_loc_list.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Ivan/Documents/GitHub/android501/project/Meet4Sho/app/src/main/res/layout/yelp_mainscreen.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/messages_list_page.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/layout/tm_event_info.xml" value="0.12083333333333333" />
       </map>

@@ -38,21 +38,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Fragment from where the user can search for events/movies
+ */
 public class SearchFragment extends Fragment {
-    // 4/24 marv's comments:
-    // the TODO is to add id.
-    // the parts with <> is the on-going modification on latest-eventID branch.
-    // walk through: searchFragment -- <create ID array> -- <get info from TM-event> -- <then send info to TM_recycler> -- <onCreate view has the recycle part to modify> √
-    //               TM-Recycler -- <create id array> -- <get id in CONSTRUCTOR> -- <add id to bundle in holders' onClick> √
-    //               EventInfoFragment -- <create id string> -- <get id from bundle>
-    // !!!! further goal: once the sign-up button is created in EventInfoFragment:
-    // TODO: send id into bundle as a key for the sign-up in eventInfoFragment -> event sign-up page.
-    // TODO: In event sign-up page: create a sign-up form and upload <eid> <uid>, <uid> is in a preference file.
-    // TODO: return chatroomID.
 
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public Map<String, ArrayList<String>> movies = new HashMap<String, ArrayList<String>>();
     private OnFragmentInteractionListener mListener;
 
@@ -63,29 +53,21 @@ public class SearchFragment extends Fragment {
 
     private double inputLatitude = 42.350444;
     private double inputLongitude = -71.105377;
-
     private int pageNum = 1;
 
-
-    // TODO: add private id ?
     private List<String> ids = new ArrayList<>();
-    // END TODO.
-
     private List<String> names = new ArrayList<>();
     private List<String> descriptions = new ArrayList<>();
     private List<String> imageURLs = new ArrayList<>();
     private List<String> longitude = new ArrayList<>();
     private List<String> latitude = new ArrayList<>();
-
     private List<String> cinemaNames = new ArrayList<>();
-
     private List<List<MGTime>> movieTimes = new ArrayList<>();
-
-    String username;
 
     private TM_RecyclerAdapter ra;
     private MG_RecyclerAdapter ta;
 
+    String username;
     private boolean ticketmaster;
 
 
@@ -100,6 +82,14 @@ public class SearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * 1.) Retrieve the username that was passed in a bundle from the login page
+     * 2.) Set up views and RecyclerViews
+     * 3.) Depending on whether user is searching for events or movies
+     *          display that specific RecyclerView
+     * 4.) Set up onClick listeners that act differently depending on whether
+     *          user is searching for events or movies
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -108,7 +98,6 @@ public class SearchFragment extends Fragment {
         username = bundle.getString("username");
 
         View v = inflater.inflate(R.layout.fragment_search, container, false);
-
         edtSearchBar = (EditText) v.findViewById(R.id.edtSearchBar);
         edtSearchCity = (EditText) v.findViewById(R.id.edtSearchCity);
         edtSearchDate = (EditText) v.findViewById(R.id.edtSearchDate);
@@ -116,7 +105,6 @@ public class SearchFragment extends Fragment {
         btnMore = (Button) v.findViewById(R.id.btnMore);
         rvResults = (RecyclerView) v.findViewById(R.id.rvResults);
         spnCategories = (Spinner) v.findViewById(R.id.spnCategories);
-
         ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager(), username);
         ta = new MG_RecyclerAdapter(getActivity(),ids, names, imageURLs, longitude, latitude, cinemaNames, movieTimes, getActivity().getFragmentManager(), username);
 
@@ -125,7 +113,6 @@ public class SearchFragment extends Fragment {
         else
             rvResults.setAdapter(ta);
         rvResults.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
         // view actions
         btnSearch.setOnClickListener(new View.OnClickListener() {
@@ -202,7 +189,9 @@ public class SearchFragment extends Fragment {
         mListener = null;
     }
 
-
+    /**
+     * Find the latitude and longitude of the address/city that the user inputted into the edtSearchCity field
+     */
     public void findLatAndLon() {
         if (Geocoder.isPresent()) {
             try {
@@ -226,6 +215,11 @@ public class SearchFragment extends Fragment {
         void messageFromParentFragment(Map.Entry<String, ArrayList<String>> temp);
     }
 
+    /**
+     * Passes in the info that was returned by the TMRequest class into the TM_RecyclerAdapter (RecyclerView)
+     * 1.) Reset the ArrayLists
+     * 2.) Loop through every TMEvent and add the info from it to each respective ArrayList
+     */
     private class TMListener implements RequestListener {
         @Override
         public void updateViews(List events) {
@@ -258,6 +252,11 @@ public class SearchFragment extends Fragment {
         }
     }
 
+    /**
+     * Passes in the info that was returned by the MGRequest class into the MG_RecyclerAdapter (RecyclerView)
+     * 1.) Reset the ArrayLists
+     * 2.) Loop through every MGCinema and add the info from it to each respective ArrayList
+     */
     private class MGListener implements RequestListener {
         @Override
         public void updateViews(List events) {

@@ -39,7 +39,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Fragment displays all the info pertaining to another user
+ *      (i.e. their profile page)
+ *      (Contains their bio, name, and a recyclerView of all their interested events)
+ *      (Similar to the ProfileFragment fragment only here there's a Text button which
+ *        if the logged in user clicks on it, it'll take them to a chat-room with the user
+ *        who's profile they were just on)
+ */
 public class ProfileOtherFragment extends Fragment {
     private EditText edtBio;
     private TextView tvName;

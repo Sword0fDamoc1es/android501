@@ -140,6 +140,10 @@ public class signupActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Checks whether the user has a CometChat account already
+     *      and if they don't then an account is created for them
+     */
     public void CreateCometChatUser(String name) {
         List<String> userIDsInCometChat = new ArrayList<>();
         UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().build();

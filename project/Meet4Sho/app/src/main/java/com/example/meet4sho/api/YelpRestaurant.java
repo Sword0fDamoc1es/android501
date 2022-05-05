@@ -6,6 +6,13 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class creates an Object called YelpRestaurant that saves all the info pertaining
+ * to a specific restaurant when we request for all restaurants near a location via the Yelp API
+ * Methods: Just set and get methods
+ *
+ */
+
 public class YelpRestaurant extends ApiEvent implements Serializable {
 
     private String id;

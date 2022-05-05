@@ -3,6 +3,23 @@ package com.example.meet4sho.api;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class creates an Object called TMEvent that saves all the info pertaining
+ * to a specific event when we call for all the events near a location via Ticketmaster
+ * Methods: Just set and get methods
+ *
+ * id: An event's ID as assigned by Ticketmaster
+ * name: Name of the event
+ * description: A description of the event
+ * info: Info about the event
+ * url: URL to the event's webpage
+ * images: An ArrayList of TMEventImage Objects (Which contain a URL to the poster, and the width and height of the poster)
+ * classifications: An ArrayList of TMEventClassification Objects (Which contain an event's segment, genre, and subgenre)
+ * time: A TMEventTime Object (Which contains an events start time, end time, and whether it spans multiple days)
+ * venue: A TMEventVenue Object (Which contains a venue's (name, address, latitude, and longitude)
+ *
+ */
+
 public class TMEvent extends ApiEvent implements Serializable {
     private String id;
     private String name;
@@ -13,10 +30,6 @@ public class TMEvent extends ApiEvent implements Serializable {
     private List<TMEventClassification> classifications;
     private TMEventTime time;
     private TMEventVenue venue;
-    // private TMEventSales sales;
-    // private String locale;
-    // private String seatmapUrl;
-    // private String accessibility;
 
 
     public TMEvent(String id, String name, String description, String info, String url, List<TMEventImage> images, List<TMEventClassification> classifications, TMEventTime time, TMEventVenue venue) {

@@ -20,8 +20,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.MyViewHolder> {
 
+/**
+ * RecyclerView that displays all the information for every TMEvent Object that we constructed
+ *      from the TMRequest class (Ticketmaster api call)
+ */
+public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.MyViewHolder> {
     List<String> ids;
     List<String> names;
     List<String> descriptions;
@@ -54,9 +58,16 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         return new MyViewHolder(view);
     }
 
+    /**
+     * 1.) Get the information from a TMEvent object pertaining to specific position
+     *          so that we may pass them into the EventInfoFragment fragment if the
+     *          user ends up selecting that event
+     * 2.) Set a ViewHolder Object's textview to the name of the event that pertains to that TMEvent object
+     * 3.) Set an on-click event on each ViewHolder so that when a user clicks
+     *      on it, it takes them to the EventInfoFragment fragment
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
         String id = ids.get(position);
         String title = names.get(position);
         String description = descriptions.get(position).split("T")[0];
@@ -111,6 +122,9 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         notifyDataSetChanged();
     }
 
+    /**
+     * An Object that will be used to display every MGCinema in the RecyclerView
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle, tvDate, tvCinemaName;

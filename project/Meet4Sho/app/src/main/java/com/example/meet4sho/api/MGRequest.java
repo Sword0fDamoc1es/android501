@@ -28,32 +28,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class calls the MovieGlu API and parses all the info into MGCinema Objects
+ */
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
 
     private final String YELP_API_KEY = "88RR4WnZJtAJeY_z4UA6bR-NhnlmhFk5zYFqxD30lDTrpfa543apNhHmDzum2ElLWI4od6pGjBfMjIoG7T9ReRU8vYaQejY57KwBwKwoj-r9ID9ahOJG4D1d5TRDYnYx";
 
-//    client:	BOST_0
-//    x-api-key:	fms66r7H056EXLIIZhgcg8pquCOwXbCo4EpfVJhl
-//    authorization:	Basic Qk9TVF8wX1hYOmFoUGVtdGFzSTIxQQ==
-//    territory:	XX
-//    api-version:	v200
-//    geolocation:	-22.0;14.0 (Recommended location, note initial minus character)
-//    device-datetime:	yyyy-mm-ddThh:mm:ss.sssZ (ISO 8601 format, e.g. 2018-09-14T08:30:17.360Z)
 
-    // API constants
+    /**
+     * MovieGlu API constants
+     */
     private final String API_ENDPOINT = "https://api-gate2.movieglu.com/";
     private final String API_CLIENT = "NYU";
     private final String API_KEY = "5H78ZTGLPI8j1e24ewsfh5lrita93T3S2GPxQkNQ";
     private final String API_AUTH = "Basic TIIVOmgyVjVKZUdqTU9IQw==";
     private final String API_TERRITORY = "US";
     private final String API_VERSION = "v200";
-    // member variables
+
+    /**
+     * Member variables
+     */
     private RequestListener listener;
     private double latitude = 42.350444;
     private double longitude = -71.105377;
     private String deviceDatetime = Instant.now().toString();
-    //private String deviceDatetime = "2022-04-25T21:23:51.027Z";
 
     public MGRequest(RequestListener listener, Double latitude, Double longitude) {
         this.latitude = latitude;
@@ -63,7 +64,9 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
 
     @Override
     protected Void doInBackground(SearchFilter... filter) {
-        // set request headers
+        /**
+         * Set request headers
+          */
         Map<String, String> props = new HashMap<>();
         props.put("api-version", "v200");
         props.put("territory", "US");
@@ -73,14 +76,12 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
         props.put("device-datetime", deviceDatetime);
         props.put("geolocation", Double.toString(latitude) + ";" + Double.toString(longitude));
         Log.d("MRRequest",deviceDatetime);
-        // search film name using MovieGlu's filmLiveSearch and get a film id
-//        String query = filter[0].toString().replaceAll(" ", "+").substring(1);
-//        if (query.charAt(query.length()-1) == '+') query = query.substring(0,query.length()-1);
-//        String url = API_ENDPOINT + "filmLiveSearch/?" + query + "&n=1";
-//        Log.i("------>", url);
+
+        /**
+         * Search film name using MovieGlu's filmLiveSearch and get a film ID
+          */
         String name = filter[0].get("query").replace(' ', '+');
         if (name.charAt(name.length()-1) == '+') name = name.substring(0, name.length()-1);
-//        Log.d("MGRequest",name);
 
         String url = API_ENDPOINT + "filmLiveSearch/?query=" + name + "&n=1";
         Log.i("------>", url);
@@ -93,8 +94,9 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
         }
         if (film_id == null) return null;
 
-
-        // search film id using MovieGlu's filmShowTimes and get showtimes for selected film at nearest cinemas
+        /**
+         * Search film ID using MovieGlu's filmShowTimes and get showtimes for selected film at nearest cinemas
+         */
         Log.i("------>", film_id);
         String date = filter[0].get("date");
         url = API_ENDPOINT + "filmShowTimes/?film_id=" + film_id + "&date=" + date;
@@ -123,10 +125,14 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
                 filterForMovie.add("term", cinema_name);
                 urlS += "longitude="+longitude+"&latitude="+latitude+"&term="+cinema_name;
 
-                URL YelpURL = new URL(urlS);                                                                           // create a new URL object
-                HttpURLConnection urlConnection = (HttpURLConnection) YelpURL.openConnection();                                               // open a new HTTP url connection
-                urlConnection.setRequestProperty("Authorization", "Bearer " + YELP_API_KEY);                                 // set request header
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());                               // get response result from GET request
+                /**
+                 * Use Yelp API to get longitude and latitude of the cinema using the name
+                 *      returned by MovieGlu's API
+                 */
+                URL YelpURL = new URL(urlS);                                                          // create a new URL object
+                HttpURLConnection urlConnection = (HttpURLConnection) YelpURL.openConnection();       // open a new HTTP url connection
+                urlConnection.setRequestProperty("Authorization", "Bearer " + YELP_API_KEY);          // set request header
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());             // get response result from GET request
                 String httpResponse = IOUtil.toString(in);
                 JSONObject YelpResult = new JSONObject(httpResponse);
                 JSONArray movieTheaters = YelpResult.getJSONArray("businesses");
@@ -135,11 +141,13 @@ public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
                 String latToProvide = JSONUtils.getJSONObject(movieTheater,"coordinates").getString("latitude");
                 String lngToProvide = JSONUtils.getJSONObject(movieTheater,"coordinates").getString("longitude");
 
-
                 double cinema_lat = Double.parseDouble(latToProvide);
                 double cinema_lng = Double.parseDouble(lngToProvide);
 
-
+                /**
+                 * Create a MGCinema object containing all the parsed info
+                 * Get movie showing start time, end time, and date
+                 */
                 MGCinema cinema_i = new MGCinema(cinema_id, cinema_name, cinema_lat, cinema_lng, cinema_distance, movie_id, movie_name, movie_img, new ArrayList<>());
                 JSONArray showings = cinema.getJSONObject("showings").getJSONObject("Standard").getJSONArray("times");
                 for (int j = 0; j < showings.length(); j++) {

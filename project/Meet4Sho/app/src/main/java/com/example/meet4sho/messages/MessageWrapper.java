@@ -6,6 +6,9 @@ import com.stfalcon.chatkit.commons.models.IUser;
 
 import java.util.Date;
 
+/**
+ * MessageWrapper that is required for CometChat to work
+ */
 public class MessageWrapper implements IMessage {
     private TextMessage message;
 

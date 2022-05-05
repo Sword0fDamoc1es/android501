@@ -2,6 +2,16 @@ package com.example.meet4sho.api;
 
 import java.io.Serializable;
 
+/**
+ * This class creates an Object called MGTime that saves all the info we
+ * get back from MovieGlu when we request for a specific movie's showtime at a specific cinema
+ * Methods: Just set and get methods
+ *
+ * startTime: Start time of the movie at a specific cinema
+ * endTime: End time of a movie at a specific cinema
+ * date: Date of the showing of the movie at a specific cinema
+ */
+
 public class MGTime implements Serializable {
     private String startTime;
     private String endTime;

@@ -21,6 +21,10 @@ import com.example.meet4sho.api.YelpRestaurant;
 
 import java.util.List;
 
+/**
+ * RecyclerView that displays all the information for every Restaurant Object that we constructed
+ *      from the YelpRequest class (Yelp api call)
+ */
 public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRecyclerAdapter.MyViewHolder> {
 
     List<YelpRestaurant> restaurants;
@@ -41,6 +45,14 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         return new MyViewHolder(view);
     }
 
+    /**
+     * 1.) Get the information from a YelpRestaurant object pertaining to specific position
+     *          so that we may pass them into the RestaurantInfoFragment fragment if the
+     *          user ends up selecting that restaurant
+     * 2.) Set a ViewHolder Object's textview to the name of the restaurant that pertains to that YelpRestaurant object
+     * 3.) Set an on-click event on each ViewHolder so that when a user clicks
+     *      on it, it takes them to the RestaurantInfoFragment fragment
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         YelpRestaurant restaurant = restaurants.get(position);
@@ -81,6 +93,9 @@ public class RestaurantRecyclerAdapter extends RecyclerView.Adapter<RestaurantRe
         notifyDataSetChanged();
     }
 
+    /**
+     * An Object that will be used to display every YelpRestaurant in the RecyclerView
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvTitle, tvIsOpen, tvRating, tvDistance, tvDescription;

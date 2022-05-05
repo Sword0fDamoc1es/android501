@@ -4,6 +4,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * This class deals with the JSON objects that we get back from the API's
+ * and returns the object in a format for us to use in our app
+ *      (i.e. Objects, Strings, Arrays, Ints, Booleans)
+ */
+
 public class JSONUtils {
     public static JSONObject getJSONObject(JSONArray jsonArray, int index) {
         JSONObject result = new JSONObject();

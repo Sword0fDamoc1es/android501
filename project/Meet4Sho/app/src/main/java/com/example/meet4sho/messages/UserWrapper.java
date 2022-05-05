@@ -3,6 +3,9 @@ package com.example.meet4sho.messages;
 import com.cometchat.pro.models.User;
 import com.stfalcon.chatkit.commons.models.IUser;
 
+/**
+ * UserWrapper that is required for CometChat to work
+ */
 public class UserWrapper implements IUser {
     private User user;
 

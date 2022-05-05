@@ -23,7 +23,9 @@ import com.example.meet4sho.api.YelpRestaurant;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Fragment from where the user can search for restaurants that are near a specific event
+ */
 public class RestaurantsFragment extends Fragment {
 
     public EditText edtResSearchBar;
@@ -33,13 +35,7 @@ public class RestaurantsFragment extends Fragment {
 
     public List<YelpRestaurant> restaurants = new ArrayList<>();
 
-
     public RestaurantRecyclerAdapter ra;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    //private OnFragmentInteractionListener mListener;
-
 
     public RestaurantsFragment() {
         // Required empty public constructor
@@ -51,6 +47,12 @@ public class RestaurantsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * 1.) Retrieve the longitude and latitude of the event/cinema that the user clicked on in the SearchFragment fragment
+     * 2.) Set up views
+     * 3.) Set RecyclerView of all the restaurants that are nearby
+     * 4.) Set onClick listener to take the user to the RestaurantInfoFragment when they select a specific restaurant
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,7 +67,6 @@ public class RestaurantsFragment extends Fragment {
         edtResSearchBar = (EditText) v.findViewById(R.id.edtResSearchBar);
         btnResSearch = (Button) v.findViewById(R.id.btnResSearch);
         spnResSort = (Spinner) v.findViewById(R.id.spnResSort);
-
         rvResResults = (RecyclerView) v.findViewById(R.id.rvResResults);
 
         ra = new RestaurantRecyclerAdapter(getActivity(), restaurants, getActivity().getFragmentManager());
@@ -93,6 +94,9 @@ public class RestaurantsFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Set up the sort filter
+     */
     private String getSort(String s){
         String sort = "";
         switch(s){
