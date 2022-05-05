@@ -17,6 +17,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Displays the info pertaining to specific event/movie
+ */
 public class TM_EventInfoActivity extends AppCompatActivity {
     public ImageView ivEventImg;
     public TextView tvTitleEvent;

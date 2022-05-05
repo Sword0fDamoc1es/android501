@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This activity is where the user can create an account to login with
+ */
 public class signupActivity extends AppCompatActivity {
     //CometChat API Keys
     public String appID = "2078762eaec81f6e"; // Replace with your App ID
@@ -40,26 +43,7 @@ public class signupActivity extends AppCompatActivity {
     public Button btnCreate;
     private Boolean valid = false;
 
-    // path of database - user
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
-
-    // here is my work-flow of signup:
-    // onCreate only generate layout.
-    // using late binding to bind func to button.
-    // onClick should contain two parts:
-    //      part1:
-    //          check whether  exsists?
-    //          using a  SEPERATE algo func  to return  a boolean : <= checkValid.
-    //      part2:
-    //          if valid:
-    //          get  info and save .
-
-    //  details of the above:
-    //  how to  check?
-    //  version 4/18: use str of name  only. if contains this COLEECTION: invalid; else , create collection based on  name.
-    //  TODO: genereate  ID?
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
