@@ -46,7 +46,7 @@
 -   **LoginRepository**: Class that requests authentication and user information from the remote data source and maintains an in-memory cache of login status and user credentials information.
 -   **Result**: A generic class that holds a result success w/ data or an error exception.
 
--	**model Package**
+## model Sub-package
 -	***LoggedInUser***: Data class that captures user information for logged in users retrieved from LoginRepository
 
 # messages Package
