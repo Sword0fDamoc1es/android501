@@ -1,5 +1,7 @@
 package com.example.meet4sho.api;
 
+
+// Class of TicketMaster event images
 public class TMEventImage {
     private String url;
     private int width;

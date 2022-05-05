@@ -4,6 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * A Util Class that contains methods for getting JSON elements and catching JSON exceptions
+ */
 public class JSONUtils {
     public static JSONObject getJSONObject(JSONArray jsonArray, int index) {
         JSONObject result = new JSONObject();

@@ -3,6 +3,7 @@ package com.example.meet4sho.api;
 import java.io.Serializable;
 import java.util.List;
 
+// Class of TicketMaster Events
 public class TMEvent extends ApiEvent implements Serializable {
     private String id;
     private String name;

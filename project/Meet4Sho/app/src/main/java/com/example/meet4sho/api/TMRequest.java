@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+// This is a class that handles TicketMaster API calling
 public class TMRequest extends AsyncTask<SearchFilter, Void, Void> {
     private final String TM_API_KEY = "PqFUIagPA9p1AMWB2SeEF9QFyhGnG0P7";
     private RequestListener listener;

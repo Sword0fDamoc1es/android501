@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A class for calling MovieGlu API
+ */
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MGRequest extends AsyncTask<SearchFilter, Void, Void> {
 

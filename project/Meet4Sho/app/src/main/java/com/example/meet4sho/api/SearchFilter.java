@@ -3,6 +3,7 @@ package com.example.meet4sho.api;
 import java.util.HashMap;
 import java.util.Map;
 
+// A class that stores API query parameters and their corresponding values
 public class SearchFilter {
     private Map<String, String> filters = new HashMap<>();
 

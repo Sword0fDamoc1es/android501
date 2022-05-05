@@ -3,6 +3,9 @@ package com.example.meet4sho.api;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class for MovieGlu cinemas
+ */
 public class MGCinema {
     private String cinema_id;
     private String cinema_name;

@@ -1,5 +1,7 @@
 package com.example.meet4sho.api;
 
+
+// Class of TicketMaster event times info
 public class TMEventTime {
 //    private String startDate;
 //    private String startTime;

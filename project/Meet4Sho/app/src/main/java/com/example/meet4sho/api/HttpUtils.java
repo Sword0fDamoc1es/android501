@@ -17,6 +17,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+/**
+ * A Utils class that contains methods for sending Http GET requests
+ */
 public class HttpUtils {
     /**
      * This method sends an HTTP GET request and returns a JSON object

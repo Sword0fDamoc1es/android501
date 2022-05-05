@@ -1,5 +1,6 @@
 package com.example.meet4sho.api;
 
+// Class of TicketMaster event venue info
 public class TMEventVenue {
     private String name;
     private String address1;

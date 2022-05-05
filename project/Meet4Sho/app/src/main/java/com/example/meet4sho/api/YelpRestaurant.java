@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.List;
 
+// Class of Yelp restaurant info
 public class YelpRestaurant extends ApiEvent implements Serializable {
 
     private String id;

@@ -1,5 +1,7 @@
 package com.example.meet4sho.api;
 
+
+// Class of TicketMaster event classifications
 public class TMEventClassification {
     private String segment;
     private String genre;

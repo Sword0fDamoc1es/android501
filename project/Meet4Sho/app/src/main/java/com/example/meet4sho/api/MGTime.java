@@ -2,6 +2,7 @@ package com.example.meet4sho.api;
 
 import java.io.Serializable;
 
+// A class that keeps showing times for MovieGlu showings
 public class MGTime implements Serializable {
     private String startTime;
     private String endTime;
