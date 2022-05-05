@@ -103,6 +103,8 @@ public class ProfileFragment extends Fragment {
         return v;
     }
 
+
+    // this function gets the users' interested event list.
     public void checkExistsUser(String name){
         // input name, will be username
         DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
@@ -137,6 +139,8 @@ public class ProfileFragment extends Fragment {
         });
 
     }
+
+    // this function get the description from database. and set it.
     public void setDescription(){
         String uid = tvName.getText().toString();
         DocumentReference docCheck =  pDocRef.collection("user-bio").document(uid);
@@ -157,6 +161,7 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    // the onClick function will submit the new bio. to the dataabase.
     public void onClick(View view){
         String uid = tvName.getText().toString();
         Map<String,Object> dataToSave =  new HashMap<>();
