@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tvUsername"
+                android:id="@+id/tvTitle"
                 android:layout_width="270dp"
                 android:layout_height="27dp"
                 android:text="Title"

@@ -17,10 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.meet4sho.api.YelpRestaurant;
-
 import java.util.List;
 
+/**
+ * RecyclerView that displays all the user's that are interested in an event
+ */
 public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapter.MyViewHolder> {
 
     List<String> usernames;
@@ -43,21 +44,23 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         return new MyViewHolder(view);
     }
 
+    /**
+     * 1.) Get a user's name and biography, and display it
+     * 2.) Set onClick listener so that if the current logged in user clicks on a user's name
+     *          it takes them to that user's profile (ProfileOtherFragment fragment)
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String user = usernames.get(position);
         holder.tvUsername.setText(user);
         holder.tvBio.setText(bios.get(position));
-
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ProfileOtherFragment proFrag = new ProfileOtherFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("username", user);
-
                 proFrag.setArguments(bundle);
-
                 FragmentTransaction fragmentTransaction = fm.beginTransaction();
                 fragmentTransaction.replace(R.id.displayedView, proFrag);
                 fragmentTransaction.addToBackStack("eiFrag");
@@ -79,6 +82,9 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         notifyDataSetChanged();
     }
 
+    /**
+     * An Object that will be used to display every User in the RecyclerView
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvUsername, tvBio;
@@ -87,8 +93,8 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUsername = itemView.findViewById(R.id.tvUsername);
-            tvBio = itemView.findViewById(R.id.tvBio);
+            tvUsername = itemView.findViewById(R.id.tvTitle);
+            tvBio = itemView.findViewById(R.id.tvDate);
             ivPFP = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }

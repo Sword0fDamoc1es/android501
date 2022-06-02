@@ -3,6 +3,24 @@ package com.example.meet4sho.api;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This class creates an Object called MGCinema that saves all the info we
+ * get back from MovieGlu when we request for a specific movie at a specific cinema
+ * Methods: Just set and get methods
+ *
+ * cinema_id: A cinema's ID as assigned by MovieGlu
+ * cinema_name: The name of the cinema
+ * cinema_lat: Latitude of the cinema
+ * cinema_lng: Longitude of the cinema
+ * film_id: The ID of the film we requested as assigned by MovieGlu
+ * film_name: The name of the film
+ * film_img: URL to the film's movie poster
+ * times: An ArrayList of MGTime objects (MGTime is an object containing a movie's start time,
+ *      end time, and date of showing at this specfic cinema)
+ *
+ */
+
 public class MGCinema {
     private String cinema_id;
     private String cinema_name;
@@ -12,10 +30,9 @@ public class MGCinema {
     private String film_id;
     private String film_name;
     private String film_img;
-    private String film_info;
     private List<MGTime> times = new ArrayList<>();
 
-    public MGCinema(String cinema_id, String cinema_name, double cinema_lat, double cinema_lng, double cinema_distance, String film_id, String film_name, String film_img, String film_info, List<MGTime> times) {
+    public MGCinema(String cinema_id, String cinema_name, double cinema_lat, double cinema_lng, double cinema_distance, String film_id, String film_name, String film_img, List<MGTime> times) {
         this.cinema_id = cinema_id;
         this.cinema_name = cinema_name;
         this.cinema_lat = cinema_lat;
@@ -24,7 +41,6 @@ public class MGCinema {
         this.film_id = film_id;
         this.film_name = film_name;
         this.film_img = film_img;
-        this.film_info = film_info;
         this.times = times;
     }
 
@@ -88,10 +104,6 @@ public class MGCinema {
         this.film_img = film_img;
     }
 
-    public String getFilm_info() { return film_info; }
-
-    public void setFilm_info(String film_info) { this.film_info = film_info; }
-
     public double getCinema_lat() {
         return cinema_lat;
     }
@@ -107,4 +119,5 @@ public class MGCinema {
     public void setCinema_lng(double cinema_lng) {
         this.cinema_lng = cinema_lng;
     }
+
 }

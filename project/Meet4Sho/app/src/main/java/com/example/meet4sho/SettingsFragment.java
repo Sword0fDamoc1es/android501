@@ -29,9 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment that allows user to save their email and phone, and change their password
+ *      This is also where the user can sign out from
  */
 public class SettingsFragment extends Fragment {
 
@@ -40,7 +39,6 @@ public class SettingsFragment extends Fragment {
     private EditText editSettingsEmail;
     private EditText editSettingsPhone;
     private EditText editSettingsPassword;
-    private SeekBar sbSettingsDistance;
     private Button btnSettingSave;
     private Button btnSignOut;
     private String username;
@@ -65,21 +63,14 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.preference_file_name), Context.MODE_PRIVATE);
-
-//        SharedPreferences.Editor seditr = sharedPref.edit();
-//        seditr.putString(getString(R.string.preference_user_name), username);
-//        seditr.apply();
         username = sharedPref.getString(getString(R.string.preference_user_name),"");
-
 
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
         editSettingsEmail = v.findViewById(R.id.edtSettingsEmail);
         editSettingsPassword = v.findViewById(R.id.edtSettingsPassword);
         editSettingsPhone = v.findViewById(R.id.edtSettingsPhone);
-        sbSettingsDistance = v.findViewById(R.id.sbSettingsDistance);
         btnSettingSave = v.findViewById(R.id.btnSettingsSave);
         btnSignOut = v.findViewById(R.id.btnSignOut);
-
         btnSettingSave.setOnClickListener(this::onClick);
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
@@ -99,15 +90,10 @@ public class SettingsFragment extends Fragment {
                 getString(R.string.preference_file_name), Context.MODE_PRIVATE);
 
         SharedPreferences.Editor seditr = sharedPref.edit();
-        // change the following into put distance.
-//        seditr.putString(getString(R.string.preference_user_name), username);
         seditr.apply();
-
-
         Map<String,Object> dataToSaveInfo =  new HashMap<>();
         dataToSaveInfo.put("email",editSettingsEmail.getText().toString());
         dataToSaveInfo.put("phone",editSettingsPhone.getText().toString());
-
         pDocRef.collection("user-info").document(username).set(dataToSaveInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -118,7 +104,6 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
-
         Map<String,Object> dataToSave =  new HashMap<>();
         dataToSave.put("uid",username);
         dataToSave.put("upwd",editSettingsPassword.getText().toString());
@@ -132,7 +117,6 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
-
 
     }
 

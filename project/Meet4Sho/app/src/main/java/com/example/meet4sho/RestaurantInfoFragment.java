@@ -20,7 +20,10 @@ import com.example.meet4sho.api.YelpRestaurant;
 import java.util.ArrayList;
 import java.util.Map;
 
-
+/**
+ * This class displays all the info pertaining to a specific restuarant when a user
+ *      clicks on it from the RecyclerView in the RestaurantsFragment class
+ */
 public class RestaurantInfoFragment extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
@@ -58,32 +61,9 @@ public class RestaurantInfoFragment extends Fragment{
         description += "Address: " + restaurant.getDisplay_address() + "\n";
         description += "Phone: " + restaurant.getDisplay_phone() + "\n";
         tvDescription.setText(description);
-
         new TM_EventInfoActivity.DownloadImageTask(ivRestoImg).execute(restaurant.getImage_url());
-
 
         return v;
     }
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void messageFromChildFragment(Map.Entry<String, ArrayList<String>> temp);
-//    }
 
 }

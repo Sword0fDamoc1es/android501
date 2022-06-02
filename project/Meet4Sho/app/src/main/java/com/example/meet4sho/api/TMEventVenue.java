@@ -1,5 +1,10 @@
 package com.example.meet4sho.api;
 
+
+/**
+ * An object that contains a Ticketmaster event's venue information
+ *      (i.e. Venue name, address, latitude, and longitude)
+ */
 public class TMEventVenue {
     private String name;
     private String address1;

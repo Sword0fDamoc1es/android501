@@ -39,7 +39,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Fragment displays all the info pertaining to another user
+ *      (i.e. their profile page)
+ *      (Contains their bio, name, and a recyclerView of all their interested events)
+ *      (Similar to the ProfileFragment fragment only here there's a Text button which
+ *        if the logged in user clicks on it, it'll take them to a chat-room with the user
+ *        who's profile they were just on)
+ */
 public class ProfileOtherFragment extends Fragment {
     private EditText edtBio;
     private TextView tvName;
@@ -93,6 +100,8 @@ public class ProfileOtherFragment extends Fragment {
 
         edtBio = v.findViewById(R.id.edtBio);
         setDescription();
+        edtBio.setFocusable(false);
+        edtBio.setEnabled(false);
 
         Button btnSave = v.findViewById(R.id.btnProfSave);
         btnSave.setVisibility(View.GONE);
@@ -205,7 +214,7 @@ public class ProfileOtherFragment extends Fragment {
                         ids.add(event.getId());
                         // END TODO.
                         names.add(event.getName());
-                        descriptions.add(event.getDescription());
+                        descriptions.add(event.getTime().getStartDateTime());
                         imageURLs.add(event.getImages().get(0).getUrl());
                         longitude.add(event.getVenue().getLongitude());
                         latitude.add(event.getVenue().getLatitude());

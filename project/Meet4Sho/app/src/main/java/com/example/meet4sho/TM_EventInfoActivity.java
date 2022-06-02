@@ -17,6 +17,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Displays the info pertaining to specific event/movie
+ */
 public class TM_EventInfoActivity extends AppCompatActivity {
     public ImageView ivEventImg;
     public TextView tvTitleEvent;
@@ -53,21 +56,6 @@ public class TM_EventInfoActivity extends AppCompatActivity {
         ivEventImg = (ImageView) findViewById(R.id.ivEventImg);
         tvTitleEvent = (TextView) findViewById(R.id.tvTitleEvent);
         tvDescriptionEvent = (TextView) findViewById(R.id.tvDescriptionEvent);
-//        btnBack = (Button) findViewById(R.id.btnBack);
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                names = extras.getStringArrayList("names");
-//                descriptions = extras.getStringArrayList("descriptions");
-//                imgURLS = extras.getStringArrayList("urls");
-//
-//                Intent i = new Intent(getApplicationContext(),AppActivity.class);
-//                i.putStringArrayListExtra("names",(ArrayList<String>) names);
-//                i.putStringArrayListExtra("descriptions",(ArrayList<String>) descriptions);
-//                i.putStringArrayListExtra("urls",(ArrayList<String>) imgURLS);
-//                startActivity(i);
-//            }
-//        });
 
         tvDescriptionEvent.setText(description);
         tvTitleEvent.setText(title);

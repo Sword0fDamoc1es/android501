@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This activity is where the user can create an account to login with
+ */
 public class signupActivity extends AppCompatActivity {
     //CometChat API Keys
     public String appID = "2078762eaec81f6e"; // Replace with your App ID
@@ -41,24 +44,6 @@ public class signupActivity extends AppCompatActivity {
     private Boolean valid = false;
 
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
-
-    // here is my work-flow of signup:
-    // onCreate only generate layout.
-    // using late binding to bind func to button.
-    // onClick should contain two parts:
-    //      part1:
-    //          check whether  exsists?
-    //          using a  SEPERATE algo func  to return  a boolean : <= checkValid.
-    //      part2:
-    //          if valid:
-    //          get  info and save .
-
-    //  details of the above:
-    //  how to  check?
-    //  version 4/18: use str of name  only. if contains this COLEECTION: invalid; else , create collection based on  name.
-    //  TODO: genereate  ID?
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +60,8 @@ public class signupActivity extends AppCompatActivity {
         checkValid(uname);
 
     }
+
+    // create a account
     public void createAccount(){
         String uname = signup_name.getText().toString();
 
@@ -90,6 +77,7 @@ public class signupActivity extends AppCompatActivity {
         dataToSave.put("upwd",upwd);
 
         Log.d("HERE","end here");
+        // write the new info info the database.
         pDocRef.collection("user").document(uname).set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -105,6 +93,8 @@ public class signupActivity extends AppCompatActivity {
         });
     }
 
+
+    // check whether this username is occupied.
     public void checkValid(String name){
         DocumentReference docCheck =  pDocRef.collection("user").document(name);
         String checkName = "";
@@ -134,6 +124,10 @@ public class signupActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Checks whether the user has a CometChat account already
+     *      and if they don't then an account is created for them
+     */
     public void CreateCometChatUser(String name) {
         List<String> userIDsInCometChat = new ArrayList<>();
         UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().build();

@@ -20,11 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.MyViewHolder> {
 
-    // TODO: add id
+/**
+ * RecyclerView that displays all the information for every TMEvent Object that we constructed
+ *      from the TMRequest class (Ticketmaster api call)
+ */
+public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.MyViewHolder> {
     List<String> ids;
-    // END TODO
     List<String> names;
     List<String> descriptions;
     List<String> imageURLS;
@@ -34,12 +36,9 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
     Context context;
     FragmentManager fm;
 
-    // TODO change the constructor, the first parameter will be ids array.
-
-    public TM_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> d, List<String> u, List<String> lg, List<String> lt,android.app.FragmentManager f, String un){
-        // TODO: add id
+    public TM_RecyclerAdapter(Activity ct, List<String> i, List<String> n, List<String> d, List<String> u,
+                              List<String> lg, List<String> lt,android.app.FragmentManager f, String un){
         ids = i;
-        // END TODO
         context = ct;
         names = n;
         descriptions = d;
@@ -50,7 +49,6 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         fm = f;
 
     }
-    // END TODO
 
     @NonNull
     @Override
@@ -60,19 +58,24 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         return new MyViewHolder(view);
     }
 
+    /**
+     * 1.) Get the information from a TMEvent object pertaining to specific position
+     *          so that we may pass them into the EventInfoFragment fragment if the
+     *          user ends up selecting that event
+     * 2.) Set a ViewHolder Object's textview to the name of the event that pertains to that TMEvent object
+     * 3.) Set an on-click event on each ViewHolder so that when a user clicks
+     *      on it, it takes them to the EventInfoFragment fragment
+     */
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        // TODO get id based on postion:
         String id = ids.get(position);
-        // END TODO
-
         String title = names.get(position);
-        String description = descriptions.get(position);
+        String description = descriptions.get(position).split("T")[0];
         String url = imageURLS.get(position);
         String lg = longitude.get(position);
         String lt = latitude.get(position);
         holder.tvTitle.setText(title);
-        holder.tvDescription.setText(description);
+        holder.tvDate.setText(description);
         new TM_EventInfoActivity.DownloadImageTask(holder.ivPreview).execute(url);
 
         holder.mainLayout.setOnClickListener(new View.OnClickListener() {
@@ -80,10 +83,8 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
             public void onClick(View view) {
                 EventInfoFragment eiFrag = new EventInfoFragment();
                 Bundle bundle = new Bundle();
-//                Intent i = new Intent(context, TM_EventInfoActivity.class);
-                // TODO: add id
+
                 bundle.putString("id",id);
-                // END TODO.
                 bundle.putString("name", title);
                 bundle.putString("description", description);
                 bundle.putString("url", url);
@@ -100,8 +101,6 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
                 fragmentTransaction.replace(R.id.displayedView, eiFrag);
                 fragmentTransaction.addToBackStack("eiFrag");
                 fragmentTransaction.commit();
-
-//                context.startActivity(i);
             }
         });
 
@@ -118,21 +117,26 @@ public class TM_RecyclerAdapter extends RecyclerView.Adapter<TM_RecyclerAdapter.
         this.names = names;
         this.descriptions = descriptions;
         this.imageURLS = imageURLS;
-        this.latitude = lon;
-        this.longitude = lat;
+        this.latitude = lat;
+        this.longitude = lon;
         notifyDataSetChanged();
     }
 
+    /**
+     * An Object that will be used to display every MGCinema in the RecyclerView
+     */
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle, tvDescription;
+        TextView tvTitle, tvDate, tvCinemaName;
         ImageView ivPreview;
         ConstraintLayout mainLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tvUsername);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvDate = itemView.findViewById(R.id.tvDate);
+            tvCinemaName = itemView.findViewById(R.id.tvCinemaName);
+            tvCinemaName.setVisibility(View.INVISIBLE);
             ivPreview = itemView.findViewById(R.id.ivPFP);
             mainLayout = itemView.findViewById(R.id.mainLayout);
         }

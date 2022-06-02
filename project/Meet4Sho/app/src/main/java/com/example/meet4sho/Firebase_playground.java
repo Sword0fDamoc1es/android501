@@ -19,6 +19,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Firebase playground that allows for user creation and manipulation
+ */
 public class Firebase_playground extends AppCompatActivity {
     public static final String UID = "uid";
     public static final String UPWD = "upwd";
@@ -50,29 +53,6 @@ public class Firebase_playground extends AppCompatActivity {
         dataToSave.put(UPWD,upwdStr);
         dataToSave.put(UNAME,unameStr);
 
-//        pDocRef.set(dataToSave).addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void unused) {
-//                Log.d("addSuccess","add success");
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Log.w("ERROR","not success");
-//            }
-//        });
-
-        //
-        // Important comments to understand the database:
-        // database structure:
-        // playground --
-        //  ---- user_test     <== this is where pDocRef points to.
-        //
-        // for the line bellow, it creates a collection from pointer pDocRef.
-        // thus:
-        // ---- ---- user_test
-        // ---- ---- ---- 007
-        // ---- ---- ---- :(007's field)
 
         pDocRef.collection("user_test").document("007").set(dataToSave).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

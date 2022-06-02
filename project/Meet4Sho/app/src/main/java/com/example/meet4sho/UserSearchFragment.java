@@ -29,8 +29,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class  UserSearchFragment extends Fragment {
+/**
+ * Fragment that displays all the user's that are interested in an event/movie
+ *      via UserRecyclerAdapter's RecyclerView
+ */
+public class UserSearchFragment extends Fragment {
 
     public RecyclerView rvUsers;
     String id;
@@ -59,6 +62,7 @@ public class  UserSearchFragment extends Fragment {
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,17 +72,11 @@ public class  UserSearchFragment extends Fragment {
         Bundle bundle = this.getArguments();
         id = bundle.getString("id");
         usernames = bundle.getStringArrayList("users");
-        Log.d("what?"," the hack");
         System.out.println(usernames.size());
-//        usernames = new ArrayList<>();
         bios = bundle.getStringArrayList("userBio");
-//        checkExists(id);
-//        Log.d("tag!",usernames.get(1));
         String username = bundle.getString("username");
-//        usernames.add(username);
         
         rvUsers = (RecyclerView) v.findViewById(R.id.rvUsers);
-//        Log.d("tag!",usernames.get(2));
         ra = new UserRecyclerAdapter(getActivity(), usernames, bios,getActivity().getFragmentManager());
         rvUsers.setAdapter(ra);
         rvUsers.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -99,12 +97,9 @@ public class  UserSearchFragment extends Fragment {
                         usernames =(ArrayList<String>) document.getData().get("list");
                         System.out.println(usernames.get(2));
                     } else {
-
                         usernames = new ArrayList<>();
                         Log.d("doc Reached", "No such document");
-
                     }
-
                 }else{
                     System.out.println("failed to get!");
                 }

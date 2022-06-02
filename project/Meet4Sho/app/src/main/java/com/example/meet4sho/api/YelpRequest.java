@@ -18,7 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class calls the Yelp API and parses all the info into YelpRestaurant Objects
+ */
+
 public class YelpRequest extends AsyncTask<SearchFilter, Void, Void> {
+
+    /**
+     * Yelp API constants
+     */
     private final String YELP_API_KEY = "88RR4WnZJtAJeY_z4UA6bR-NhnlmhFk5zYFqxD30lDTrpfa543apNhHmDzum2ElLWI4od6pGjBfMjIoG7T9ReRU8vYaQejY57KwBwKwoj-r9ID9ahOJG4D1d5TRDYnYx";
     private RequestListener listener;
 
@@ -28,7 +36,7 @@ public class YelpRequest extends AsyncTask<SearchFilter, Void, Void> {
 
     @Override
     protected Void doInBackground(SearchFilter... filter) {
-        String urlS = "https://api.yelp.com/v3/businesses/search?";                                        // base url
+        String urlS = "https://api.yelp.com/v3/businesses/search?";    // base url
         urlS += filter[0].toString();
         Log.i("------>", urlS);
 
@@ -36,10 +44,10 @@ public class YelpRequest extends AsyncTask<SearchFilter, Void, Void> {
         HttpURLConnection urlConnection = null;
         String httpResponse = null;
         try {
-            url = new URL(urlS);                                                                           // create a new URL object
-            urlConnection = (HttpURLConnection) url.openConnection();                                               // open a new HTTP url connection
-            urlConnection.setRequestProperty("Authorization", "Bearer " + YELP_API_KEY);                                 // set request header
-            InputStream in = new BufferedInputStream(urlConnection.getInputStream());                               // get response result from GET request
+            url = new URL(urlS);                                                          // create a new URL object
+            urlConnection = (HttpURLConnection) url.openConnection();                     // open a new HTTP url connection
+            urlConnection.setRequestProperty("Authorization", "Bearer " + YELP_API_KEY);  // set request header
+            InputStream in = new BufferedInputStream(urlConnection.getInputStream());     // get response result from GET request
             httpResponse = IOUtil.toString(in);
             JSONObject result = null;
             result = new JSONObject(httpResponse);
@@ -84,7 +92,7 @@ public class YelpRequest extends AsyncTask<SearchFilter, Void, Void> {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         } finally {
-            urlConnection.disconnect();                                                                             // IMPORTANT: disconnect url connection
+            urlConnection.disconnect();            // IMPORTANT: disconnect url connection
         }
         return null;
     }

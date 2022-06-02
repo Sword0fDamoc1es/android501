@@ -35,11 +35,13 @@ import com.stfalcon.chatkit.messages.MessagesListAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Fragment the displays a chat-room for the user and from where the user can message other people
+ *      (The main messaging screen from where you type in your message and receive the messages)
+ */
 
 public class MessageChatFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private String conversationID;
     private String recipient;
@@ -65,6 +67,10 @@ public class MessageChatFragment extends Fragment {
         conversationID = bundle.getString("Chat ID");
         recipient = bundle.getString("Recipient");
 
+        /**
+         * Set views so that the user can see what they're typing, the messages they've received,
+         *      and send the text that they've typed
+         */
         MessageInput inputView  = v.findViewById(R.id.input);
         MessagesList messagesList = v.findViewById(R.id.messagesList);
         ImageLoader imageLoader = (imageView, url, payload) -> Picasso.get().load(url).into(imageView);
@@ -97,6 +103,10 @@ public class MessageChatFragment extends Fragment {
             }
         });
 
+        /**
+         * Load all previous messages that were in the chat so that the user may view them even if they've
+         *      left the chat-room screen (Load chat-room history)
+         */
         MessagesRequest messagesRequest = new MessagesRequest.MessagesRequestBuilder().setUID(recipient).build();
         messagesRequest.fetchPrevious(new CometChat.CallbackListener<List<BaseMessage>>() {
             @Override
@@ -114,6 +124,9 @@ public class MessageChatFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Helper method to display all the messages in the adapter
+     */
     private void addMessages(List<BaseMessage> baseMessages) {
         List<IMessage> list = new ArrayList<>();
         for(BaseMessage message: baseMessages) {
@@ -124,9 +137,11 @@ public class MessageChatFragment extends Fragment {
         adapter.addToEnd(list, true);
     }
 
+    /**
+     * Helper method to send the message to the other user
+     */
     private void sendMessage(String message) {
         TextMessage textMessage = new TextMessage(recipient, message, CometChatConstants.RECEIVER_TYPE_USER);
-
         CometChat.sendMessage(textMessage, new CometChat.CallbackListener <TextMessage> () {
             @Override
             public void onSuccess(TextMessage textMessage) {
@@ -140,6 +155,9 @@ public class MessageChatFragment extends Fragment {
         });
     }
 
+    /**
+     * Helper method to add a singular message to the adapter
+     */
     private void addMessage(TextMessage textMessage) {
         adapter.addToStart(new MessageWrapper(textMessage), true);
     }

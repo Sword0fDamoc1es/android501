@@ -39,11 +39,12 @@ public class HttpUtils {
         HttpURLConnection urlConnection = null;
         JSONObject root = null;
         try {
-            reqURL = new URL(url);                                                      // Step 1: create a URL instance
+            reqURL = new URL(String.format(url));                                                      // Step 1: create a URL instance
             urlConnection = (HttpURLConnection) reqURL.openConnection();                // Step 2: open an http connection
             if (props != null) {
                 for (String key: props.keySet()) {
                     urlConnection.setRequestProperty(key, props.get(key));              // Step 3: set request properties (headers)
+                    System.out.println(key+","+props.get(key));
                 }
             }
             InputStream in = new BufferedInputStream(urlConnection.getInputStream());   // Step 4: get the response as an InputStream

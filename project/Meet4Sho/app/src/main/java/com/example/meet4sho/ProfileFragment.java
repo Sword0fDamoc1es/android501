@@ -32,7 +32,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Fragment displays all the info pertaining to specific user
+ *      (i.e. their profile page)
+ *      (Contains their bio, name, and a recyclerView of all their interested events)
+ */
 public class ProfileFragment extends Fragment {
     private EditText edtBio;
     private TextView tvName;
@@ -75,10 +79,8 @@ public class ProfileFragment extends Fragment {
         longitude = new ArrayList<>();
         latitude = new ArrayList<>();
 
-        // TODO
-        // Marv's Comment: after the following line, bufferUser will get the arrayList of eventID
-        // If user has not yet interested, it will be an empty array. So if u wanna display, remember to check if isEmpty.
-
+        // After the following line, bufferUser will get the arrayList of eventID
+        // If user has not yet interested, it will be an empty array. So if you want to display, remember to check if isEmpty.
         View v = inflater.inflate(R.layout.profile_page, container, false);
 
         tvName = v.findViewById(R.id.tvName);
@@ -93,7 +95,6 @@ public class ProfileFragment extends Fragment {
         btnSave.setOnClickListener(this::onClick);
 
         rvInterestedEvents = v.findViewById(R.id.rvInterestedEvents);
-
         ra = new TM_RecyclerAdapter(getActivity(),ids, names, descriptions, imageURLs, longitude, latitude, getActivity().getFragmentManager(), username);
         rvInterestedEvents.setAdapter(ra);
         rvInterestedEvents.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -103,6 +104,10 @@ public class ProfileFragment extends Fragment {
         return v;
     }
 
+
+    /**
+     * Function gets the users' interested event list.
+     */
     public void checkExistsUser(String name){
         // input name, will be username
         DocumentReference docCheck =  pDocRefUser.collection("interest").document(name);
@@ -115,21 +120,15 @@ public class ProfileFragment extends Fragment {
                     if (document.exists()) {
                         Log.d("GET", "DocumentSnapshot data: " + document.getData().get("uid"));
                         bufferUser =(ArrayList<String>) document.getData().get("event_list");
-
                         for(int i = 0; i < bufferUser.size(); i++) {
                             SearchFilter filter = new SearchFilter();
                             filter.add("id", bufferUser.get(i));
                             new TMRequest(new TMListener()).execute(filter);
                         }
-
                     } else {
-
-//                        valid = true;
                         bufferUser = new ArrayList<>();
                         Log.d("doc Reached", "No such document");
-
                     }
-
                 }else{
                     System.out.println("failed to get!");
                 }
@@ -137,6 +136,10 @@ public class ProfileFragment extends Fragment {
         });
 
     }
+
+    /**
+     * Function gets the description from database. and set it.
+     */
     public void setDescription(){
         String uid = tvName.getText().toString();
         DocumentReference docCheck =  pDocRef.collection("user-bio").document(uid);
@@ -157,6 +160,9 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    /**
+     * Function will submit the new bio to the database when the save button is clicked
+     */
     public void onClick(View view){
         String uid = tvName.getText().toString();
         Map<String,Object> dataToSave =  new HashMap<>();
@@ -174,6 +180,7 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
     private class TMListener implements RequestListener {
         @Override
         public void updateViews(List events) {
@@ -182,14 +189,11 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void run() {
                     String output = "";
-
                     for (int i = 0; i < events.size(); i++) {
                         TMEvent event = (TMEvent) events.get(i);
-                        // TODO add id here.
                         ids.add(event.getId());
-                        // END TODO.
                         names.add(event.getName());
-                        descriptions.add(event.getDescription());
+                        descriptions.add(event.getTime().getStartDateTime());
                         imageURLs.add(event.getImages().get(0).getUrl());
                         longitude.add(event.getVenue().getLongitude());
                         latitude.add(event.getVenue().getLatitude());

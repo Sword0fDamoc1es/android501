@@ -1,10 +1,9 @@
 package com.example.meet4sho.api;
 
+/**
+ * An object that contains a Ticketmaster event's start time, end time, and whether it spans multiple days
+ */
 public class TMEventTime {
-//    private String startDate;
-//    private String startTime;
-//    private String endDate;
-//    private String endTime;
     private String startDateTime;
     private String endDateTime;
     private boolean spanMultipleDays;

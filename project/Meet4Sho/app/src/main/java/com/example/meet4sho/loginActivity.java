@@ -22,6 +22,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * This class deals with the login page
+ *      (i.e. Checking if the user typed in a username and password that is in our database)
+ */
 public class loginActivity extends AppCompatActivity {
 
     //CometChat API Keys
@@ -30,14 +35,11 @@ public class loginActivity extends AppCompatActivity {
     public String authKey = "b5a91f16fbe450cb26f7584db9f85d3bd75785ed"; //Replace with your Auth Key.
     //
 
-    public Map<String,String> userNames = new HashMap<String,String>();
-
     public EditText edtPassword;
     public EditText edtUsername;
     public Button btnLogin;
     public Button btnSignUp;
 
-    // MARVE: comment
     private DocumentReference pDocRef = FirebaseFirestore.getInstance().document("front_end/user");
 
     @Override
@@ -58,28 +60,12 @@ public class loginActivity extends AppCompatActivity {
             }
         });
 
-
-
-        userNames.put("Test", "123");
-
-
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(userNames.containsKey(edtUsername.getText().toString())) {
-//                    if(userNames.get(edtUsername.getText().toString()).equals(edtPassword.getText().toString())){
-//                        Intent intent = new Intent(loginActivity.this, AppActivity.class);
-//                        intent.putExtra("username",edtUsername.getText().toString());
-//                        startActivity(intent);
-//                    }
-//                }
-//            }
-//        });
-
     }
     public void onLogin(View view){
         String uname = edtUsername.getText().toString();
         String upwd = edtPassword.getText().toString();
+
+        // the rest is the implementation of how to compare input with firebase data.
         DocumentReference docRef = pDocRef.collection("user").document(uname);
         DocumentSnapshot document;
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -107,6 +93,9 @@ public class loginActivity extends AppCompatActivity {
     }
 
     private void initCometChat() {
+        /**
+         * 1.) Initiate CometChat via the appID so that we may use it's functionality later in the app
+         */
         AppSettings appSettings = new AppSettings.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
         CometChat.init(this, appID, appSettings, new CometChat.CallbackListener<String>() {
             @Override

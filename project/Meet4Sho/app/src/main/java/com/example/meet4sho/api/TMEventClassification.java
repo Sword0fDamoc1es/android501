@@ -1,5 +1,9 @@
 package com.example.meet4sho.api;
 
+
+/**
+ * An object that contains a Ticketmaster event's segment, genre, and subgenre
+ */
 public class TMEventClassification {
     private String segment;
     private String genre;
